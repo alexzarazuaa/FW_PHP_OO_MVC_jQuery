@@ -14,9 +14,10 @@
   <!-- LINKS PLANTILLA -->
 
   <!-- Custom-Files -->
-  <link href="<?php echo CSS_PATH ?>bootstrap.css" rel="stylesheet" >
+  <link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.css">
+  <!-- <link rel="stylesheet" href="view/css/bootstrap.css"> -->
   <!-- Bootstrap-Core-CSS -->
-  <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css" type="text/css" media="all" />
   <!-- Style-CSS -->
   <!-- font-awesome-icons -->
   <link href="<?php echo CSS_PATH ?>font-awesome.css" rel="stylesheet">
@@ -28,15 +29,15 @@
 
 
   <!-- //LINKS PLANTILLA -->
-   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
-   <script src="<?php echo  VIEW_PATH_LANG ?>translate.js" type="text/javascript" ></script>
-   <script src="<?php echo JS_VIEW_CONTACT ?>contact.js"></script>
-  <!--<script type="text/javascript" src=view/Lang/translate.js></script>
+
+  <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
+  <!-- <script type="text/javascript" src=view/Lang/translate.js></script> -->
+  <!-- <script src="module/contact/model/gmaps.js"></script>
   <script src="view/js/search/view/js/fsearch.js"></script>
   <script src="view/js/Activiti/activiti.js"></script>
-  <script src="module/login/model/main_menus.js"></script> -->
-  <link rel="icon" type="image/png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
-  <!-- <script src="model/api_key.js"></script> -->
+  <script src="module/login/model/main_menus.js"></script>
+  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
+  <script src="model/api_key.js"></script> -->
 
   
   

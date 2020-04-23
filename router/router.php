@@ -5,7 +5,7 @@ require_once("paths.php");
 //include(UTILS . "utils.inc.php");
 include(UTILS . "common.inc.php");
 //include(UTILS . "upload.inc.php");
-//include(UTILS . "mail.inc.php");
+include(UTILS . "mail.inc.php");
 
 if (PRODUCTION) { //estamos en producción
     ini_set('display_errors', '1');
@@ -51,7 +51,7 @@ function handlerModule($module_uri, $function_uri) {
             //print_r($module_uri);
 
             $path = MODULES_PATH . $module_uri . "/controller/controller_" . $module_uri . ".class.php";
-            //print_r(MODULES_PATH);
+            //print_r($path);
 
             if (file_exists($path)) {
                 //print_r($path);

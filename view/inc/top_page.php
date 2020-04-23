@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>MASTERSPORT</title>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -28,12 +27,13 @@
   
   
   <!-- FAVICON-->
-  <link rel="icon" type="image/png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
+  <link rel="icon" type="<?php echo IMG_PATH ?>png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
 
   <!-- //LINKS PLANTILLA -->
 
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="<?php echo  VIEW_PATH_LANG ?>/translate.js"></script>
+  <script type="text/javascript" src="<?php echo  LANG_PATH ?>translate.js"></script>
+
 <!--  
   <script src="module/sport/model/validate_sport.js"></script>
   <script src="module/shop/model/main_shop.js"></script>
