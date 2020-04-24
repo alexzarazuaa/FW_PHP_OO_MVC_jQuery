@@ -66,8 +66,15 @@ function enviar_email($arr)
 }
 
 function send_mailgun($from,$email,$subject,$html){
+    $keys = parse_ini_file("keys.ini");
+    $api_key = $keys['api_key'];
+    $api_url = $keys['domin_key'];
+    // print_r($api_key);
+    // print_r($api_url);
     $config = array();
- 
+    $config['api_key'] = $api_key; //API Key
+    $config['api_url'] = "https://api.mailgun.net/v2/". $api_url ."/messages"; //API Base URL
+
     $message = array();
     $message['from'] = "$from";
     $message['to'] = $email;

@@ -33,6 +33,7 @@
 
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="<?php echo  LANG_PATH ?>translate.js"></script>
+ 
 
 <!--  
   <script src="module/sport/model/validate_sport.js"></script>

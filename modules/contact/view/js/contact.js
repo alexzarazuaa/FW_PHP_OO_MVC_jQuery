@@ -51,8 +51,9 @@ $(document).ready(function () {
 		//	 toastr["success"]("We sent the email, please check your inbox.", "Email sent.");
 			 
 			 console.log(data)
-			cont("../../index.php?module=contact&function=send_cont", data)
+			cont(amigable("?module=contact&function=send_cont"), data)
 				.then(function (data) {
+					console.log(data)
 					info = JSON.parse(data)
 					console.log(info['message']);
 					if (info['message'] == "Queued. Thank you.") {

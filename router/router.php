@@ -2,7 +2,7 @@
 require_once("paths.php");
 //require 'autoload.php';
 
-//include(UTILS . "utils.inc.php");
+include(UTILS . "utils.inc.php");
 include(UTILS . "common.inc.php");
 //include(UTILS . "upload.inc.php");
 include(UTILS . "mail.inc.php");
