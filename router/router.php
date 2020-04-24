@@ -20,9 +20,9 @@ session_start();
 $_SESSION['module'] = "";
 
 function handlerRouter() {
-    //print_r($_GET['module']);
+ //print_r("entra");
     if (!empty($_GET['module'])) {
-        $module_uri = $_GET['module'];
+       $module_uri = $_GET['module'];
        // print_r($module_uri);
     } else {
         $module_uri = 'contact';
@@ -48,7 +48,7 @@ function handlerModule($module_uri, $function_uri) {
         if (($module_uri === (String) $module->uri)) {
                
             $exist = true;
-            //print_r($module_uri);
+           // print_r($module_uri);
 
             $path = MODULES_PATH . $module_uri . "/controller/controller_" . $module_uri . ".class.php";
             //print_r($path);

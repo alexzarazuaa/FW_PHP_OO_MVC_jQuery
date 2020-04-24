@@ -9,6 +9,7 @@ body {
     scroll-behavior: smooth;
 
 }
+
 body a {
     text-decoration: none;
     transition: 0.5s all;
@@ -2023,6 +2024,11 @@ ul.dropdown-cart {
   }
   ul.dropdown-cart li .item-right button {
     margin-top: 14px;
+  }
+
+  #send_contact{
+    -webkit-appearance: button;
+    
   }
   
 

@@ -47,7 +47,7 @@ function enviar_email($arr)
     $html .= "<br><br>";
     $html .= $body;
     $html .= "<br><br>";
-    $html .= "<p>Sent by OHANA_DOGS</p>";
+    $html .= "<p>Sent by MASTERSPORT</p>";
     $html .= "</body>";
     $html .= "</html>";
 
@@ -65,18 +65,17 @@ function enviar_email($arr)
     return $result;
 }
 
-function send_mailgun($email,$from,$subject,$html){ //myfunctionyaprobada
+function send_mailgun($from,$email,$subject,$html){
     $config = array();
-    $config['api_key'] = "e03c5f15a3c70970363f9f12116af6d5-915161b7-639b6841"; //API Key
-    $config['api_url'] = "https://api.mailgun.net/v2/sandboxb5b5d67e107e439894fe7053fff84bd9.mailgun.org/messages"; //API Base URL
-
+ 
     $message = array();
-    $message['from'] = $from;
-    $message['to'] =  $email;
+    $message['from'] = "$from";
+    $message['to'] = $email;
     $message['h:Reply-To'] = "mastersport@gmail.com";
     $message['subject'] = $subject;
     $message['html'] = $html;
 
+ 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $config['api_url']);
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -85,11 +84,12 @@ function send_mailgun($email,$from,$subject,$html){ //myfunctionyaprobada
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
+    curl_setopt($ch, CURLOPT_POST, true); 
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$message);
     $result = curl_exec($ch);
     curl_close($ch);
     return $result;
     
 }
+
 

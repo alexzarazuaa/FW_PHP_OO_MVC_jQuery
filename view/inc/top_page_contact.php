@@ -10,6 +10,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <!-- TOASTR -->
+
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></link>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></link> -->
+
+  <!-- //TOASTR -->
 
   <!-- LINKS PLANTILLA -->
 
@@ -31,6 +37,11 @@
   <!-- //LINKS PLANTILLA -->
 
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
+  <script src="<?php echo  JS_VIEW_CONTACT ?>contact.js"></script>
+  <!-- TOASTR -->
+  <!-- <script src="<?php echo  JS_PATH ?>toastr/toastr.js"></script> -->
+  <!-- //TOASTR -->
+
   <!-- <script type="text/javascript" src=view/Lang/translate.js></script> -->
   <!-- <script src="module/contact/model/gmaps.js"></script>
   <script src="view/js/search/view/js/fsearch.js"></script>
@@ -39,8 +50,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
   <script src="model/api_key.js"></script> -->
 
-  
-  
+
+
 
 
 </head>

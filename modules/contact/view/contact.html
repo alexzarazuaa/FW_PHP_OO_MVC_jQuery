@@ -14,17 +14,18 @@
         <div class="row contact-main-info mt-5">
             <div class="col-md-6 contact-right-content">
                 <!--form-->
-                <form action="#" method="post">
+                <form action="#" method="post" id="contactus">
                     <input type="text"  name="cname" id="cname" placeholder="Name" required="required">
                     <label id="error_name"></label>
-                    <input type="email" class="email" name="cemail" id="cemail" placeholder="Email" required="required">
+                    <input type="email" class="cemail" name="cemail" id="cemail" placeholder="Email" required="required">
                     <label id="error_email"></label>
                     <input type="text" name="asunto" id="asunto" placeholder="Asunto" required="required"></input>
                     <label id="error_infasun"></label>
                     <textarea name="message" id="message" placeholder="Message" required="required"></textarea>
                     <label id="error_dinfo"></label>
                     <div class="read mt-3">
-                        <input type="submit" value="Enviar"  name="send_contact" id="send_contact">
+                        <!-- <input type="button" value="Enviar"  name="send_contact" id="send_contact"> -->
+                        <input type="button"  name="send_contact" value="Enviar"  id="send_contact" class="btn btn-secondary btn-lg btn-block"></input>
                     </div>
                     <div id="rltsendmessage" style="display: none;"></div>
                 </form>
