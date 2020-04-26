@@ -39,8 +39,12 @@
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
   <script src="<?php echo  JS_VIEW_CONTACT ?>contact.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
+
   <!-- TOASTR -->
-  <!-- <script src="<?php echo  JS_PATH ?>toastr/toastr.js"></script> -->
+  <script type="text/javascript" src="<?php echo PROJECT ?>view/js/toastr/build/toastr.min.js"></script>
+  <link rel="stylesheet" href="<?php echo PROJECT ?>view/js/toastr/build/toastr.css">
+  <!-- TOASTR -->
+
   <!-- //TOASTR -->
 
   <!-- <script type="text/javascript" src=view/Lang/translate.js></script> -->

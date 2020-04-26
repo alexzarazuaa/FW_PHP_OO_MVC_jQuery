@@ -2,7 +2,7 @@
 <functions>
     <function>
         <name>list_contact</name>
-        <uri>list_contact</uri>
+        <uri>contact</uri>
     </function>
     <function>
         <name>send_cont</name>

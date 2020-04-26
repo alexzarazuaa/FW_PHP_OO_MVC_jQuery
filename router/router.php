@@ -27,7 +27,7 @@ function handlerRouter() {
     } else {
         $module_uri = 'contact';
         /////PREGUNTAR
-        echo'<script>window.location.href = "./contact/list_contact/";</script>';
+        echo'<script>window.location.href = "./contact/contact/";</script>';
         /////PREGUNTAR
     }
 
@@ -35,7 +35,7 @@ function handlerRouter() {
         $function_uri = $_GET['function'];
         //print_r($function_uri);
     } else {
-        $function_uri = 'list_contact';
+        $function_uri = 'contact';
     }
     handlerModule($module_uri, $function_uri);
 }

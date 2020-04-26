@@ -47,17 +47,19 @@ $(document).ready(function () {
 
 		if (result) {
 			 var data = $('#contactus').serialize();
+			// alert("ENTRA")
 			// console.log(data)
-		//	 toastr["success"]("We sent the email, please check your inbox.", "Email sent.");
+			 //toastr["success"]("We sent the email, please check your inbox.", "Email sent.");
 			 
 			 console.log(data)
 			cont(amigable("?module=contact&function=send_cont"), data)
 				.then(function (data) {
-					console.log(data)
+				//alert("ENTRA , SEND MAIL");
+					//console.log(data)
 					info = JSON.parse(data)
-					console.log(info['message']);
+					//console.log(info['message']);
 					if (info['message'] == "Queued. Thank you.") {
-						//toastr["success"]("We sent the email, please check your inbox.", "Email sent.");
+						toastr.success("We sent the email, please check your inbox.", "Email sent.");
 						//alert("enviado loco")
 						console.log("send mail")
 						window.setTimeout(function(){
@@ -65,6 +67,7 @@ $(document).ready(function () {
 						},2000)
 					}else{
 						console.log("toaster error")
+						toastr.error("A failure has been made when sending your message","Email Not Sent.")
 					}
 				})
 

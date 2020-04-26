@@ -22,7 +22,7 @@ function enviar_email($arr)
 
         case 'contact':
             $subject = 'Tu Petición a MASTERSPORT ha sido enviada <br>';
-            $ruta = '<a href=' . 'http://localhost/SPORT_V1.6/contact/list_contact/' . '>aqu&iacute;</a>';
+            $ruta = '<a href=' . 'http://localhost/SPORT_V1.6/contact/contact/' . '>aqu&iacute;</a>';
             $body = 'Para visitar nuestra web, pulsa ' . $ruta;
             break;
 
