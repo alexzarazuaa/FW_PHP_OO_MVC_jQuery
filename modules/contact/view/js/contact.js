@@ -50,14 +50,14 @@ $(document).ready(function () {
 			// alert("ENTRA")
 			// console.log(data)
 			 //toastr["success"]("We sent the email, please check your inbox.", "Email sent.");
-			 
 			 console.log(data)
-			cont(amigable("?module=contact&function=send_cont"), data)
+			 var info_data = {module:'contact',function:'send_cont',data:data}
+			cont(amigable("?"), info_data)
 				.then(function (data) {
 				//alert("ENTRA , SEND MAIL");
-					//console.log(data)
+					console.log(data)
 					info = JSON.parse(data)
-					//console.log(info['message']);
+					console.log(info);
 					if (info['message'] == "Queued. Thank you.") {
 						toastr.success("We sent the email, please check your inbox.", "Email sent.");
 						//alert("enviado loco")

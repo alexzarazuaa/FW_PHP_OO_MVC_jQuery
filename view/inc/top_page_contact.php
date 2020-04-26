@@ -41,8 +41,8 @@
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
 
   <!-- TOASTR -->
-  <script type="text/javascript" src="<?php echo PROJECT ?>view/js/toastr/build/toastr.min.js"></script>
-  <link rel="stylesheet" href="<?php echo PROJECT ?>view/js/toastr/build/toastr.css">
+  <script type="text/javascript" src="<?php echo TOASTR_PATH ?>build/toastr.min.js"></script>
+  <link rel="stylesheet" href="<?php echo TOASTR_PATH ?>build/toastr.css">
   <!-- TOASTR -->
 
   <!-- //TOASTR -->

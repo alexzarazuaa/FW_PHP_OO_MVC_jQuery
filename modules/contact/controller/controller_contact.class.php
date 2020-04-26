@@ -5,7 +5,7 @@
 			$_SESSION['module'] = "contact";
 		}
 		
-		function list_contact(){
+		function contact(){
 			require(VIEW_PATH_INC . "top_page_contact.php");
 			require(VIEW_PATH_INC . "menu.html");
 			loadView('modules/contact/view/','contact.html');
@@ -19,14 +19,21 @@
 			 //echo ("SEND_EMAIL");
 			 //die();
 	
+			 parse_str ($_POST['data'], $array);
+			//   echo($array['cname']);
+
+
+
+
+
 			$arrArgument = array(
 			
 				'type' => 'contact',
 				'token' => '',
-				'inputName' => $_POST['cname'],
-				'inputEmail' => $_POST['cemail'],
-				'inputSubject' => $_POST['asunto'],
-				'inputMessage' => $_POST['message']
+				'inputName' => $array['cname'],
+				'inputEmail' => $array['cemail'],
+				'inputSubject' => $array['asunto'],
+				'inputMessage' => $array['message']
 			);
 			
 			//echo json_encode($arrArgument);
@@ -40,13 +47,15 @@
 			//restore_error_handler();
 
 			$arrArgument = array(
+			
 				'type' => 'admin',
 				'token' => '',
-				'inputName' => $_POST['cname'],
-				'inputEmail' => $_POST['cemail'],
-				'inputSubject' => $_POST['asunto'],
-				'inputMessage' => $_POST['message']
+				'inputName' => $array['cname'],
+				'inputEmail' => $array['cemail'],
+				'inputSubject' => $array['asunto'],
+				'inputMessage' => $array['message']
 			);
+			
 			try{
 	            enviar_email($arrArgument);
 			} catch (Exception $e) {

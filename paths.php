@@ -20,6 +20,9 @@ define('LANG_PATH', SITE_PATH . 'view/Lang/');
 //JS
 define('JS_PATH', SITE_PATH . 'view/js/');
 
+//TOASTR
+define('TOASTR_PATH', SITE_PATH . 'view/js/toastr/');
+
 //IMG
 define('IMG_PATH', SITE_PATH . 'view/img/');
 
@@ -62,4 +65,4 @@ define('JS_VIEW_CONTACT', SITE_PATH . 'modules/contact/view/js/');
 
 
 //amigables
-define('URL_AMIGABLES', FALSE);
+define('URL_AMIGABLES', TRUE);

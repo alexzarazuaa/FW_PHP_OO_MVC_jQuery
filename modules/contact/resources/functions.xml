@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>list_contact</name>
-        <uri>contact</uri>
+        <name>contact</name>
+        <uri></uri>
     </function>
     <function>
         <name>send_cont</name>
-        <uri>send_cont</uri>
+        <uri></uri>
     </function>
 </functions>
