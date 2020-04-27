@@ -40,14 +40,15 @@
   <script src="<?php echo  JS_VIEW_CONTACT ?>contact.js"></script>
   <script src="<?php echo  JS_VIEW_CONTACT ?>gmaps.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
-  <script type="text/javascript" src="<?php echo  LANG_PATH ?>translate.js"></script>
 
   <!-- TOASTR -->
   <script type="text/javascript" src="<?php echo TOASTR_PATH ?>build/toastr.min.js"></script>
   <link rel="stylesheet" href="<?php echo TOASTR_PATH ?>build/toastr.css">
   <!-- TOASTR -->
 
-  <!-- //TOASTR -->
+  
+  <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
+
 
   <!-- <script type="text/javascript" src=view/Lang/translate.js></script> -->
   <!-- <script src="module/contact/model/gmaps.js"></script>

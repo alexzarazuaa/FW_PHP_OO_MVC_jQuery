@@ -22,31 +22,32 @@ $_SESSION['module'] = "";
 function handlerRouter()
 {
     //print_r("entra");
-   
-    if (!empty($_GET['module'])) { // enter when we are in a module or $ get is not empty
 
+    if (!empty($_GET['module'])) { // enter when we are in a module or $ get is not empty
         if (!empty($_POST['module'])) {
-            
-            $module_uri = $_POST['module'];//if comes from any js
+            $module_uri = $_POST['module']; //if comes from any js
             //print_r("entra en if !isset");
         } else {
-          
             $module_uri = $_GET['module'];  // if comes from main_menu
-           // print_r("entra en ELSE");
+            // print_r("entra en ELSE");
         }
 
         // print_r($module_uri);
     } else {
-        $module_uri = 'contact';       
+        $module_uri = 'contact';
         echo '<script>window.location.href = "./contact/";</script>';
     }
 
     if (!empty($_POST['function'])) {   //if comes from any js
-        $function_uri = $_POST['function'];//it passes the value it takes per post to the function
-          //print_r($function_uri);
+        $function_uri = $_POST['function']; //it passes the value it takes per post to the function
+        //print_r($function_uri);
     } else {
-        $function_uri = $module_uri;  // pass the name of the module as a function
-        //print_r("entra aqui");
+        if (!empty($_GET['function'])) {//entra aqui si la function no existe
+            $function_uri = $_GET['function'];  
+            //print_r("entra aqui");
+        } else { // pass the name of the module as a function
+            $function_uri =  $module_uri;
+        }
     }
     handlerModule($module_uri, $function_uri);
 }
@@ -90,15 +91,16 @@ function handlerModule($module_uri, $function_uri)
     }
 }
 
-function handlerfunction($module, $obj, $function_uri){//pass the name of the function and check that it is in the name of the xml
-  
+function handlerfunction($module, $obj, $function_uri)
+{ //pass the name of the function and check that it is in the name of the xml
+
     //print_r($function_uri);
 
     $functions = simplexml_load_file(MODULES_PATH . $module . "/resources/functions.xml");  //check if function exists
     $exist = false;
 
-    foreach ($functions->function as $function) {  
-      
+    foreach ($functions->function as $function) {
+
         if (($function_uri === (string) $function->name)) {
             $exist = true;
             $event = $function_uri;
@@ -113,7 +115,7 @@ function handlerfunction($module, $obj, $function_uri){//pass the name of the fu
         require_once(VIEW_PATH_INC . "top_page.php");
         require_once(VIEW_PATH_INC . "footer.html");
     } else {
-        call_user_func(array($obj, $event));//call to the function in envent and obj is the module
+        call_user_func(array($obj, $event)); //call to the function in envent and obj is the module
     }
 }
 
