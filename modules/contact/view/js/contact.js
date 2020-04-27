@@ -1,4 +1,4 @@
-$(document).ready(function () {
+function send_cont(){
 	console.log("ENTRA EN CONTACT JS");
 	$('.ajaxLoader').fadeOut("fast");
 
@@ -48,20 +48,18 @@ $(document).ready(function () {
 		if (result) {
 			 var data = $('#contactus').serialize();
 			// alert("ENTRA")
-			// console.log(data)
-			 //toastr["success"]("We sent the email, please check your inbox.", "Email sent.");
-			 console.log(data)
+			 //console.log(data)
 			 var info_data = {module:'contact',function:'send_cont',data:data}
 			cont(amigable("?"), info_data)
 				.then(function (data) {
 				//alert("ENTRA , SEND MAIL");
-					console.log(data)
+					//console.log(data)
 					info = JSON.parse(data)
-					console.log(info);
+					//console.log(info);
 					if (info['message'] == "Queued. Thank you.") {
 						toastr.success("We sent the email, please check your inbox.", "Email sent.");
 						//alert("enviado loco")
-						console.log("send mail")
+						//console.log("send mail")
 						window.setTimeout(function(){
 							document.location.href = "/SPORT_V1.6/";
 						},2000)
@@ -74,11 +72,12 @@ $(document).ready(function () {
 		}
 
 	});
+}
 
-});
 
 
-var cont = function (url, data) { //function/promise GENERAL 
+
+var cont = function (url, data) { //function-promise GENERAL 
 
  //console.log(data)
 
@@ -96,18 +95,10 @@ var cont = function (url, data) { //function/promise GENERAL
 	})
 };
 
-// $.ajax({
-// 	type: 'POST',
-// 	dataType: "json",
-// 	url: "../../index.php?module=contact&function=send_cont",
-// 	fin_data : "fin_data"
-// })
-// 	.done(function (data) {
-// 		//$.post("../../index.php?module=contact&function=send_cont",{"fin_data":fin_data},function(data){
-// 		$('.ajaxLoader').fadeOut("fast");
-// 		console.log(data);
-// 		$("#rltsendmessage").html(data).fadeIn("slow");
-// 		setTimeout(function () {
-// 			$("#rltsendmessage").fadeOut("slow")
-// 		}, 5000);
-// 	});
+
+
+$(document).ready(function () {
+	console.log("entra function send_cont")
+	send_cont()
+
+});

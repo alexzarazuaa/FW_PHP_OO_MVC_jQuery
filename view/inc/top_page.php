@@ -12,8 +12,8 @@
 
   <!-- LINKS PLANTILLA -->
 
-    <!-- Custom-Files -->
-    <link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.css">
+  <!-- Custom-Files -->
+  <link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.css">
   <!-- Bootstrap-Core-CSS -->
   <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css" type="text/css" media="all" />
   <!-- Style-CSS -->
@@ -24,18 +24,19 @@
   <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
   <!-- //Fonts -->
-  
-  
+
+
   <!-- FAVICON-->
   <link rel="icon" type="<?php echo IMG_PATH ?>png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
 
   <!-- //LINKS PLANTILLA -->
 
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="<?php echo  LANG_PATH ?>translate.js"></script>
- 
 
-<!--  
+  <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
+
+
+  <!--  
   <script src="module/sport/model/validate_sport.js"></script>
   <script src="module/shop/model/main_shop.js"></script>
   <script src="module/contact/model/gmaps.js"></script>
@@ -43,12 +44,12 @@
   <script src="model/api_key.js"></script>
   <script src="module/login/model/validate_login.js"></script>
   <script src="view/js/Activiti/activiti.js"></script> -->
- 
 
 
 
 
-  
+
+
 </head>
 
 <body>

@@ -10,7 +10,7 @@ function cambiarIdioma(lang) {
   //console.log(elems);
 
   $.ajax({
-    url: '<?php echo  LANG_PATH ?>' + lang + '.json',
+    url: 'view/Lang/' + lang + '.json',
     type: 'POST',
     dataType: 'JSON',
     success: function (data) {
@@ -51,6 +51,3 @@ $(document).ready(function () {
     }
   });
 });
-
-
- // html js id funci... controller php case que siga , de ahi al dao enviara la info al js($ajax) y al html

@@ -21,7 +21,7 @@ function enviar_email($arr)
         //     break;
 
         case 'contact':
-            $subject = 'Tu Petición a MASTERSPORT ha sido enviada <br>';
+            $subject = 'Tu Petición a MASTERSPORT ha sido enviada';
             $ruta = '<a href=' . 'http://localhost/SPORT_V1.6/contact/contact/' . '>aqu&iacute;</a>';
             $body = 'Para visitar nuestra web, pulsa ' . $ruta;
             break;
@@ -73,7 +73,7 @@ function send_mailgun($from,$email,$subject,$html){
     // print_r($api_url);
     $config = array();
     $config['api_key'] = $api_key; //API Key
-    $config['api_url'] = "https://api.mailgun.net/v2/". $api_url ."/messages"; //API Base URL
+    $config['api_url'] = "https://api.mailgun.net/v2/". $api_url ."/messages"; // URL api
 
     $message = array();
     $message['from'] = "$from";

@@ -1,17 +1,13 @@
 <?php
 
-function loadView($rutaVista = '', $templateName = '', $arrPassValue = '') {
+    function loadView($rutaVista = '', $templateName = '') {//function render views
         $view_path = $rutaVista . $templateName;
-        $arrData = '';
-
+        //$arrData = '';
+        // echo $view_path;
         if (file_exists($view_path)) {
-            if (isset($arrPassValue))
-                $arrData = $arrPassValue;
             include_once($view_path);
         } else {
-            /*$result = response_code($rutaVista);
-            $arrData = $result;
-            require_once VIEW_PATH_INC_ERROR . "error.php";*/
+           require_once VIEW_PATH_INC . "error404.php";
             //die();
         }
     }

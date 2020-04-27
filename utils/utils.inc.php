@@ -1,5 +1,5 @@
 <?php
-    function amigable($url, $return = false) {
+    function amigable($url, $return = false) {//pretty php
         //print_r("estoy entrando");
         $amigableson = URL_AMIGABLES;
         $link = "";

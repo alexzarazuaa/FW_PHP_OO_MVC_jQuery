@@ -15,17 +15,10 @@
 		
 		
 		function send_cont(){
-		
 			 //echo ("SEND_EMAIL");
 			 //die();
-	
 			 parse_str ($_POST['data'], $array);
 			//   echo($array['cname']);
-
-
-
-
-
 			$arrArgument = array(
 			
 				'type' => 'contact',
@@ -44,7 +37,7 @@
 			} catch (Exception $e) {
 				echo "<div class='alert alert-error'>Server error. Try later...</div>";
 			}
-			//restore_error_handler();
+	
 
 			$arrArgument = array(
 			
