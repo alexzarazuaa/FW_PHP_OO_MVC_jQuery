@@ -34,8 +34,8 @@ function handlerRouter()
 
         // print_r($module_uri);
     } else {
-        $module_uri = 'contact';
-        echo '<script>window.location.href = "./contact/";</script>';
+        $module_uri = 'home';
+        echo '<script>window.location.href = "./home/";</script>';
     }
 
     if (!empty($_POST['function'])) {   //if comes from any js

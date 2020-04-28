@@ -7,14 +7,14 @@
       <!-- nav -->
       <nav class="py-4">
         <div id="logo">
-          <h1> <a href="index.php?page=controller_home&op=list" data-tr="MASTERSPORT"><span class="fa fa-bold"
+          <h1> <a href="<?php amigable('?module=home'); ?>" data-tr="MASTERSPORT"><span class="fa fa-bold"
                 aria-hidden="true"></span></a></h1>
         </div>
 
         <label for="drop" class="toggle">Menu</label>
         <input type="checkbox" id="drop" />
         <ul class="menu mt-2">
-          <li><a href="index.php?page=controller_home&op=list" data-tr="Inicio"></a></li>
+          <li><a href="<?php amigable('?module=home'); ?>" data-tr="Inicio">INICIO</a></li>
           <!-- tienda -->
           <li><a href="index.php?page=controller_shop&op=view" data-tr="Tienda"></a></li>
 

@@ -82,7 +82,7 @@ function marca_empty() {
 
 }
 function offer_marca() {
-    console.log("entra offer");
+    //console.log("entra offer");
     marca_empty();
     $("#talla").on("change", function () {
         console.log("entra talla change");
@@ -133,19 +133,19 @@ function autocom() {
 
 
         if ((marca != 0) && (talla == 0)) {
-            console.log("if")
+          //  console.log("if")
             complete = 'where marca="' + marca + '"'
-            console.log(complete);
+            //console.log(complete);
         } else if ((marca == 0) && (talla != 0)) {
             complete = 'where talla= "' + talla + '"'
-            console.log(complete);
+           // console.log(complete);
         } else if ((marca == 0) && (talla == 0)) {
             complete = ''
-            console.log(complete);
+           /// console.log(complete);
         } else {
             console.log("else")
             complete = 'where talla= "' + talla + '" and marca="' + marca + '"'
-            console.log(complete);
+           // console.log(complete);
         }
         $.ajax({
             type: "GET",
@@ -174,7 +174,7 @@ function buttonsearch() {
 
     //// BTN SEARCH
     $(".btn").on("click", function () {
-        console.log("ENTRA EN EL button");
+        //console.log("ENTRA EN EL button");
 
         var talla = $("#talla").val();
         var marca = $("#marca").val();
@@ -203,6 +203,8 @@ function keyenter() {
 }
 
 $(document).ready(function () {
+
+    //console.log("entra fseacrh")
 
 
 

@@ -28,6 +28,9 @@ define('IMG_PATH', SITE_PATH . 'view/img/');
 
 //IMAGES 
 define('IMGAGES_PATH', SITE_PATH . 'view/images/');
+//FSSEARCH
+define('FSEACRH_PATH', SITE_PATH . 'view/js/search/');
+
 
 //PRODUCTION
 define('PRODUCTION', true);
@@ -63,6 +66,12 @@ define('UTILS_CONTACT', SITE_ROOT . 'modules/contact/utils/');
 define('JS_VIEW_CONTACT', SITE_PATH . 'modules/contact/view/js/');
 
 
+//MODEL HOME
+define('MODEL_PATH_HOME', SITE_ROOT . 'modules/home/model/');
+define('DAO_HOME', SITE_ROOT . 'modules/home/model/DAO/');
+define('BLL_HOME', SITE_ROOT . 'modules/home/model/BLL/');
+define('MODEL_HOME', SITE_ROOT . 'modules/home/model/model/');
+define('JS_VIEW_HOME', SITE_PATH . 'modules/home/view/js/');
 
 //amigables
 define('URL_AMIGABLES', TRUE);
