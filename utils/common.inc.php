@@ -5,6 +5,8 @@
     if (file_exists($model)) {
         include_once($model);
         $modelClass = $model_name;
+        //print_r($function);
+        //print_r($modelClass);
 
         if (!method_exists($modelClass, $function)){
             throw new Exception();
@@ -12,6 +14,7 @@
 
         $obj = $modelClass::getInstance();
         if (isset($arrArgument)){
+            //print_r($arrArgument);
             if (isset($arrArgument2)) {
                 //return $obj->$function($arrArgument,$arrArgument2);
                 return call_user_func(array($obj, $function),$arrArgument,$arrArgument2);

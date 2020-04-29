@@ -1,9 +1,11 @@
 <?php
+// print_r ("entra dai ");
+// die();
 class home_dao {
     static $_instance;
 
     private function __construct() {
-        print_r("entra dao model home");
+       
 
     }
 
@@ -16,13 +18,16 @@ class home_dao {
 
     
     public function select_data($db) {//prueba conectar con db 
-        $sql = "SELECT * FROM products ";
+       //print_r("entra function dao");
+        
+        $sql = "SELECT idprod FROM products ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
+        //return $loco; 
     }
 
-    public function select_data_details($db,$arrArgument) {
-        $sql = "SELECT name,chip,breed,sex,stature,picture,date_birth,tlp,country,province,city,cinfo,dinfo FROM dogs WHERE chip = '$arrArgument'";
+    public function select_img_carousel($db) {
+        $sql = "SELECT link,categoria FROM images ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

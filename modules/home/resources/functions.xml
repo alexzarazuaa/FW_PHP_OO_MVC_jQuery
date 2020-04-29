@@ -4,4 +4,15 @@
         <name>home</name>
         <uri></uri>
     </function>
+
+      <function>        
+        <name>prueba_data</name>
+        <uri></uri>
+    </function>
+
+     <function>
+        <name>data_carousel</name>
+        <uri></uri>
+    </function>
+
 </functions>

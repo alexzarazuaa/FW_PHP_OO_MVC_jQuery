@@ -23,23 +23,24 @@ function click() {
 }
 
 function carousel() {
-    //console.log("ENTRA  HOME");
+    console.log("ENTRA  HOME CAROUSEL");
     //alert("AVISO HA ENTRADO ");
-    //  console.log(data);
-    $.ajax({
-        type: 'GET',
-        dataType: "json",
-        url: "module/home/controller/controller_home.php?op=carousel",
-    })
-        .done(function (data) {
-            //console.log(data);
+      //console.log(data);
+      var info_data = {module:'home',function:'data_carousel',data:'data'}
+      home(amigable("?"),info_data)
+        .then(function (data) {
+//            console.log(JSON.parse(data));
+            info = JSON.parse(data);
+            console.log(info)
+            console.log(info[0].link);
+            console.log(info[0].categoria);
             $('<div></div>').attr('class', "carousel-item active").appendTo('.carousel-inner').html(
-                '<img src="' + data[0].link + '" alt="..." car="' + data[0].categoria + '"  class="d-block w-100" id="salt" ></a>'
+                '<img src="' + info[0].link + '" alt="..." car="' + info[0].categoria + '"  class="d-block w-100" id="salt" ></a>'
 
             );
             for (i = 1; i <= 2; i++) {
                 $('<div></div>').attr('class', "carousel-item ").appendTo('.carousel-inner').html(
-                    '<img src="' + data[i].link + '" alt="..."   car="' + data[i].categoria + '" class="d-block w-100" id="salt">'
+                    '<img src="' + info[i].link + '" alt="..."   car="' + info[i].categoria + '" class="d-block w-100" id="salt">'
                 );
             }
             $(document).on("click", '#salt', function () {
@@ -260,10 +261,23 @@ function get_data() {
 }
 
 
+function getdata() {//FUNCION DE PRUEBA DE LA DATA 
+   // console.log("ENTRA  get data");
 
+    //alert("AVISO HA ENTRADO ");
+      //console.log(data);
+      
+      var info_data = {module:'home',function:'prueba_data',data:'data'}
+
+      home(amigable("?"),info_data)
+        .then(function (data) {
+           // console.log(data)
+        })
+    }
 
 
 $(document).ready(function () {
+    console.log("entra home js");
 
     carousel();
     categoria();
@@ -271,8 +285,30 @@ $(document).ready(function () {
     getSuggestions();
     click_cart();
      get_data();
+
+
+
+     getdata();
 });
 
 
 
 
+var home = function (url, data) { //function-promise GENERAL 
+
+    //console.log(data)
+   
+       return new Promise(function (resolve) {
+           // console.log(url)
+            //console.log(data)
+           $.ajax({
+               type: "POST",
+               url: url,
+               data: data
+           })
+               .done(function (data) {
+                   resolve(data);
+               })
+       })
+   };
+   

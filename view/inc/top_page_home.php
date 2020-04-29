@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css" type="text/css" media="all" />
   <!-- Style-CSS -->
   <!-- font-awesome-icons -->
-  <link href="view/css/font-awesome.css" rel="stylesheet">
+  <link href="<?php echo CSS_PATH ?>font-awesome.css" rel="stylesheet">
   <!-- //font-awesome-icons -->
   <!-- /Fonts -->
   <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
@@ -48,6 +48,7 @@
 
   <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
   <script src="<?php echo JS_VIEW_HOME ?>home.js"></script>
+  <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
 
   <script src="<?php echo FSEACRH_PATH ?>view/js/fsearch.js"></script>
   <!-- <script src="view/js/Activiti/activiti.js"></script> -->
