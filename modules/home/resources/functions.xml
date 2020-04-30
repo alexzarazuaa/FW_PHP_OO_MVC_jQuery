@@ -5,13 +5,23 @@
         <uri></uri>
     </function>
 
-      <function>        
+    <function>
         <name>prueba_data</name>
         <uri></uri>
     </function>
 
-     <function>
+    <function>
         <name>data_carousel</name>
+        <uri></uri>
+    </function>
+
+    <function>
+        <name>data_categories</name>
+        <uri></uri>
+    </function>
+    
+    <function>
+        <name>count_categoria</name>
         <uri></uri>
     </function>
 

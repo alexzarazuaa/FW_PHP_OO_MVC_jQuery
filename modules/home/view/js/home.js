@@ -2,20 +2,25 @@
 function click() {
     $(document).on("click", '.shop', function () {
         //console.log("click");
-        //alert("click count");
+        alert("click count");
         var cat = this.getAttribute('categoria');
         localStorage.setItem('categoria', cat); // save data
-        //console.log(localStorage);
-        $(window).attr('location', 'index.php?page=controller_shop&op=view')
+        console.log(localStorage);
+        alert("click count2");
+        //$(window).attr('location', '?module=shop&function=shop')
 
         // click count
         var categorie = this.getAttribute('categoria');
-        //console.log(categorie);
-        $.ajax({
-            type: 'GET',
-            dataType: "json",
-            url: "module/home/controller/controller_home.php?op=count&categoria=" + categorie
-        })
+        console.log(categorie);
+        alert("click count3");
+        var info_data = { module: 'home', function: 'count_categoria', data: categorie }
+        alert("inf" + info_data)
+        home(amigable("?"), info_data)
+            .then(function (data) {
+                console.log(data)
+                info = JSON.parse(data)
+                alert(info)
+            })
 
 
     });
@@ -25,11 +30,11 @@ function click() {
 function carousel() {
     console.log("ENTRA  HOME CAROUSEL");
     //alert("AVISO HA ENTRADO ");
-      //console.log(data);
-      var info_data = {module:'home',function:'data_carousel',data:'data'}
-      home(amigable("?"),info_data)
+    //console.log(data);
+    var info_data = { module: 'home', function: 'data_carousel', data: 'data' }
+    home(amigable("?"), info_data)
         .then(function (data) {
-//            console.log(JSON.parse(data));
+            //            console.log(JSON.parse(data));
             info = JSON.parse(data);
             console.log(info)
             console.log(info[0].link);
@@ -47,7 +52,7 @@ function carousel() {
                 //console.log("click");
                 var car = this.getAttribute('car');
                 localStorage.setItem('all', car); // save data
-                $(window).attr('location', 'index.php?page=controller_shop&op=view');
+                $(window).attr('location', '?module=shop&function=shop')
 
             });
 
@@ -66,15 +71,12 @@ function loadmore() {
         $('#products').empty();
         limit = limit + 3;
         //console.log("limit=" + limit);
-
-        $.ajax({
-            type: 'GET',
-            dataType: "json",
-            url: "module/home/controller/controller_home.php?op=categories&limit=" + limit,
-        })
-
-            .done(function (data) {
+        var info_data = { module: 'home', function: 'data_categories', data: limit }
+        home(amigable("?"), info_data)
+            .then(function (info) {
+                var data = JSON.parse(info)
                 $.each(data, function (index, data) {
+                    console.log(data.imagen)
                     // console.log(data);
                     var ElementDiv = document.createElement('div');
                     ElementDiv.innerHTML =
@@ -92,16 +94,16 @@ function loadmore() {
 function categoria() {
 
     var limit = 3
-    //  console.log("ENTRA CATEGORIAS ");
-    $.ajax({
-        type: 'GET',
-        dataType: "json",
-        url: "module/home/controller/controller_home.php?op=categories&limit=" + limit,
-    })
+    console.log("ENTRA CATEGORIAS ");
 
-        .done(function (data) {
+    var info_data = { module: 'home', function: 'data_categories', data: limit }
+    home(amigable("?"), info_data)
+        .then(function (info) {
+            //console.log(info)
+            var data = JSON.parse(info)
+            console.log(data)
             $.each(data, function (index, data) {
-                //console.log(data);
+                console.log(data);
                 var ElementDiv = document.createElement('div');
                 ElementDiv.innerHTML =
                     "<br><div id='cont_img'><img src='" + data.imagen + "' class='shop' categoria='" + data.categoria + "'  id='" + data.idprod + "' data-toggle='modal' data-target='#exampleModal'></div><div id='list_header'><span id='li_brand'>  " + data.categoria + "</span></div>";
@@ -206,7 +208,7 @@ function click_cart() {
         var categ = this.getAttribute('cat');
         localStorage.setItem('bookCategorie', categ);
 
-        var url = 'index.php?page=controller_shop&op=view'
+        var url = '?module=shop&function=shop'
         $(window).attr('location', url)
 
     });
@@ -236,23 +238,23 @@ var check = function (url, data) { //funcion cart general
 function get_data() {
     var save = localStorage.getItem('addcart');
     var data = JSON.parse(save);
-    
+
     var storage = { addcart: data };
     if (save) {
         alert("compra realizada")
-        check('module/home/controller/controller_home.php?op=check_cart',storage)
-        .then(function (info) {
-            console.log(info)
+        check('module/home/controller/controller_home.php?op=check_cart', storage)
+            .then(function (info) {
+                console.log(info)
 
-            infopoints = { mypoints: parseInt(data[0][4]) * 10, nickname: data[0][3] , chequereg : data[0][5]}
+                infopoints = { mypoints: parseInt(data[0][4]) * 10, nickname: data[0][3], chequereg: data[0][5] }
 
-            check('module/home/controller/controller_home.php?op=mypoints', infopoints)
-                .then(function (data) {
-                    console.log(data)
-                    alert(data)
-                })
+                check('module/home/controller/controller_home.php?op=mypoints', infopoints)
+                    .then(function (data) {
+                        console.log(data)
+                        alert(data)
+                    })
 
-        })
+            })
     } else {
         alert(" no existe cart")
     }
@@ -261,20 +263,38 @@ function get_data() {
 }
 
 
-function getdata() {//FUNCION DE PRUEBA DE LA DATA 
-   // console.log("ENTRA  get data");
+// function getdata() {//FUNCION DE PRUEBA DE LA DATA 
+//    // console.log("ENTRA  get data");
 
-    //alert("AVISO HA ENTRADO ");
-      //console.log(data);
-      
-      var info_data = {module:'home',function:'prueba_data',data:'data'}
+//     //alert("AVISO HA ENTRADO ");
+//       //console.log(data);
 
-      home(amigable("?"),info_data)
-        .then(function (data) {
-           // console.log(data)
+//       var info_data = {module:'home',function:'data_categories',data:'data'}
+
+//       home(amigable("?"),info_data)
+//         .then(function (data) {
+//             console.log(JSON.parse(data))
+//             //console.log(data)
+//         })
+//     }
+
+var home = function (url, data) { //function-promise GENERAL 
+
+    console.log(data)
+
+    return new Promise(function (resolve) {
+        // console.log(url)
+        //console.log(data)
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data
         })
-    }
-
+            .done(function (data) {
+                resolve(data);
+            })
+    })
+};
 
 $(document).ready(function () {
     console.log("entra home js");
@@ -284,31 +304,12 @@ $(document).ready(function () {
     click();
     getSuggestions();
     click_cart();
-     get_data();
+    get_data();
 
 
 
-     getdata();
 });
 
 
 
 
-var home = function (url, data) { //function-promise GENERAL 
-
-    //console.log(data)
-   
-       return new Promise(function (resolve) {
-           // console.log(url)
-            //console.log(data)
-           $.ajax({
-               type: "POST",
-               url: url,
-               data: data
-           })
-               .done(function (data) {
-                   resolve(data);
-               })
-       })
-   };
-   

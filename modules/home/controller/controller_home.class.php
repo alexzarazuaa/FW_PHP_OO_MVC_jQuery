@@ -28,8 +28,22 @@
 			$json = array();
 			$json = loadModel(MODEL_HOME, "home_model", "data_carousel",$_POST['data']);
 			echo json_encode($json);
-			//echo "daasdasd";
-		   // print($json);
+	
+		}
+		function data_categories (){// function para la imagenes del carousel
+			//print_r("entra function prueba cateogires");
+			$json = array();
+			$json = loadModel(MODEL_HOME, "home_model", "data_categories",$_POST['data']);
+			echo json_encode($json);
+		
+		}
+
+		function count_categoria (){
+				//print_r("entra function  count");
+				$json = array();
+				$json = loadModel(MODEL_HOME, "home_model", "count_categoria",$_POST['data']);
+				echo json_encode($json);
+			
 		}
 
     }

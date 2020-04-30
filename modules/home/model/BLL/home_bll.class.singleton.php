@@ -25,6 +25,14 @@ require(SITE_ROOT . "modules/home/model/DAO/home_dao.class.singleton.php");
 	    }
 	    public function obtain_carousel_BLL(){
 	      return $this->dao->select_img_carousel($this->db);
-	    }
+		}
+		public function obtain_categories_BLL($limit){
+			return $this->dao->select_categories($this->db,$limit);
+		}
+		public function obtain_countcateg_BLL($categoria){
+			return $this->dao->countval($this->db,$categoria);
+		}
+		
+
 	  
 	}

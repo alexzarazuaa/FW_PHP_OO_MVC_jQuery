@@ -13,15 +13,22 @@
         }
 
         $obj = $modelClass::getInstance();
-        if (isset($arrArgument)){
-            //print_r($arrArgument);
-            if (isset($arrArgument2)) {
-                //return $obj->$function($arrArgument,$arrArgument2);
+
+        if ($arrArgument == ''){
+            return call_user_func(array($obj, $function));
+           //print_r("esta asi");
+        }else{
+            if ($arrArgument2 == ''){
+                echo $arrArgument2;
+                //print_r("esta asi");
+                return call_user_func(array($obj, $function),$arrArgument);
+            }else{
+                //print_r("esta asi con dos arg");
+                //print_r("esta asi e");
                 return call_user_func(array($obj, $function),$arrArgument,$arrArgument2);
+                
             }
-            //return $obj->$function($arrArgument);
-            return call_user_func(array($obj, $function),$arrArgument);
-        }   
+        } 
         
     } else {
         throw new Exception();

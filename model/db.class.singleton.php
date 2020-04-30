@@ -2,7 +2,7 @@
     class db {
         private $server;
         private $user;
-        private $password;
+        private $pass;
         private $database;
         private $link;
         private $stmt;
@@ -17,11 +17,10 @@
         private function setConexion() {
             require_once 'Conf.class.singleton.php';
             $conf = Conf::getInstance();
-            
             $this->server = $conf->getHostDB();
             $this->database = $conf->getDB();
             $this->user = $conf->getUserDB();
-            $this->password = $conf->getPassDB();
+            $this->pass = $conf->getPassDB();
         }
 
         private function __clone() {
@@ -36,7 +35,7 @@
 
         private function conectar() {
            // print_r("se conecta");
-            $this->link = new mysqli($this->server, $this->user, $this->password);
+            $this->link = new mysqli($this->server, $this->user, $this->pass);
             $this->link->select_db($this->database);
         }
 
