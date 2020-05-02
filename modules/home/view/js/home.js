@@ -7,7 +7,8 @@ function click() {
         localStorage.setItem('categoria', cat); // save data
         console.log(localStorage);
         alert("click count2");
-        //$(window).attr('location', '?module=shop&function=shop')
+        url=amigable('?module=shop');
+        $(window).attr('location',url)
 
         // click count
         var categorie = this.getAttribute('categoria');
@@ -34,7 +35,7 @@ function carousel() {
     var info_data = { module: 'home', function: 'data_carousel', data: 'data' }
     home(amigable("?"), info_data)
         .then(function (data) {
-            //            console.log(JSON.parse(data));
+            console.log(JSON.parse(data));
             info = JSON.parse(data);
             console.log(info)
             console.log(info[0].link);
@@ -51,8 +52,9 @@ function carousel() {
             $(document).on("click", '#salt', function () {
                 //console.log("click");
                 var car = this.getAttribute('car');
+                url=amigable('?module=shop');
                 localStorage.setItem('all', car); // save data
-                $(window).attr('location', '?module=shop&function=shop')
+                $(window).attr('location', url)
 
             });
 
@@ -208,8 +210,8 @@ function click_cart() {
         var categ = this.getAttribute('cat');
         localStorage.setItem('bookCategorie', categ);
 
-        var url = '?module=shop&function=shop'
-        $(window).attr('location', url)
+        url=amigable('?module=shop');
+        $(window).attr('location',url)
 
     });
 
@@ -235,13 +237,16 @@ var check = function (url, data) { //funcion cart general
 
 
 
+//MIGRAR FUNCION INSERT CART Y TEMA POINTS DE LA COMPRA MAS ADELANTE
+
 function get_data() {
     var save = localStorage.getItem('addcart');
     var data = JSON.parse(save);
 
     var storage = { addcart: data };
     if (save) {
-        alert("compra realizada")
+        //alert("compra realizada")
+        //AÑADIR TOASTR
         check('module/home/controller/controller_home.php?op=check_cart', storage)
             .then(function (info) {
                 console.log(info)
@@ -256,7 +261,7 @@ function get_data() {
 
             })
     } else {
-        alert(" no existe cart")
+        //alert(" no existe cart")
     }
 
     var save = localStorage.removeItem('addcart');

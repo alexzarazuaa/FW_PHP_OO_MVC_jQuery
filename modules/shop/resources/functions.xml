@@ -4,13 +4,64 @@
         <name>shop</name>
         <uri></uri>
     </function>
-      <function>
+
+
+    <function>
         <name>data_products</name>
         <uri></uri>
     </function>
-      
 
+    <function>
+        <name>prods_categoria</name>
+        <uri></uri>
+    </function>
 
+    <function>
+        <name>data_one_product</name>
+        <uri></uri>
+    </function>
+
+    <function>
+        <name>count_views</name>
+        <uri></uri>
+    </function>
+
+    <function>
+        <name>select_filter</name>
+        <uri></uri>
+    </function>
 
     
+    <function>
+        <name>select_btnsearch</name>
+        <uri></uri>
+    </function>
+
+        
+    <function>
+        <name>gmaps</name>
+        <uri></uri>
+    </function>
+
+     <function>
+        <name>geomaps</name>
+        <uri></uri>
+    </function>
+
+      <function>
+        <name>geomaps_desc</name>
+        <uri></uri>
+    </function>
+
+      <function>
+        <name>count_pages</name>
+        <uri></uri>
+    </function>
+
+
+
+
+
+
+
 </functions>

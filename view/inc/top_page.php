@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>MASTERSPORT</title>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -14,39 +13,46 @@
   <!-- LINKS PLANTILLA -->
 
   <!-- Custom-Files -->
-  <link rel="stylesheet" href="view/css/bootstrap.css">
+  <link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.css">
   <!-- Bootstrap-Core-CSS -->
-  <link rel="stylesheet" href="view/css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css" type="text/css" media="all" />
   <!-- Style-CSS -->
   <!-- font-awesome-icons -->
-  <link href="view/css/font-awesome.css" rel="stylesheet">
+  <link href="<?php echo CSS_PATH ?>font-awesome.css" rel="stylesheet">
   <!-- //font-awesome-icons -->
   <!-- /Fonts -->
   <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
   <!-- //Fonts -->
-  
-  
+
+
   <!-- FAVICON-->
-  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
+  <link rel="icon" type="<?php echo IMG_PATH ?>png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
 
   <!-- //LINKS PLANTILLA -->
 
-  <link href="view/css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src=view\Lang\translate.js></script>
-  <!-- <script src="module/sport/model/validate_sport.js"></script>
+  <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
+  
+  <script src="<?php echo FSEACRH_PATH ?>view/js/fsearch.js"></script>
+  
+  <script src="<?php echo JS_PATH ?>api_keys.js"></script>
+
+  <!--  
+  <script src="module/sport/model/validate_sport.js"></script>
   <script src="module/shop/model/main_shop.js"></script>
   <script src="module/contact/model/gmaps.js"></script>
-  <script src="view/js/search/view/js/fsearch.js"></script>
-  <script src="model/api_key.js"></script>
+ 
+
   <script src="module/login/model/validate_login.js"></script>
-  <script src="view/js/Activiti/activiti.js"></script>
-  <script src="view/js/menu.js"></script> -->
+  <script src="view/js/Activiti/activiti.js"></script> -->
 
 
 
 
-  
+
+
 </head>
 
 <body>

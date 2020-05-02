@@ -204,7 +204,7 @@ function keyenter() {
 
 $(document).ready(function () {
 
-    //console.log("entra fseacrh")
+    console.log("entra fseacrh")
 
 
 

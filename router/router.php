@@ -1,11 +1,11 @@
 <?php
-require_once("paths.php");
-//require 'autoload.php';
 
-include(UTILS . "utils.inc.php");
-include(UTILS . "common.inc.php");
-//include(UTILS . "upload.inc.php");
-include(UTILS . "mail.inc.php");
+ require 'autoload.php';
+
+// include(UTILS . "utils.inc.php");
+// include(UTILS . "common.inc.php");
+// //include(UTILS . "upload.inc.php");
+// include(UTILS . "mail.inc.php");
 
 if (PRODUCTION) { //estamos en producción
     ini_set('display_errors', '1');
@@ -23,7 +23,8 @@ function handlerRouter()
 {
     //print_r("entra");
 
-    if (!empty($_GET['module'])) { // enter when we are in a module or $ get is not empty
+    if (!empty($_GET['module'])) { 
+        // enter when we are in a module or $ get is not empty
         if (!empty($_POST['module'])) {
             $module_uri = $_POST['module']; //if comes from any js
             //print_r("entra en if !isset");
@@ -35,7 +36,7 @@ function handlerRouter()
         // print_r($module_uri);
     } else {
         $module_uri = 'home';
-        echo '<script>window.location.href = "./home/";</script>';
+        echo '<script>window.location.href = "./home";</script>';
     }
 
     if (!empty($_POST['function'])) {   //if comes from any js

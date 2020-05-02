@@ -1,17 +1,17 @@
 
-function ajaxForSearch(durl) {
-  var url = durl;
+function ajaxForSearch(url, data) {
+  //var url = durl;
   console.log(url);
   $.ajax({
     type: "POST",
-    dataType: "json",
+    data: data,
     url: url,
-
   })
     .done(function (data) {
 
-      console.log(data);
-      //var data = JSON.parse(data);
+      console.log("lala");
+      var data = JSON.parse(data);
+      console.log(data)
       $.each(data, function (index, data) {
         //console.log(data);
         var ElementDiv = document.createElement('div');
@@ -36,11 +36,9 @@ function apiajax(url) {
     .done(function (data) {
 
       console.log(data);
-      //var data = JSON.parse(data);
       var DatosJson = JSON.parse(JSON.stringify(data));
       console.log(DatosJson.items.length);
       //console.log(data['items'][i]['volumeInfo']['infoLink']);
-      //console.log(DatosJson.items.imageLinks);
       //DatosJson.items.length = limit;
       $('#pagination').empty();
 
@@ -120,30 +118,29 @@ function initMap() {
   });
 
   var infowindow = new google.maps.InfoWindow();
-  $.ajax({
-    type: "GET",
-    dataType: 'json',
-    url: "module/shop/controller/controller_shop.php?op=maps"
-  })
-    .done(function (data) {
+  var info_data = { module: 'shop', function: 'gmaps' }
+  shop(amigable("?"), info_data)
+    .then(function (data) {
       console.log(data);
+      info = JSON.parse(data)
+      console.log(info)
 
-      for (row in data) {
-        console.log(data);
+      for (row in info) {
+        console.log(info);
 
         var newMarker = new google.maps.Marker({
           position: new google.maps.LatLng(
-            data[row].latitud,
-            data[row].longitud),
+            info[row].latitud,
+            info[row].longitud),
           map: map,
           title:
-            data[row].Tienda
+            info[row].Tienda
         });
 
         google.maps.event.addListener(newMarker, 'click', (function (newMarker, row) {
           return function () {
             infowindow.setContent(
-              data[row].dscp);
+              info[row].dscp);
             infowindow.open(map, newMarker);
           }
         })(newMarker, row));
@@ -152,6 +149,10 @@ function initMap() {
       }
     });
 }
+
+
+// FALTA ESTA 
+
 //funcion mostrar mapa grande 
 function initMap2() {
 
@@ -166,40 +167,39 @@ function initMap2() {
   });
 
   var infowindow = new google.maps.InfoWindow();
-  $.ajax({
-    type: "GET",
-    dataType: 'json',
-    url: "module/shop/controller/controller_shop.php?op=geomaps"
-  })
-    .done(function (data) {
+  var info_data = { module: 'shop', function: 'geomaps' }
+  shop(amigable("?"), info_data)
+    .then(function (data) {
       console.log(data);
+      info = JSON.parse(data)
+      console.log(info)
 
-      for (row in data) {
-        console.log(data);
+      for (row in info) {
+        console.log(info);
 
         var newMarker = new google.maps.Marker({
           position: new google.maps.LatLng(
-            data[row].latitud,
-            data[row].longitud),
+            info[row].latitud,
+            info[row].longitud),
           map: map,
           title:
-            data[row].Tienda
+            info[row].Tienda
         });
 
         google.maps.event.addListener(newMarker, 'click', (function (newMarker, row) {
 
           return function () {
-            var latitud = data[row].latitud
-            var longitud = data[row].longitud
-            $.ajax({
-              type: "GET",
-              dataType: 'json',
-              url: "module/shop/controller/controller_shop.php?op=dspmap&latitud=" + latitud + "&longitud=" + longitud
-            })
-              .done(function (data) {
+            var latitud = info[row].latitud
+            var longitud = info[row].longitud
+            var info_data = { module: 'shop', function: 'geomaps_desc', data: {latitud, longitud }}
+            shop(amigable("?"), info_data)
+              .then(function (data) {
+                console.log(data);
+                info = JSON.parse(data)
+                console.log(info[0].nombre)
                 var name = "";
-                for (row in data) {
-                  name = name + data[row].nombre
+                for (row in info) {
+                  name = name + info[row].nombre
                 }
                 infowindow.setContent(
                   name);
@@ -524,7 +524,8 @@ function allfilters(filters) {
   console.log("filter");
   $('#list_products').empty();
   console.log(filters);
-  ajaxForSearch("module/shop/controller/controller_shop.php?op=filter&filters=" + filters);
+  var info_data = { module: 'shop', function: 'select_filter', data: filters }
+  ajaxForSearch(amigable("?"), info_data)
 
   //end_click_checked
 }
@@ -599,23 +600,28 @@ function details_products() {
 
     //click count
     console.log(id);
-    $.ajax({
-      type: 'GET',
-      dataType: "json",
-      url: "module/shop/controller/controller_shop.php?op=countvi&idprod=" + id,
-    })
-    //ajax for details
-    $.ajax({
-      dataType: 'json',
-      url: "module/shop/controller/controller_shop.php?op=producto&details=" + id,
-      type: 'GET',
-    })
-      //console.log(localStorage);
-
-      .done(function (data) {
-        // console.log("done");
-
+    //DUDA SI HACER PROMISE
+    //PROMISE FOR COUNT EN CADA PRODUCT
+    var info_data = { module: 'shop', function: 'count_views', data: id }
+    shop(amigable("?"), info_data)
+      .then(function (data) {
+        //console.log(data)
+      })
+    // $.ajax({
+    //   type: 'POST',
+    //   dataType: "json",
+    //   url: "module/shop/controller/controller_shop.php?op=countvi&idprod=" + id,
+    // })
+    //PROMISE for details
+    var info_data = { module: 'shop', function: 'data_one_product', data: id }
+    shop(amigable("?"), info_data)
+      .then(function (data) {
         console.log(data);
+        info = JSON.parse(data)
+        console.log(info[0].imagen)
+        console.log("done");
+
+
         $("#list_products").empty();
         $("#featured").empty();
         $("#mapdetails").empty();
@@ -625,21 +631,21 @@ function details_products() {
         $("#pagination").empty()
         $("#npg").empty()
 
-        console.log(data.idprod);
+        console.log(info[0].idprod);
         $("#list_prod").append(
           '<div class="row">' +
-          '<div class="desc1-left col-md-6"> <img src="' + data.imagen + '" class="img-fluid" alt=""> </div>' +
-          '<div class="desc1-right col-md-6 pl-lg-4"> <h3>' + data.nombre + '</h3> <h5>' + data.precio + '€' + ' <span>99</span> <a href="#">click for offer</a></h5>' +
-          "<div class='available mt-3'><button class='btn btn-default btn-lg like  " + data.idprod + "' ' id='" + data.idprod + "' id=''>❤</button>" +
-          "</span><div id='cont_comprar'><select  id='" + data.idprod + "'></select><button class='baddcart' id='" + data.idprod + "'>Add to cart</button></div></div>" +
+          '<div class="desc1-left col-md-6"> <img src="' + info[0].imagen + '" class="img-fluid" alt=""> </div>' +
+          '<div class="desc1-right col-md-6 pl-lg-4"> <h3>' + info[0].nombre + '</h3> <h5>' + info[0].precio + '€' + ' <span>99</span> <a href="#">click for offer</a></h5>' +
+          "<div class='available mt-3'><button class='btn btn-default btn-lg like  " + info[0].idprod + "' ' id='" + info[0].idprod + "' id=''>❤</button>" +
+          "</span><div id='cont_comprar'><select  id='" + info[0].idprod + "'></select><button class='baddcart' id='" + info[0].idprod + "'>Add to cart</button></div></div>" +
           ' <br><div class="share-desc"><div class="share"><h4>Share Product :</h4>' +
           ' <ul class="w3layouts_social_list list-unstyled"><li><a href="#" class="w3pvt_facebook"> <span class="fa fa-facebook-f"></span></a></a></li>' +
           ' <li class="mx-2"><a href="#" class="w3pvt_twitter"><span class="fa fa-twitter"></span></a></li>' +
           ' <li><a href="#" class="w3pvt_dribble"><span class="fa fa-dribbble"></span></a></li>' +
           ' <li class="ml-2"><a href="#" class="w3pvt_google"><span class="fa fa-google-plus"></span></a></li></ul></div>' +
           '<div class="clearfix"></div></div></div></div>' +
-          '<div class="row sub-para-w3layouts mt-5"><h3 class="shop-sing"><strong>MARCA :</strong> ' + data.marca + ' <BR> <strong>PRODUCTO  :</strong> ' + data.nombre + ' <BR><strong> DESCRIPCIÓN :</strong></h3>' +
-          '<p>' + data.descripcion + '</p>'
+          '<div class="row sub-para-w3layouts mt-5"><h3 class="shop-sing"><strong>MARCA :</strong> ' + info[0].marca + ' <BR> <strong>PRODUCTO  :</strong> ' + info[0].nombre + ' <BR><strong> DESCRIPCIÓN :</strong></h3>' +
+          '<p>' + info[0].descripcion + '</p>'
 
 
         );
@@ -683,20 +689,28 @@ function all_lists_products() {
     if (cat) {
       console.log("home categoria");
       console.log(cat);
-      ajaxForSearch("module/shop/controller/controller_shop.php?op=categoria&clas=" + cat);
+      //hacer funcion categoria
+      var info_data = { module: 'shop', function: 'prods_categoria', data: cat }
+      ajaxForSearch(amigable("?"), info_data)
 
     } else if (auto) {
+
       console.log("entra en auto , existe el nombre")
       var insidesearch = 'where nombre= "' + auto + '"';
 
       //console.log(insidesearch);
-      ajaxForSearch("module/shop/controller/controller_shop.php?op=search&btnsearch=" + insidesearch);
+      var info_data = { module: 'shop', function: 'select_btnsearch', data: insidesearch }
+      ajaxForSearch(amigable("?"), info_data)
+
+      //ajaxForSearch("module/shop/controller/controller_shop.php?op=search&btnsearch=" + insidesearch);//
     } else if ((marca) && (talla) && (marca != 0) && (talla != 0)) {
+
       console.log("entra en marca y talla existe la marca y la talla o son distintos de 0")
       var insides = 'where talla= "' + talla + '" and  marca="' + marca + '" ';
 
       //console.log(insidesearch);
-      ajaxForSearch("module/shop/controller/controller_shop.php?op=search&btnsearch=" + insides);
+      var info_data = { module: 'shop', function: 'select_btnsearch', data: insides }
+      ajaxForSearch(amigable("?"), info_data)
 
     } else if ((marca) && (marca != 0)) {
       console.log("entra en marca o es distintos de 0")
@@ -704,14 +718,18 @@ function all_lists_products() {
       console.log("inside=" + insides);
 
       //console.log(insidesearch);
-      ajaxForSearch("module/shop/controller/controller_shop.php?op=search&btnsearch=" + insides);
+      var info_data = { module: 'shop', function: 'select_btnsearch', data: insides }
+      ajaxForSearch(amigable("?"), info_data)
+
     } else if ((talla) && (talla != 0)) {
       console.log("entra en talla o es distintos de 0")
       var insides = 'where talla= "' + talla + '"';
       console.log("inside=" + insides);
 
       //console.log(insidesearch);
-      ajaxForSearch("module/shop/controller/controller_shop.php?op=search&btnsearch=" + insides);
+      var info_data = { module: 'shop', function: 'select_btnsearch', data: insides }
+      ajaxForSearch(amigable("?"), info_data)
+
     } else if (categ) {
       //console.log(categ);
       console.log("entra en categ book , existe el book")
@@ -719,8 +737,9 @@ function all_lists_products() {
       //console.log(apiajax);
     } else {
       //ajaxForSearch("module/shop/controller/controller_shop.php?op=productos&limit=" + limit);
+      //var info_data = { data: limit }
       var info_data = { module: 'shop', function: 'data_products', data: limit }
-       shop(ajaxForSearch(amigable("?"), info_data))
+      ajaxForSearch(amigable("?"), info_data)
       //ajaxForSearch(amigable("?module=shop&function=data_products",limit));
     }
 
@@ -749,15 +768,14 @@ function all_lists_products() {
 }
 
 function pagination() {
-
-  $.ajax({
-    type: 'GET',
-    dataType: "json",
-    url: "module/shop/controller/controller_shop.php?op=countp",
-  })
-    .done(function (data) {
+  var info_data = { module: 'shop', function: 'count_pages' }
+  shop(amigable("?"), info_data)
+    .then(function (data) {
       console.log(data);
-      var numprods = data[0].allpages;
+      var info = JSON.parse(data);
+      console.log(info);
+      var numprods = info[0].allpages;
+      console.log(numprods)
       page = numprods / 3;
       console.log(page);
       $('#pagination').bootpag({
@@ -767,105 +785,110 @@ function pagination() {
       }).on("page", function (event, num) {
         console.log(num);
         limit = 3 * (num - 1);
-        $.ajax({
-          type: 'GET',
-          dataType: "json",
-          url: "module/shop/controller/controller_shop.php?op=productos&limit=" + limit,
-        })
+        var info_data = { module: 'shop', function: 'data_products', data: limit }
+        shop(amigable("?"), info_data)
+          .then(function (data) {
 
-          .done(function (data) {
             console.log(data);
+            var info = JSON.parse(data);
+            console.log(info);
 
             $('#list_products').empty();
             $("#npg").html("Page " + num);
 
             console.log(limit);
-            ajaxForSearch("module/shop/controller/controller_shop.php?op=productos&limit=" + limit);
+            var info_data = { module: 'shop', function: 'data_products', data: limit }
+            ajaxForSearch(amigable("?"), info_data)
 
           });
       });//end on
     });//enddone
 }
 
-function redirect_login() {
-  var url = "index.php?page=controller_login&op=view_register"
-  $(window).attr('location', url);
 
-}
+//REDIRECT LOGIN ESPERAR A LA MIGRACION DE LOGIN
+// function redirect_login() {
+//   var url = "index.php?page=controller_login&op=view_register"
+//   $(window).attr('location', url);
 
-
-function prod_cart() {
-  var prod = [];
-
-  $(document).on('click', '.baddcart', function () {
-    console.log("btnaddcart")
-
-    var id = this.getAttribute('id');
-    console.log(id)
-
-    fav('module/shop/controller/controller_shop.php?op=check_logged')
-      .then(function (info) {
-        console.log(info)
-        if (info == '"logged"') {
-          console.log("entra if")
-
-          //console.log(data.ip);
-          fav('module/shop/controller/controller_shop.php?op=check_fav')
-            .then(function (nickname) {
-              console.log(nickname)
-
-              var infouser = { id_prod: id, id: nickname };
-              console.log(infouser);
-
-              fav('module/shop/controller/controller_shop.php?op=add_prod_cart', infouser)
-                .then(function (data) {
-
-                  console.log(data)
-
-                })
-            })
+// }
 
 
 
-        } else {
+//ESPERARSE A LA MIGRACION DEL CART
 
-          $.getJSON('https://api.ipify.org?format=json', function (data) {
-            console.log(data.ip);
+// function prod_cart() {
+//   var prod = [];
 
-            var infouser = { id_prod: id, id: data.ip };
-            console.log(infouser);
+//   $(document).on('click', '.baddcart', function () {
+//     console.log("btnaddcart")
 
-            fav('module/shop/controller/controller_shop.php?op=add_prod_cart', infouser)
-              .then(function (data) {
+//     var id = this.getAttribute('id');
+//     console.log(id)
 
-                console.log(data)
+//     fav('module/shop/controller/controller_shop.php?op=check_logged')
+//       .then(function (info) {
+//         console.log(info)
+//         if (info == '"logged"') {
+//           console.log("entra if")
+
+//           //console.log(data.ip);
+//           fav('module/shop/controller/controller_shop.php?op=check_fav')
+//             .then(function (nickname) {
+//               console.log(nickname)
+
+//               var infouser = { id_prod: id, id: nickname };
+//               console.log(infouser);
+
+//               fav('module/shop/controller/controller_shop.php?op=add_prod_cart', infouser)
+//                 .then(function (data) {
+
+//                   console.log(data)
+
+//                 })
+//             })
 
 
-              })
 
-          });
+//         } else {
+
+//           $.getJSON('https://api.ipify.org?format=json', function (data) {
+//             console.log(data.ip);
+
+//             var infouser = { id_prod: id, id: data.ip };
+//             console.log(infouser);
+
+//             fav('module/shop/controller/controller_shop.php?op=add_prod_cart', infouser)
+//               .then(function (data) {
+
+//                 console.log(data)
 
 
-        }
+//               })
 
-        prod.push(id);
-        console.log(prod)
+//           });
 
 
-        localStorage.setItem('prod', JSON.stringify(prod));
-        var gd = localStorage.getItem('prod');
-        console.log(JSON.parse(gd));
-        var save = localStorage.getItem('prod');
-        var storatge = { prod: save }
-        fav('module/shop/controller/controller_shop.php?op=prod_array', storatge)
-          .then(function (data) {
-            var data = JSON.parse(data);
-            console.log(data)
-          })
+//         }
 
-      })
-  })
-}
+//         prod.push(id);
+//         console.log(prod)
+
+
+//         localStorage.setItem('prod', JSON.stringify(prod));
+//         var gd = localStorage.getItem('prod');
+//         console.log(JSON.parse(gd));
+//         var save = localStorage.getItem('prod');
+//         var storatge = { prod: save }
+//         fav('module/shop/controller/controller_shop.php?op=prod_array', storatge)
+//           .then(function (data) {
+//             var data = JSON.parse(data);
+//             console.log(data)
+//           })
+
+//       })
+//   })
+// }
 
 var fav = function (url, data) { //funcion favorite general
 
@@ -940,28 +963,28 @@ function paint_likes() {
 
 }
 
-function prueba_products(data = 0) {
+// function prueba_products(data = 0) {
 
-  console.log("ENTRA  get data");
+//   console.log("ENTRA  get data");
 
-  //alert("AVISO HA ENTRADO ");
-  //console.log(data);
+//   //alert("AVISO HA ENTRADO ");
+//   //console.log(data);
 
-  var info_data = { module: 'shop', function: 'data_products', data: data }
-  shop(amigable("?"), info_data)
-    .then(function (data) {
-      var info = JSON.parse(data)
-      console.log(info)
-    })
-}
+//   var info_data = { module: 'shop', function: 'data_products', data: data }
+//   shop(amigable("?"), info_data)
+//     .then(function (data) {
+//       var info = JSON.parse(data)
+//       console.log(info)
+//     })
+// }
 
 var shop = function (url, data) { //function-promise GENERAL 
 
-  //console.log(data)
+  console.log(data)
 
   return new Promise(function (resolve) {
-    // console.log(url)
-    console.log(data)
+    //console.log(url)
+    //console.log(data)
     $.ajax({
       type: "POST",
       url: url,
@@ -976,23 +999,22 @@ var shop = function (url, data) { //function-promise GENERAL
 
 $(document).ready(function () {
 
-  // details_gmaps();
-  // details_products();
-  // loadata();
-  ajaxForSearch();
-  // apiajax();
-  // filtros();
-  // clickgmaps();
+  details_gmaps();
+  details_products();
+  loadata();
+
+  apiajax();
+  filtros();
+  clickgmaps();
   all_lists_products();
-  // pagination();
-  // detail_book();
+  pagination();
+  detail_book();
   // inlike();
 
-  // //
 
   // prod_cart();
 
-  prueba_products();
+  //prueba_products();
 
 
 

@@ -47,7 +47,7 @@ function send_cont(){
 
 		if (result) {
 			 var data = $('#contactus').serialize();
-			// alert("ENTRA")
+			 alert("ENTRA")
 			 //console.log(data)
 			 var info_data = {module:'contact',function:'send_cont',data:data}
 			cont(amigable("?"), info_data)

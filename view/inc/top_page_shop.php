@@ -51,6 +51,8 @@
   <script src="<?php echo JS_VIEW_SHOP ?>main_shop.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
   <script type="text/javascript" src="<?php echo  JQUERY_PATH ?>jquery.bootpag.min.js"></script>
+  <script src="<?php echo FSEACRH_PATH ?>view/js/fsearch.js"></script>
+  <script src="<?php echo JS_PATH ?>api_keys.js"></script>
 
   <!--añadir despues una vez probado el shop correctly-->
   <!-- <script src="view/js/search/view/js/fsearch.js"></script>

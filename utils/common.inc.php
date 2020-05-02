@@ -28,10 +28,11 @@
                 return call_user_func(array($obj, $function),$arrArgument,$arrArgument2);
                 
             }
-        } 
+        }    
         
     } else {
         throw new Exception();
+        print_r("estas asi");
     }
 }
 

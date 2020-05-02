@@ -15,7 +15,7 @@
         }
         
         private function setConexion() {
-            require_once 'Conf.class.singleton.php';
+           
             $conf = Conf::getInstance();
             $this->server = $conf->getHostDB();
             $this->database = $conf->getDB();
@@ -44,12 +44,26 @@
             return $this->stmt;
         }
         
-        public function listar($stmt) {
+        // public function listar($stmt) {
+        //     $this->array = array();
+        //     while ($row = $stmt->fetch_array(MYSQLI_ASSOC)) {
+        //         array_push($this->array, $row);
+        //     }
+        //     return $this->array;
+        // }
+
+        public function listar($stmt)
+        {
             $this->array = array();
-            while ($row = $stmt->fetch_array(MYSQLI_ASSOC)) {
-                array_push($this->array, $row);
+    
+            if (!($stmt) || empty($stmt)) {
+                return ('error');
+            } else {
+                while ($row = $stmt->fetch_array(MYSQLI_ASSOC)) {
+                    array_push($this->array, $row);
+                }
+                return $this->array;
             }
-            return $this->array;
         }
 
     }

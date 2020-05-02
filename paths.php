@@ -35,6 +35,7 @@ define('IMGAGES_PATH', SITE_PATH . 'view/images/');
 define('FSEACRH_PATH', SITE_PATH . 'view/js/search/');
 
 
+
 //PRODUCTION
 define('PRODUCTION', true);
 
