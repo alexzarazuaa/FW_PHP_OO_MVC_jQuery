@@ -51,7 +51,7 @@
   <script src="<?php echo JS_VIEW_SHOP ?>main_shop.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
   <script type="text/javascript" src="<?php echo  JQUERY_PATH ?>jquery.bootpag.min.js"></script>
-  <script src="<?php echo FSEACRH_PATH ?>view/js/fsearch.js"></script>
+  <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
 
   <!--añadir despues una vez probado el shop correctly-->
@@ -65,6 +65,7 @@
  <!-- IPCART-->
  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
   <!-- IPCART-->
+  
   <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 

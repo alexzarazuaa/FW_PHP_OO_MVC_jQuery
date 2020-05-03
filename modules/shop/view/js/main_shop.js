@@ -191,12 +191,14 @@ function initMap2() {
           return function () {
             var latitud = info[row].latitud
             var longitud = info[row].longitud
-            var info_data = { module: 'shop', function: 'geomaps_desc', data: {latitud, longitud }}
+            console.log(latitud);
+            console.log(longitud);
+            var info_data = { module: 'shop', function: 'geomaps_desc', latitud : latitud, longitud:longitud }
             shop(amigable("?"), info_data)
               .then(function (data) {
                 console.log(data);
                 info = JSON.parse(data)
-                console.log(info[0].nombre)
+                console.log(info)
                 var name = "";
                 for (row in info) {
                   name = name + info[row].nombre

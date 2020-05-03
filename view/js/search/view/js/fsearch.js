@@ -1,14 +1,13 @@
 
 
 function chargefirstajax() {
-    var valtalla = ""; // muestra las opcines del select de las tallas 
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "view/js/search/controller/controller_search.php?op=talla&marca=" + valtalla
-    })
-        .done(function (data) {
-            //console.log(data);
+    valtalla = "where 1=1"// muestra las opcines del select de las tallas 
+    var info_data = {module:'search',function:'talla', data:valtalla }
+    search(amigable("?"), info_data)
+        .then(function (data) {
+            console.log(data);
+            data = JSON.parse(data)
+            console.log(data)
             var $talla = $("#talla");
             $talla.empty();//
             $talla.append("<option value=0>" + "Selecciona talla" + "</option>");
@@ -22,7 +21,7 @@ function offer_talla() {
     chargefirstajax();
     $("#marca").on("change", function () {
 
-       // console.log("entra marca change");
+        console.log("entra marca change");
         var valtalla = $(this).val();
         var talla = $('#talla').val();
         console.log(talla);
@@ -33,18 +32,17 @@ function offer_talla() {
 
 
         if ((valtalla === "") || (valtalla == 0)) {
-            var valtalla = "";
+            valtalla = "where 1=1"
         } else {
             var valtalla = 'where marca = "' + valtalla + '" ';
-          //  console.log(valtalla)
+            console.log(valtalla)
         }
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "view/js/search/controller/controller_search.php?op=talla&marca=" + valtalla
-        })
-            .done(function (data) {
-                //console.log(data);
+        var info_data = {module:'search',function:'talla', data:valtalla }
+        search(amigable("?"), info_data)
+            .then(function (data) {
+                console.log(data);
+                data = JSON.parse(data)
+                console.log(data)
                 var $talla = $("#talla");
                 $talla.empty();//
 
@@ -64,13 +62,12 @@ function offer_talla() {
 
 
 function marca_empty() {
-    var valmarca = "";
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "view/js/search/controller/controller_search.php?op=marca&talla=" + valmarca
-    })
-        .done(function (data) {
+    valmarca = "where 1=1"
+    var info_data = {module:'search',function:'marca', data:valmarca }
+    search(amigable("?"), info_data)
+        .then(function (data) {
+            console.log(data);
+            data = JSON.parse(data)
             console.log(data);
             var $marca = $("#marca");
             $marca.empty();//
@@ -91,19 +88,18 @@ function offer_marca() {
         var marca = $('#marca').val();
         console.log(valmarca);
         if ((valmarca === "") || (valmarca == 0)) {
-            var valmarca = "";
+            var valmarca = "WHERE 1=1";
             console.log(valmarca);
         } else {
             var valmarca = 'where talla = "' + valmarca + '" ';
             console.log(valmarca)
         }
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "view/js/search/controller/controller_search.php?op=marca&talla=" + valmarca
-        })
-            .done(function (data) {
+        var info_data = {module:'search',function:'marca', data:valmarca }
+        search(amigable("?"), info_data)
+            .then(function (data) {
                 console.log(data);
+                data = JSON.parse(data)
+                console.log(data)
                 var $marca = $("#marca");
                 $marca.empty();//
                 $marca.append("<option value=0>" + "Selecciona Marca" + "</option>");
@@ -147,12 +143,11 @@ function autocom() {
             complete = 'where talla= "' + talla + '" and marca="' + marca + '"'
            // console.log(complete);
         }
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "view/js/search/controller/controller_search.php?op=autocomplete&complete=" + complete
-        })
-            .done(function (data) {
+        var info_data = {module:'search',function:'autocomplete', data:complete }
+        search(amigable("?"), info_data)
+            .then(function (data) {
+                console.log(data)
+                data = JSON.parse(data);
                 console.log(data)
                 var nombre = []
                 for (row in data) {
@@ -187,7 +182,8 @@ function buttonsearch() {
         localStorage.setItem('autocomplete', auto); // save data
 
         //alert("vad")
-        $(window).attr('location', 'index.php?page=controller_shop&op=view')
+        url=amigable('?module=shop');
+        $(window).attr('location',url)
 
     });
 
@@ -202,6 +198,38 @@ function keyenter() {
     });
 }
 
+
+
+
+var search = function (url, data) { //function-promise GENERAL 
+
+ console.log(data)
+
+	return new Promise(function (resolve) {
+		 //console.log(url)
+		 console.log(data)
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: data
+		})
+			.done(function (data) {
+				resolve(data);
+			})
+	})
+};
+
+
+// function prueba () {
+//     var info_data = {module:'search',function:'search'}
+//     search(amigable("?"), info_data)
+//         .then(function (data) {
+//             console.log(data)
+            
+            
+//         })
+// }
+
 $(document).ready(function () {
 
     console.log("entra fseacrh")
@@ -214,7 +242,7 @@ $(document).ready(function () {
     autocom();
     buttonsearch();
     keyenter();
-
+    //prueba();
 
 });
 

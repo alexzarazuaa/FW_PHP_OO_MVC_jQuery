@@ -50,7 +50,7 @@
   <script src="<?php echo JS_VIEW_HOME ?>home.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
 
-  <script src="<?php echo FSEACRH_PATH ?>view/js/fsearch.js"></script>
+  <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <!-- <script src="view/js/Activiti/activiti.js"></script> -->
   <!-- <script src="module/login/model/main_menus.js"></script> -->
   <!-- FAVICON-->

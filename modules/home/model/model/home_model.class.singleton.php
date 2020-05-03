@@ -1,9 +1,5 @@
 <?php
 
-//require(SITE_ROOT . "modules/home/model/BLL/home_bll.class.singleton.php");
-//echo json_encode("products model class");
-// exit;
-
 class home_model
 {
 

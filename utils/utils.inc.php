@@ -1,6 +1,6 @@
 <?php
     function amigable($url, $return = false) {//pretty php
-        //print_r("estoy entrando");
+        //print_r(" entrando");
         $amigableson = URL_AMIGABLES;
         $link = "";
         if ($amigableson) {

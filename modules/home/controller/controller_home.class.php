@@ -38,7 +38,7 @@
 		
 		}
 
-		function count_categoria (){
+		function count_categoria (){//FUNCTION COUNT VIEW CATEGORIAS HOME
 				//print_r("entra function  count");
 				$json = array();
 				$json = loadModel(MODEL_HOME, "home_model", "count_categoria",$_POST['data']);

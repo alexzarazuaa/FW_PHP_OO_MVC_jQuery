@@ -2,17 +2,17 @@
 <functions>
 
     <function>
-        <name>contact</name>
+        <name>talla</name>
         <uri></uri>
     </function>
 
-    <function>
-        <name>send_cont</name>
+        <function>
+        <name>marca</name>
         <uri></uri>
     </function>
 
      <function>
-        <name>map</name>
+        <name>autocomplete</name>
         <uri></uri>
     </function>
 

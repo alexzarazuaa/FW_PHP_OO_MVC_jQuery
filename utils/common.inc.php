@@ -32,7 +32,7 @@
         
     } else {
         throw new Exception();
-        print_r("estas asi");
+        //print_r("estas asi");
     }
 }
 

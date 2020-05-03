@@ -2,20 +2,20 @@
 function click() {
     $(document).on("click", '.shop', function () {
         //console.log("click");
-        alert("click count");
+        //alert("click count");
         var cat = this.getAttribute('categoria');
         localStorage.setItem('categoria', cat); // save data
         console.log(localStorage);
-        alert("click count2");
+        //alert("click count2");
         url=amigable('?module=shop');
         $(window).attr('location',url)
 
         // click count
         var categorie = this.getAttribute('categoria');
         console.log(categorie);
-        alert("click count3");
+        //alert("click count3");
         var info_data = { module: 'home', function: 'count_categoria', data: categorie }
-        alert("inf" + info_data)
+        //alert("inf" + info_data)
         home(amigable("?"), info_data)
             .then(function (data) {
                 console.log(data)
@@ -76,6 +76,7 @@ function loadmore() {
         var info_data = { module: 'home', function: 'data_categories', data: limit }
         home(amigable("?"), info_data)
             .then(function (info) {
+                console.log(info)
                 var data = JSON.parse(info)
                 $.each(data, function (index, data) {
                     console.log(data.imagen)
@@ -101,7 +102,7 @@ function categoria() {
     var info_data = { module: 'home', function: 'data_categories', data: limit }
     home(amigable("?"), info_data)
         .then(function (info) {
-            //console.log(info)
+            console.log(info)
             var data = JSON.parse(info)
             console.log(data)
             $.each(data, function (index, data) {
@@ -268,7 +269,7 @@ function get_data() {
 }
 
 
-// function getdata() {//FUNCION DE PRUEBA DE LA DATA 
+// function getdata() {//FUNCION DE PRUEBA  
 //    // console.log("ENTRA  get data");
 
 //     //alert("AVISO HA ENTRADO ");
@@ -310,7 +311,8 @@ $(document).ready(function () {
     getSuggestions();
     click_cart();
     get_data();
-
+    //
+    //getdata();
 
 
 });

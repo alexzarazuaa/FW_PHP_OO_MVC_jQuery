@@ -51,13 +51,7 @@
 
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
 
-  <!-- <script type="text/javascript" src=view/Lang/translate.js></script> -->
-  <!-- <script src="module/contact/model/gmaps.js"></script>
-  <script src="view/js/search/view/js/fsearch.js"></script>
-  <script src="view/js/Activiti/activiti.js"></script>
-  <script src="module/login/model/main_menus.js"></script>
-  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
-  <script src="model/api_key.js"></script> -->
+
 
 
 

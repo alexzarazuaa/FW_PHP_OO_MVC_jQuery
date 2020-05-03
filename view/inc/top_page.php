@@ -35,7 +35,8 @@
 
   <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
   
-  <script src="<?php echo FSEACRH_PATH ?>view/js/fsearch.js"></script>
+  <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
+  
   
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
 

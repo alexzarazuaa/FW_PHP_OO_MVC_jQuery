@@ -2,10 +2,6 @@
 
  require 'autoload.php';
 
-// include(UTILS . "utils.inc.php");
-// include(UTILS . "common.inc.php");
-// //include(UTILS . "upload.inc.php");
-// include(UTILS . "mail.inc.php");
 
 if (PRODUCTION) { //estamos en producción
     ini_set('display_errors', '1');
@@ -62,9 +58,19 @@ function handlerModule($module_uri, $function_uri)
         if (($module_uri === (string) $module->uri)) {
 
             $exist = true;
-            // print_r($module_uri);
+           
 
-            $path = MODULES_PATH . $module_uri . "/controller/controller_" . $module_uri . ".class.php";
+            if ($module_uri=='search'){
+               
+                $path = FSEACRH_PATH . $module_uri . "/controller/controller_" . $module_uri . ".class.php";
+                //print_r(" view\js\search\controller\controller_search.class.php");
+                //print_r($path);
+                //die();
+            }else{
+                $path = MODULES_PATH . $module_uri . "/controller/controller_" . $module_uri . ".class.php";
+            }
+           
+
             //print_r($path);
 
             if (file_exists($path)) {
@@ -96,10 +102,18 @@ function handlerfunction($module, $obj, $function_uri)
 { //pass the name of the function and check that it is in the name of the xml
 
     //print_r($function_uri);
+ 
+    
+    if ($module=='search'){
+  
+        $functions = simplexml_load_file(FSEACRH_PATH . $module . "/resources/functions.xml");
+        $exist = false;
+    }else{
+        $functions = simplexml_load_file(MODULES_PATH . $module . "/resources/functions.xml");  //check if function exists
+        $exist = false;
+    }
 
-    $functions = simplexml_load_file(MODULES_PATH . $module . "/resources/functions.xml");  //check if function exists
-    $exist = false;
-
+    
     foreach ($functions->function as $function) {
 
         if (($function_uri === (string) $function->name)) {

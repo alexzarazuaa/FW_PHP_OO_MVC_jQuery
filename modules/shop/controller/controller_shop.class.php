@@ -20,24 +20,22 @@ class controller_shop
 	}
 	
 	function data_products()
-	{ //function probar que funcion la conexion con db
+	{ //function obtener todos los productos contando con el limit y el count_view
 		//print_r($_GET);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "data_products", $_POST['data']);
 		echo json_encode($json);
-		//echo "daasdasd";
-		// print($json);
+	
 
 	}
 
 	function data_one_product()
-	{ //function probar que funcion la conexion con db
+	{ //function para obetener la info de details de producs
 		//print_r($_GET);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "data_one_product", $_POST['data']);
 		echo json_encode($json);
-		//echo "daasdasd";
-		// print($json);
+		
 
 	}
 
@@ -80,7 +78,7 @@ class controller_shop
 
 	function geomaps_desc(){
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "obtain_geomaps_desc" ,$_POST['data'],$_POST['data']);
+		$json = loadModel(MODEL_SHOP, "shop_model", "obtain_geomaps_desc" ,$_POST['latitud'],$_POST['longitud']);
 		echo json_encode($json);
 	}
 
