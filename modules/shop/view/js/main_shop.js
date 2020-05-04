@@ -151,7 +151,6 @@ function initMap() {
 }
 
 
-// FALTA ESTA 
 
 //funcion mostrar mapa grande 
 function initMap2() {

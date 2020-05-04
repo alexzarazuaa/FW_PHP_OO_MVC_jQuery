@@ -1,13 +1,13 @@
 <?php
 
-class contact_model {
+class login_model {
     
     private $bll;
     static $_instance;
     
 
     private function __construct() {
-        $this->bll = contact_bll::getInstance();
+        $this->bll = login_bll::getInstance();
     }
 
     public static function getInstance() {

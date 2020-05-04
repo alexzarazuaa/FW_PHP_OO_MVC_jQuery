@@ -23,6 +23,10 @@ define('JS_PATH', SITE_PATH . 'view/js/');
 //JQUERY
 define('JQUERY_PATH', SITE_PATH . 'view/jquery/');
 
+//ACTIVITY
+define('ACTIVITY_PATH', SITE_PATH . 'view/js/Activiti/');
+
+
 //TOASTR
 define('TOASTR_PATH', SITE_PATH . 'view/js/toastr/');
 
@@ -88,6 +92,13 @@ define('DAO_SHOP', SITE_ROOT . 'modules/shop/model/DAO/');
 define('BLL_SHOP', SITE_ROOT . 'modules/shop/model/BLL/');
 define('MODEL_SHOP', SITE_ROOT . 'modules/shop/model/model/');
 define('JS_VIEW_SHOP', SITE_PATH . 'modules/shop/view/js/');
+
+//MODEL LOGIN
+define('MODEL_PATH_LOGIN', SITE_ROOT . 'modules/login/model/');
+define('DAO_LOGIN', SITE_ROOT . 'modules/login/model/DAO/');
+define('BLL_LOGIN', SITE_ROOT . 'modules/login/model/BLL/');
+define('MODEL_LOGIN', SITE_ROOT . 'modules/login/model/model/');
+define('JS_VIEW_LOGIN', SITE_PATH . 'modules/login/view/js/');
 
 
 //MODEL SEARCH

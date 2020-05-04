@@ -61,12 +61,12 @@ class controller_contact
 	}
 
 
-	function map()
-	{ //function select shops for map
-
-		$json = array();
-		$json = loadModel(MODEL_CONTACT, "contact_model", "obtain_gmap_model",);
-		echo json_encode($json);
-
+	function shops_map(){
+		
+			$json = array();
+			 $json = loadModel(MODEL_CONTACT, "contact_model", "shops_model");
+			 echo json_encode($json);
+		
 	}
+
 }

@@ -53,7 +53,6 @@
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <!-- <script src="view/js/Activiti/activiti.js"></script> -->
   <!-- <script src="module/login/model/main_menus.js"></script> -->
-  <!-- FAVICON-->
-  <link rel="icon" type="<?php echo IMG_PATH ?>png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
-
+ 
+  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
 </head>

@@ -5,9 +5,9 @@ function chargefirstajax() {
     var info_data = {module:'search',function:'talla', data:valtalla }
     search(amigable("?"), info_data)
         .then(function (data) {
-            console.log(data);
+           // console.log(data);
             data = JSON.parse(data)
-            console.log(data)
+           // console.log(data)
             var $talla = $("#talla");
             $talla.empty();//
             $talla.append("<option value=0>" + "Selecciona talla" + "</option>");
@@ -40,9 +40,9 @@ function offer_talla() {
         var info_data = {module:'search',function:'talla', data:valtalla }
         search(amigable("?"), info_data)
             .then(function (data) {
-                console.log(data);
+               // console.log(data);
                 data = JSON.parse(data)
-                console.log(data)
+               // console.log(data)
                 var $talla = $("#talla");
                 $talla.empty();//
 
@@ -66,9 +66,9 @@ function marca_empty() {
     var info_data = {module:'search',function:'marca', data:valmarca }
     search(amigable("?"), info_data)
         .then(function (data) {
-            console.log(data);
+           // console.log(data);
             data = JSON.parse(data)
-            console.log(data);
+           // console.log(data);
             var $marca = $("#marca");
             $marca.empty();//
             $marca.append("<option value=0>" + "Selecciona Marca" + "</option>");
@@ -97,9 +97,9 @@ function offer_marca() {
         var info_data = {module:'search',function:'marca', data:valmarca }
         search(amigable("?"), info_data)
             .then(function (data) {
-                console.log(data);
+               // console.log(data);
                 data = JSON.parse(data)
-                console.log(data)
+                //console.log(data)
                 var $marca = $("#marca");
                 $marca.empty();//
                 $marca.append("<option value=0>" + "Selecciona Marca" + "</option>");
@@ -146,9 +146,9 @@ function autocom() {
         var info_data = {module:'search',function:'autocomplete', data:complete }
         search(amigable("?"), info_data)
             .then(function (data) {
-                console.log(data)
+              //  console.log(data)
                 data = JSON.parse(data);
-                console.log(data)
+                //console.log(data)
                 var nombre = []
                 for (row in data) {
                     nombre.push(data[row].nombre);
@@ -203,11 +203,11 @@ function keyenter() {
 
 var search = function (url, data) { //function-promise GENERAL 
 
- console.log(data)
+ //console.log(data)
 
 	return new Promise(function (resolve) {
 		 //console.log(url)
-		 console.log(data)
+		 //console.log(data)
 		$.ajax({
 			type: "POST",
 			url: url,

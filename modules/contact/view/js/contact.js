@@ -97,6 +97,7 @@ var cont = function (url, data) { //function-promise GENERAL
 
 
 
+
 $(document).ready(function () {
 	console.log("entra function send_cont")
 	send_cont()

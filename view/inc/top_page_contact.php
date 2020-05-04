@@ -51,7 +51,7 @@
 
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
 
-
+  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
 
 
 

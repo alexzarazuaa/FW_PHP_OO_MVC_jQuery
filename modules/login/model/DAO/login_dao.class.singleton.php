@@ -1,7 +1,7 @@
 <?php
 // print_r ("entra dai ");
 // die();
-class contact_dao
+class login_dao
 {
     static $_instance;
 

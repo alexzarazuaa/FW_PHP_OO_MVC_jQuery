@@ -3,7 +3,7 @@
 //  require_once(MODEL_PATH . "db.class.singleton.php");
 //  require(SITE_ROOT . "modules/shop/model/DAO/shop_dao.class.singleton.php");
 
-class contact_bll
+class login_bll
 {
 	private $dao;
 	private $db;
@@ -11,7 +11,7 @@ class contact_bll
 
 	private function __construct()
 	{
-		$this->dao = contact_dao::getInstance();
+		$this->dao = login_dao::getInstance();
 		$this->db = db::getInstance();
 	}
 

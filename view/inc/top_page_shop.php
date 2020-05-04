@@ -40,7 +40,7 @@
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxdatatable.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxcheckbox.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxlistbox.js"></script>
-  <!-- <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqxscrollview.js"></script> -->
+   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqxscrollview.js"></script> 
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/scripts/demos.js"></script>
   <!-- //jQWidgets -->
@@ -55,12 +55,9 @@
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
 
   <!--añadir despues una vez probado el shop correctly-->
-  <!-- <script src="view/js/search/view/js/fsearch.js"></script>
-  <script src="model/api_key.js"></script>
-  <script src="view/js/Activiti/activiti.js"></script>
+  <!-- 
   <script src="module/cart/model/cart.js"></script>
-
-  <script src="module/login/model/main_menus.js"></script> -->
+</script> -->
 
  <!-- IPCART-->
  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
@@ -70,6 +67,6 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 
-  <link rel="icon" type="<?php echo IMG_PATH ?>png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
 
 </head>

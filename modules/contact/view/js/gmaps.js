@@ -8,7 +8,7 @@ $(document).ready(function () {
     script.async;
     script.defer;
     document.getElementsByTagName('script')[0].parentNode.appendChild(script);
-    console.log(script);
+    //console.log(script);
   }
 })
 
@@ -26,13 +26,14 @@ function initMap() {
 
   var infowindow = new google.maps.InfoWindow();
 
-  var info_data = { module: 'contact', function: 'map'}
+
+  var info_data = { module: 'contact', function: 'shops_map' }
   cmap(amigable("?"), info_data)
     .then(function (data) {
 
       console.log(data);
-      var info = JSON.parse(data);
-      console.log(info)
+      //var info = JSON.parse(data);
+      //console.log(info)
 
       for (row in data) {
         console.log(data);
@@ -65,7 +66,7 @@ var cmap = function (url, data) { //function-promise GENERAL
 
   return new Promise(function (resolve) {
     console.log(url)
-    //console.log(data)
+    console.log(data)
     $.ajax({
       type: "POST",
       url: url,

@@ -27,27 +27,25 @@
 
 
   <!-- FAVICON-->
-  <link rel="icon" type="<?php echo IMG_PATH ?>png" sizes="192x192" href="<?php echo IMG_PATH ?>fav.png">
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
 
   <!-- //LINKS PLANTILLA -->
 
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
 
   <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
-  
+  <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
-  
-  
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
+  <script src="<?php echo ACTIVITY_PATH ?>activity.js"></script>
+
+
+  
 
   <!--  
   <script src="module/sport/model/validate_sport.js"></script>
-  <script src="module/shop/model/main_shop.js"></script>
-  <script src="module/contact/model/gmaps.js"></script>
- 
-
-  <script src="module/login/model/validate_login.js"></script>
-  <script src="view/js/Activiti/activiti.js"></script> -->
+  <script src="module/shop/model/main_shop.js"></script> -->
 
 
 
