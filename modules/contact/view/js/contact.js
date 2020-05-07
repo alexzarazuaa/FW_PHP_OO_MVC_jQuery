@@ -61,7 +61,8 @@ function send_cont(){
 						//alert("enviado loco")
 						//console.log("send mail")
 						window.setTimeout(function(){
-							document.location.href = "/SPORT_V1.6/";
+							//document.location.href = "/SPORT_V1.6/";
+							redirect_contact()
 						},2000)
 					}else{
 						console.log("toaster error")
@@ -74,7 +75,10 @@ function send_cont(){
 	});
 }
 
-
+function redirect_contact() {
+	url = amigable('?module=contact');
+	$(window).attr('location', url)
+}
 
 
 var cont = function (url, data) { //function-promise GENERAL 

@@ -1,22 +1,5 @@
 
-$(function () {
 
-	$('#login-form-link').click(function (e) {
-		$("#formlogin").delay(100).fadeIn(100);
-		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function (e) {
-		$("#register-form").delay(100).fadeIn(100);
-		$("#formlogin").fadeOut(100);
-		$('#formlogin-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-
-});
 // regexp validators
 
 function validate_register() {
@@ -103,7 +86,7 @@ function validate_login() {
 
 
 function redirect_home() {
-	url = amigable('?module=shop');
+	url = amigable('?module=home');
 	$(window).attr('location', url)
 
 }
@@ -114,6 +97,10 @@ function redirect_cart() {
 
 }
 
+function redirect_login() {
+	url = amigable('?module=login');
+	$(window).attr('location', url)
+}
 
 
 
@@ -149,32 +136,39 @@ var reg = function (url, data) { //GENERAL FUNCTION RETURN PROMISE
 	})
 };
 
-function register() {
+function register(viene) {
 	console.log("Click register1");
 	//register form
 	console.log("entra");
 	if (validate_register() != 0) {
 		var userinfo = $('#register-form').serialize();
 		console.log(userinfo)
-		reg('module/login/controller/controller_login.php?op=user_exist', userinfo)
+		var info_data = { module: 'login', function: 'exist_id', data: userinfo, viene: 'manual' }
+		reg('?', info_data)
+			// reg('module/login/controller/controller_login.php?op=user_exist', userinfo)
 			.then(function (data) {
 				console.log("entra1");
 				console.log(data);
-				if (data == '"noexiste"') {
-					reg('module/login/controller/controller_login.php?op=register', userinfo)
+				data = JSON.parse(data);
+				console.log(data)
+				if (data == null) {
+					var info_data = { module: 'login', function: 'insert_user', data: userinfo }
+					reg('?', info_data)
 						.then(function (data) {
+							console.log("entra2");
 							console.log(data);
-							if (data == '"ok"') {
-								alert("Usuario registrado corerectamente")
-								redirect_home();
-							};
+							toastr.success("you have been registered correctly", "Email sent.");
+							//envia correo y redirect home
+							redirect_home()
 						})
 
+				} else if (data == 'THIS USER NAME IS ALREADY IN USE') {
+					toastr.error("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
+					window.setTimeout(function () {
+						redirect_login();
+					}, 2000)
 				}
-				else {
-					alert("El usuario ya existe");
-				}
-			}
+
 			)
 	}
 
@@ -189,6 +183,7 @@ var ipu = new Promise(function (resolve) { //obtener  ip for user no logged
 		resolve(data.ip);
 	})
 })
+
 function login() {
 	console.log("ENTRA FUNC LOGIN");
 	if (validate_login() != 0) {
@@ -263,12 +258,14 @@ function btn_login_reg() {
 }
 
 function key_log_reg() {
+	//KEY LOG LOGIN OPTION
 	$('#logpassword').on("keydown", function (e) {
 		// console.log("clickpass")
 		if (e.which == 13) {
 			login();
 		}
 	});
+
 	//KEY LOG CONFIRM PASSWORD REGISTER
 	$('#c_password').on("keydown", function (e) {
 		console.log("clickpass")
@@ -278,12 +275,15 @@ function key_log_reg() {
 	});
 }
 
+
+
 $(document).ready(function () {
 
 	//console.log("valideate login");
 
 	key_log_reg();
 	btn_login_reg();
+
 
 });//ENDREADY
 

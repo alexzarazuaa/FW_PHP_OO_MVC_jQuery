@@ -5,8 +5,8 @@
     if (file_exists($model)) {
         include_once($model);
         $modelClass = $model_name;
-        //print_r($function);
-        //print_r($modelClass);
+        // print_r($function);
+        // print_r($modelClass);
 
         if (!method_exists($modelClass, $function)){
             throw new Exception();

@@ -17,10 +17,28 @@ class login_model {
         return self::$_instance;
     }
 
-    public function shops_model(){
-         //print_r("entra construc model sop");
-        return $this->bll->obtain_shops_bll();
+    public function insert_user_model($data){
+         
+        return $this->bll->insert_register_user($data);
+        //return $data;
       
+    }
+
+    public function exist_user_model($user_email,$nickname){
+         
+        return $this->bll->exist_user_bll($user_email,$nickname);
+        //return $data;
+      
+    }
+    public function exist_id_model($data){
+
+         
+        return $this->bll->check_id_bll($data);
+        //return $data;
+      
+    }
+    function active_user($data){
+        return $this->bll->user_activate_BLL($data);
     }
 
 }

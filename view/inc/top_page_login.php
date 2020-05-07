@@ -48,9 +48,15 @@
 
   <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
+  <script src="<?php echo ACTIVITY_PATH ?>activiti.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
   <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>login.js"></script>
-  <script src="<?php echo ACTIVITY_PATH ?>activiti.js"></script>
+    <!-- TOASTR -->
+    <script type="text/javascript" src="<?php echo TOASTR_PATH ?>build/toastr.min.js"></script>
+  <link rel="stylesheet" href="<?php echo TOASTR_PATH ?>build/toastr.css">
+  <!-- TOASTR -->
+  <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>animation_login.js"></script>
+
    
     <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">

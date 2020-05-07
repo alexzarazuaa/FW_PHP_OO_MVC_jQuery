@@ -40,9 +40,15 @@
         }
 
         public function ejecutar($sql) {
-            $this->stmt = $this->link->query($sql);
-            return $this->stmt;
+           
+            if (!($sql) || empty($sql)) {
+                return ('error');
+            } else {
+                $this->stmt = $this->link->query($sql);
+                return $this->stmt;
+            }
         }
+        
         
         // public function listar($stmt) {
         //     $this->array = array();
@@ -65,5 +71,6 @@
                 return $this->array;
             }
         }
+        
 
     }

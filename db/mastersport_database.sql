@@ -249,21 +249,6 @@ create table categories (
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -----------------------------------------------------------------------------------------------------
 
 
@@ -335,6 +320,24 @@ CREATE TABLE `user` (
   `points` varchar(50) DEFAULT '0',
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4
+
+----------------------------------------------------------------------
+
+-- ADAPTADA LA TABLA DE USER PARA TOKEN AND NEW ID
+
+ CREATE TABLE user (
+  `userid` varchar(200) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `avatar` varchar(50) NOT NULL,
+  `type` varchar(20) DEFAULT 'Client',
+   `activate` tinyint(1) NOT NULL DEFAULT '0',
+   `token` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `points` varchar(50) DEFAULT '0',
+  PRIMARY KEY (`userid`)
+) 
+
 
  -------------------------------------------------------------
 

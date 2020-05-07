@@ -20,7 +20,8 @@ function click() {
             .then(function (data) {
                 console.log(data)
                 info = JSON.parse(data)
-                alert(info)
+                console.log(info)
+                //alert(info)
             })
 
 
@@ -257,7 +258,8 @@ function get_data() {
                 check('module/home/controller/controller_home.php?op=mypoints', infopoints)
                     .then(function (data) {
                         console.log(data)
-                        alert(data)
+                        //alert(data)
+                        //toatr
                     })
 
             })

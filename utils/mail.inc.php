@@ -8,12 +8,12 @@ function enviar_email($arr)
     $return = '';
 
     switch ($arr['type']) {
-        // case 'alta':
-        //     $subject = 'Tu Alta en Ohana dogs';
-        //     $ruta = "<a href='" . amigable("?module=home&function=active_user&param=" . $arr['token'], true) . "'>aqu&iacute;</a>";
-        //     $body = 'Gracias por unirte a nuestra aplicaci&oacute;n<br> Para finalizar el registro, pulsa ' . $ruta;
-        //     break;
-
+        case 'alta':
+            $subject = 'TE HAS DADO DE ALTA EN MASTERSPORT';
+            $ruta = "<a href='" . amigable("?module=login&function=active_user&param=" . $arr['token'], true) . "'>aqu&iacute;</a>";
+            $body = 'Gracias por unirte a nuestra aplicaci&oacute;n<br> Para finalizar el registro, pulsa ' . $ruta;
+            break;
+     
         // case 'changepass':
         //     $subject = 'Tu Nuevo Password en Ohana dogs<br>';
         //     $ruta = '<a href="' . amigable("?module=login&function=changepass&aux=" . $arr['token'], true) . '">aqu&iacute;</a>';
