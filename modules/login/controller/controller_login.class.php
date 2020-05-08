@@ -15,6 +15,14 @@ class controller_login
 		loadView('modules/login/view/', 'login.html');
 		require(VIEW_PATH_INC . "footer.html");
 	}
+	
+	function recover_pass()
+	{
+		require(VIEW_PATH_INC . "top_page_login.php");
+		require(VIEW_PATH_INC . "menu.html");
+		loadView('modules/login/view/', 'recover_pass.html');
+		require(VIEW_PATH_INC . "footer.html");
+	}
 
 
 	function insert_user()
@@ -23,7 +31,7 @@ class controller_login
 		//echo (parse_str($_POST['data'], $matriz));
 		parse_str($_POST['data'], $matriz);
 		//echo json_encode($matriz);
-		echo json_encode($_POST['data']);
+		//echo json_encode($_POST['data']);
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "insert_user_model",$matriz);
 		echo json_encode($json);
@@ -37,9 +45,14 @@ class controller_login
 			'inputEmail' => $matriz['email']
 		);
 		//print_r($arrArgument);
-		echo json_encode($arrArgument);
-
-		//activate a 1 when send email
+		//echo json_encode($arrArgument);
+		try {
+			echo  enviar_email($arrArgument);
+			//print_r($arrArgument);
+		} catch (Exception $e) {
+			echo "<div class='alert alert-error'>Server error. Try later...</div>";
+		}
+	
 	}
 	function exist_user()
 	{ //function insert_user_manual
@@ -63,10 +76,13 @@ class controller_login
 	}
 
 	function active_user(){
+		//echo json_encode($_POST['data']);
 
-		if (isset($_GET['param'])) {
+		//data variabke with name module,namefunction and the token to check and activate user
+		if (isset($_POST['data'])) {
 
-			loadModel(MODEL_LOGIN, "login_model", "active_user",$_GET['param']);
+			loadModel(MODEL_LOGIN, "login_model", "active_user",$_POST['data']);
+			header('Location: ' . SITE_PATH);
 		}
 	}
 

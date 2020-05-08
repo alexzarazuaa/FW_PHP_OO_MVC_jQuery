@@ -145,7 +145,6 @@ function register(viene) {
 		console.log(userinfo)
 		var info_data = { module: 'login', function: 'exist_id', data: userinfo, viene: 'manual' }
 		reg('?', info_data)
-			// reg('module/login/controller/controller_login.php?op=user_exist', userinfo)
 			.then(function (data) {
 				console.log("entra1");
 				console.log(data);
@@ -157,22 +156,23 @@ function register(viene) {
 						.then(function (data) {
 							console.log("entra2");
 							console.log(data);
+							alert("email")
 							toastr.success("you have been registered correctly", "Email sent.");
+							alert("email send")
 							//envia correo y redirect home
 							redirect_home()
 						})
-
 				} else if (data == 'THIS USER NAME IS ALREADY IN USE') {
 					toastr.error("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
 					window.setTimeout(function () {
 						redirect_login();
-					}, 2000)
+					}, 1000)
 				}
 
-			)
-	}
+			})//end_promise
 
-}
+}//end_validate_register
+}//end_register
 
 
 var ipu = new Promise(function (resolve) { //obtener  ip for user no logged

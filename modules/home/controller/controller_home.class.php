@@ -43,6 +43,7 @@
 				$json = array();
 				$json = loadModel(MODEL_HOME, "home_model", "count_categoria",$_POST['data']);
 				echo json_encode($json);
+				
 			
 		}
 

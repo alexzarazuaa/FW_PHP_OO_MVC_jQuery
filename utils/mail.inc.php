@@ -6,6 +6,7 @@ function enviar_email($arr)
     $body = '';
     $ruta = '';
     $return = '';
+    
 
     switch ($arr['type']) {
         case 'alta':

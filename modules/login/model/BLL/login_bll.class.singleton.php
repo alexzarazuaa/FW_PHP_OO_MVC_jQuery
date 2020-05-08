@@ -43,82 +43,68 @@ class login_bll
 		//print_r($data[0]['email']);
 		//print_r(array_slice($id,0));
 
-			$res=false;
-			$rlt=false;
-	
-            for ($i = 0; $i < count($id); $i++) {
-				if($res==false){
-					if (($id[$i]['userid']) == ($data[0]['nickname'])) {
-						$res = true;
-						return "THIS USER NAME IS ALREADY IN USE";
-						// break;
-					} else {
-						$res = false;
-						$rlt = "OK";
-					}
+		$res = false;
+		$rlt = false;
+
+		for ($i = 0; $i < count($id); $i++) {
+			if ($res == false) {
+				if (($id[$i]['userid']) == ($data[0]['nickname'])) {
+					$res = true;
+					return "THIS USER NAME IS ALREADY IN USE";
+					// break;
+				} else {
+					$res = false;
+					$rlt = "OK";
 				}
+			}
+		}
 
-         
-            }
-          
 
-		//  //return $rlt;
+		//return $rlt;
 
-		  //solamente cuando no encuentre un id igual 
-		  if ($rlt == "OK" ) {
+		//solamente cuando no encuentre un id igual 
+		if ($rlt == "OK") {
 
-            //solamente cuando venga de registrarse de nuestra pagina de login
-            if ($data[1] == 'manual') {
+			//solamente cuando venga de registrarse de nuestra pagina de login
+			if ($data[1] == 'manual') {
 
-                
+
 				$check_mail = $this->dao->user_email($this->db);
 				//print_r($data);
-					//print_r(array_slice($check_mail,0));
-					//print_r(array_slice($check_mail,0));
-					//user_email
+				//print_r(array_slice($check_mail,0));
+				//print_r(array_slice($check_mail,0));
+				//user_email
 
-                $res = false;
-                $rlt = false;
+				$res = false;
+				$rlt = false;
 
-                // y comprobamos que exista uno que sea igual
-                for ($i = 0; $i < count($check_mail); $i++) {
+				// y comprobamos que exista uno que sea igual
+				for ($i = 0; $i < count($check_mail); $i++) {
 
-                    if ($res == false) {
-                        //si encuentra un mail igual
-                        if (($check_mail[$i]['user_email']) == ($data[0]['email'])) {
-                            $res = true;
-                            return 'This mail is alredy in use';
-                        } else {
-                            $res = false;
-                            $rlt = 'ok';
-                        }
-                    }
-                }//end_for
-            }//end_if manual1
-		}//end_if_ok
-		
-
-
-	  if($rlt=='ok'){
-		return $this->dao->insert_user($this->db, $data[0]);
-
-	}
-
-		// foreach($id as $valor){
-		// 	
-		// 	if($id == ("alex")){
-		// 		$res = true;
-		// 			break;
-		// 	}
-		// 	else{
-		// 		$res = false;
-		// 	}	
+					if ($res == false) {
+						//si encuentra un mail igual
+						if (($check_mail[$i]['user_email']) == ($data[0]['email'])) {
+							$res = true;
+							return "This mail is alredy in use";
+						} else {
+							$res = false;
+							$rlt = 'ok';
+						}
+					}
+				} //end_for
+			} //end_if manual1
+		} //end_if_ok
 
 
+
+		if ($rlt == 'ok') {
+			return $this->dao->insert_user($this->db, $data[0]);
+		}
 	}
 
 
-	public function user_activate_BLL($data){
-		return $this->dao->active_user($this->db,$data);
+	public function user_activate_BLL($data)
+	{
+		return $this->dao->active_user($this->db, $data);
 	}
 }
