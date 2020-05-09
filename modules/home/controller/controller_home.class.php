@@ -47,4 +47,18 @@
 			
 		}
 
+		function active_user(){
+			//echo json_encode($_POST['data']);
+
+			print_r("active user");
+			//die();
+	
+			//data variabke with name module,namefunction and the token to check and activate
+			if (isset($_GET['data'])) {
+	
+				loadModel(MODEL_LOGIN, "login_model", "active_user",$_GET['data']);
+				
+			}
+		}
+
     }

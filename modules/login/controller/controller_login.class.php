@@ -35,12 +35,13 @@ class controller_login
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "insert_user_model",$matriz);
 		echo json_encode($json);
+		//print_r($json);
 
 		//sendmail
 		$arrArgument = array(
 
 			'type' => 'alta',
-			'token' => '',
+			'token' => '' ,
 			'inputName' => $matriz['nickname'],
 			'inputEmail' => $matriz['email']
 		);
@@ -54,6 +55,7 @@ class controller_login
 		}
 	
 	}
+
 	function exist_user()
 	{ //function insert_user_manual
 
@@ -75,15 +77,6 @@ class controller_login
 		//print_r($json);	
 	}
 
-	function active_user(){
-		//echo json_encode($_POST['data']);
 
-		//data variabke with name module,namefunction and the token to check and activate user
-		if (isset($_POST['data'])) {
-
-			loadModel(MODEL_LOGIN, "login_model", "active_user",$_POST['data']);
-			header('Location: ' . SITE_PATH);
-		}
-	}
 
 }

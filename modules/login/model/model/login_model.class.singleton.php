@@ -37,8 +37,5 @@ class login_model {
         //return $data;
       
     }
-    function active_user($data){
-        return $this->bll->user_activate_BLL($data);
-    }
-
+   
 }

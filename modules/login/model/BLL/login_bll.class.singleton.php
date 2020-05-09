@@ -103,8 +103,5 @@ class login_bll
 	}
 
 
-	public function user_activate_BLL($data)
-	{
-		return $this->dao->active_user($this->db, $data);
-	}
+
 }

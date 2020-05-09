@@ -17,16 +17,22 @@ $_SESSION['module'] = "";
 
 function handlerRouter()
 {
-    //print_r("entra");
+    // print_r("entra");
+    // die();
 
     if (!empty($_GET['module'])) { 
         // enter when we are in a module or $ get is not empty
+        //print_r("active user router");
+        //die();
         if (!empty($_POST['module'])) {
             $module_uri = $_POST['module']; //if comes from any js
             //print_r("entra en if !isset");
         } else {
             $module_uri = $_GET['module'];  // if comes from main_menu
             // print_r("entra en ELSE");
+            //$module_uri = explode("/", $module_uri);
+            // print_r($module_uri);
+            // die();
         }
 
         // print_r($module_uri);

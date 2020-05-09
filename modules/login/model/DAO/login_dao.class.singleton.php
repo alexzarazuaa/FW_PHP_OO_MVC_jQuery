@@ -27,7 +27,9 @@ class login_dao
         $token = generate_Token_secure(20);
         $sql = "INSERT INTO user (userid,user_email,nickname,password,avatar,token) 
             VALUES('$nickname','$email','$nickname','$password',' $avatar','$token')";
-        return $db->ejecutar($sql);
+         $db->ejecutar($sql);
+
+        return $token;
 
         // return $data;
 
@@ -55,10 +57,5 @@ class login_dao
     }
 
 
-    public function active_user($db,$data) {
-        // return "dentro select";
-        $token_update = generate_Token_secure(20);
-        $sql="UPDATE user SET activate=1,token='$token_update' where token='$data'";
-        return $db->ejecutar($sql);
-    }
+ 
 }

@@ -40,4 +40,8 @@ class home_model
         //print_r("entra funct model categories");
         return $this->bll->obtain_countcateg_BLL($categoria);
     }
+    function active_user($data){
+        return $this->bll->user_activate_BLL($data);
+    }
+
 }

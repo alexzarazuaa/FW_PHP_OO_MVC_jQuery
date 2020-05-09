@@ -1,7 +1,5 @@
 <?php
 
-
-
 	class home_bll{
 	    private $dao;
 	    private $db;
@@ -32,6 +30,10 @@
 			return $this->dao->countval($this->db,$categoria);
 		}
 		
+		public function user_activate_BLL($data)
+		{
+			return $this->dao->active_user($this->db, $data);
+		}
 
 	  
 	}

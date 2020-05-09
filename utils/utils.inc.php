@@ -1,14 +1,34 @@
 <?php
     function amigable($url, $return = false) {//pretty php
-        //print_r(" entrando");
+        // print_r(" entrando");
+        // die();
         $amigableson = URL_AMIGABLES;
         $link = "";
         if ($amigableson) {
+            
             $url = explode("&", str_replace("?", "", $url));
+            $cont = 0;
             foreach ($url as $key => $value) {
-                $aux = explode("=", $value);
-                $link .=  $aux[1];
+                $cont = $cont + 1;
             }
+    
+            $cont1 = 0;
+            foreach ($url as $key => $value) {
+    
+                $cont1 = $cont1 + 1;
+    
+                $aux = explode("=", $value);
+                //$url = explode("&", str_replace("?", "", $url));
+    
+                if ($cont1 == $cont) {
+    
+                    $link .=  $aux[1];
+                }else{
+                    $link .=  $aux[1] . "/" ;
+    
+                }
+            }
+
         } else {
             $link = "index.php?" . $url;
         }

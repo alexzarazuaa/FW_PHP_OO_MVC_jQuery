@@ -19,9 +19,14 @@
         <name>data_categories</name>
         <uri></uri>
     </function>
-    
+
     <function>
         <name>count_categoria</name>
+        <uri></uri>
+    </function>
+
+    <function>
+        <name>active_user</name>
         <uri></uri>
     </function>
 
