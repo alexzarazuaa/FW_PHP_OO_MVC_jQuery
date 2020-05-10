@@ -1,7 +1,7 @@
 
 
 // regexp validators
-
+//	register
 function validate_register() {
 	var email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 
@@ -55,6 +55,9 @@ function validate_register() {
 }
 
 
+
+
+//LOGIN
 function validate_login() {
 	var email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 	if (document.formlogin.email_log.value.length === 0) {
@@ -83,6 +86,48 @@ function validate_login() {
 	document.getElementById('err_passlog').innerHTML = "";
 }
 
+//RECOVER PASSWORD
+function validate_recover_passwd() {
+
+	//
+	if (document.recoverpass.newpassword.value.length < 6) {
+		document.getElementById('err_passnew').innerHTML = "La contraseña tiene que tener más de 6 caracteres";
+		document.recoverpass.newpassword.focus();
+		return 0;
+	}
+	document.getElementById('err_passnew').innerHTML = "";
+
+
+	//
+	if (document.recoverpass.reppassword.value.length === 0) {
+		document.getElementById('err_passnew').innerHTML = "Tienes que escribir la contraseña";
+		document.recoverpass.rpassword.focus();
+		return 0;
+	}
+	if (document.recoverpass.reppassword.value != document.recoverpass.newpassword.value) {
+		document.getElementById('err_passrepeat').innerHTML = "La contraseña tiene que ser la misma";
+		document.recoverpass.rpassword.focus();
+		return 0;
+	}
+	document.getElementById('err_passrepeat').innerHTML = "";
+
+}
+
+//RECOVER ONLY MAIL
+function send_mail_recover() {
+	var mail = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+	if (document.mailrecover.recmail.value.length === 0) {
+		document.getElementById('err_emailrecover').innerHTML = "Tienes que escribir el mail";
+		document.mailrecover.mail.focus();
+		return 0;
+	}
+	if (!mail.test(document.mailrecover.recmail.value)) {
+		document.getElementById('err_emailrecover').innerHTML = "El formato del mail es invalido";
+		document.mailrecover.mail.focus();
+		return 0;
+	}
+	document.getElementById('err_emailrecover').innerHTML = "";
+}
 
 
 function redirect_home() {
@@ -171,7 +216,7 @@ function register(viene) {
 
 			})//end_promise
 
-}//end_validate_register
+	}//end_validate_register
 }//end_register
 
 
@@ -187,7 +232,7 @@ var ipu = new Promise(function (resolve) { //obtener  ip for user no logged
 function login() {
 	console.log("ENTRA FUNC LOGIN");
 	if (validate_login() != 0) {
-		var userinfo = $('#formlogin').serialize();
+		var userinfo = $('#recoverpass').serialize();
 		console.log(userinfo);
 		reg('module/login/controller/controller_login.php?op=login', userinfo)
 			.then(function (data) {
@@ -240,6 +285,82 @@ function login() {
 
 
 
+function apend_mail_recover() {
+	$('#forgotpasswd').on("click", function () {
+		console.log("entra recover pass");
+
+		$("#formlogin").empty()
+		$("#register-form").empty()
+
+		// '<div class="form-group">' +
+		// '<input type="email" name="recemail" id="recemail" tabindex="1" class="form-control" placeholder="EmailAddress" value="">' +
+		// '<span id="err_emailrec"></span>' +
+		// '</div>' +
+
+		$("#recover_mail").append(
+
+
+			'<div class="panel-body">' +
+			' <div class="row">' +
+			'  <div class="col-lg-12">' +
+			'<form id="mailrecover" name="mailrecover" role="form" style="display: block;">' +
+
+
+			'<div class="form-group">' +
+			'<input type="email" name="recmail" id="recmail" tabindex="1" class="form-control" placeholder="EmailAddress" value="">' +
+			'<span id="err_emailrecover"></span>' +
+			'</div>' +
+
+			'  <div class="form-group">' +
+			'    <div class="row">' +
+			'    <div class="col-sm-6 col-sm-offset-3">' +
+			'     <input type="button" name="login-submit" id="recoverbtn" tabindex="4" class="form-control btn btn-login" value="CHANGE PASSWORD">' +
+			' </div>' +
+			'  </div>' +
+			'   </div>' +
+
+			'</form>'
+
+
+
+		);
+
+
+
+	})
+}
+
+function recover_pass() {
+	console.log("entra recoevr");
+
+	if (validate_recover_passwd() != 0) {
+		var userinfo = $('#recoverpass').serialize();
+		console.log(userinfo)
+	}
+
+}
+
+function mail_recover(){
+	console.log("entra mail recover");
+	if (send_mail_recover() != 0) {
+		
+		var userinfo = $('#mailrecover').serialize();
+		console.log(userinfo)
+		var info_data = { module: 'login', function: 'recover_mail', data: userinfo }
+		reg('?', info_data)
+		.then(function (data) {
+			console.log("entra1");
+			console.log(data);
+			if(data=="ERROR"){
+				toastr.error("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
+			}else{
+				toastr.success("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
+			}
+		})
+
+	}
+}
+
 
 function btn_login_reg() {
 	// login form
@@ -255,7 +376,20 @@ function btn_login_reg() {
 		register();
 
 	})
+
+	//recover pass
+	$(document).on("click", '#recoverbtn', function () {
+		console.log("entra CLICK REC0VER");
+		mail_recover();
+
+	})
 }
+
+
+
+
+
+
 
 function key_log_reg() {
 	//KEY LOG LOGIN OPTION
@@ -268,12 +402,26 @@ function key_log_reg() {
 
 	//KEY LOG CONFIRM PASSWORD REGISTER
 	$('#c_password').on("keydown", function (e) {
-		console.log("clickpass")
+		console.log("clickpass recover")
 		if (e.which == 13) {
 			register();
 		}
 	});
+
+	//KEY_LOG del recover pass
+	$('#recmail').on("keydown", function (e) {
+		console.log("clickpass")
+		if (e.which == 13) {
+			console.log("entra CLICK REC0VER");
+			mail_recover();
+		}
+	});
+
+
+
 }
+
+
 
 
 
@@ -283,6 +431,9 @@ $(document).ready(function () {
 
 	key_log_reg();
 	btn_login_reg();
+
+	//apend_recover_pasword();
+	apend_mail_recover();
 
 
 });//ENDREADY

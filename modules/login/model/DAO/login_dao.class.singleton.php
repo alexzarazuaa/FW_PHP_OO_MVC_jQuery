@@ -27,7 +27,7 @@ class login_dao
         $token = generate_Token_secure(20);
         $sql = "INSERT INTO user (userid,user_email,nickname,password,avatar,token) 
             VALUES('$nickname','$email','$nickname','$password',' $avatar','$token')";
-         $db->ejecutar($sql);
+          $db->ejecutar($sql);
 
         return $token;
 
@@ -44,7 +44,7 @@ class login_dao
 
     function select_id ($db){
         
-        $sql = "SELECT userid FROM user ";
+        $sql = "SELECT userid FROM user  WHERE userid=nickname ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -55,6 +55,19 @@ class login_dao
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
+
+    public function updatetoken_mail($db,$data)
+    {
+
+        $token = generate_Token_secure(20);
+        $sql = "UPDATE user set token='$token' WHERE user_email='$data'";
+        $stmt = $db->ejecutar($sql);
+     
+    }
+
+
+
+
 
 
  

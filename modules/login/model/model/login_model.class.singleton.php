@@ -37,5 +37,14 @@ class login_model {
         //return $data;
       
     }
+
+    public function mail_recover_model($data){
+                
+        return $this->bll->mail_recover_bll($data);
+    }
+
+  
+
+
    
 }

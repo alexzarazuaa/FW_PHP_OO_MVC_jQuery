@@ -102,6 +102,35 @@ class login_bll
 		}
 	}
 
+	 public function mail_recover_bll($data){
 
+
+		$check_mail = $this->dao->user_email($this->db);
+		//print_r($data);
+		//print_r(array_slice($check_mail,0));
+		//print_r(array_slice($check_mail,0));
+		//user_email
+
+		$res = false;
+	
+
+		// y comprobamos que exista uno que sea igual
+		for ($i = 0; $i < count($check_mail); $i++) {
+
+			if ($res == false) {
+				//si encuentra un mail igual
+				if (($check_mail[$i]['user_email']) == ($data)) {
+					$res = true;
+					return $this->dao->updatetoken_mail($this->db,$data);
+					//return true;
+				} else {
+					$res = false;
+					return false;
+				}
+			}
+		} //end_for
+	
+
+	}//end_func
 
 }

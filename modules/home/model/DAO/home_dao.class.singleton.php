@@ -52,8 +52,8 @@ class home_dao
 
     public function active_user($db,$data) {
         // return "dentro select";
-        $token_update = generate_Token_secure(20);
-        $sql="UPDATE user SET active=1,token='$token_update' where token='$data'";
+        //$token_update = generate_Token_secure(20);
+        $sql="UPDATE user SET activate=true where token='$data'";
         return $db->ejecutar($sql);
     }
   

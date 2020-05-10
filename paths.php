@@ -101,6 +101,7 @@ define('MODEL_LOGIN', SITE_ROOT . 'modules/login/model/model/');
 define('JS_VIEW_LOGIN', SITE_PATH . 'modules/login/view/js/');
 
 
+
 //MODEL SEARCH
 define('MODEL_PATH_SEARCH', SITE_ROOT . 'view/js/search/model/');
 define('DAO_SEARCH', SITE_ROOT . 'view/js/search/model/DAO/');

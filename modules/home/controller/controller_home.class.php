@@ -24,7 +24,7 @@
 			
 		}
 		function data_carousel (){// function para la imagenes del carousel
-			//print_r("entra function prueba carousel");
+			print_r("entra function prueba carousel");
 			$json = array();
 			$json = loadModel(MODEL_HOME, "home_model", "data_carousel",$_POST['data']);
 			echo json_encode($json);
@@ -50,15 +50,16 @@
 		function active_user(){
 			//echo json_encode($_POST['data']);
 
-			print_r("active user");
-			//die();
+			// print_r("active user jaja loco");
+			// die();
 	
 			//data variabke with name module,namefunction and the token to check and activate
-			if (isset($_GET['data'])) {
+			
 	
-				loadModel(MODEL_LOGIN, "login_model", "active_user",$_GET['data']);
-				
-			}
+				loadModel(MODEL_HOME, "home_model", "active_user",$_GET['param']);
+				header('Location: ' . SITE_PATH);
+			
 		}
+		
 
     }

@@ -6,7 +6,6 @@
         <uri></uri>
     </function>
 
-
     <function>
         <name>insert_user</name>
         <uri></uri>
@@ -17,25 +16,23 @@
         <uri></uri>
     </function>
 
-
-    <function>
-        <name>recover_pass</name>
-        <uri></uri>
-    </function>
-
-
     <function>
         <name>exist_id</name>
         <uri></uri>
     </function>
 
+    <function>
+        <name>recover_mail</name>
+        <uri></uri>
+    </function>
 
+    
+    <function>
+        <name>change_pass</name>
+        <uri></uri>
+    </function>
 
-
-
-
-
-
+    
 
 
 

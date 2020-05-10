@@ -11,15 +11,15 @@ function enviar_email($arr)
     switch ($arr['type']) {
         case 'alta':
             $subject = 'TE HAS DADO DE ALTA EN MASTERSPORT';
-            $ruta = "<a href='" . amigable("index.php?module=login&function=active_user&param=" . $arr['token'], true) . "'>aqu&iacute;</a>";
+            $ruta = "<a href='" . amigable("?module=home&function=active_user&param=" . $arr['token'], true) . "'>aqu&iacute;</a>";
             $body = 'Gracias por unirte a nuestra aplicaci&oacute;n<br> Para finalizar el registro, pulsa ' . $ruta;
             break;
      
-        // case 'changepass':
-        //     $subject = 'Tu Nuevo Password en Ohana dogs<br>';
-        //     $ruta = '<a href="' . amigable("?module=login&function=changepass&aux=" . $arr['token'], true) . '">aqu&iacute;</a>';
-        //     $body = 'Para recordar tu password pulsa ' . $ruta;
-        //     break;
+        case 'changepass':
+            $subject = 'Tu Nuevo Password en EN MASTERSPORT<br>';
+            $ruta = '<a href="' . amigable("?module=login&function=change_pass&param=" . $arr['token'], true) . '">aqu&iacute;</a>';
+            $body = 'Para recordar tu password pulsa ' . $ruta;
+            break;
 
         case 'contact':
             $subject = 'Tu Petición a MASTERSPORT ha sido enviada';

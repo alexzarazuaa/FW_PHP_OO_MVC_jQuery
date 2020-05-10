@@ -41,7 +41,7 @@ class controller_login
 		$arrArgument = array(
 
 			'type' => 'alta',
-			'token' => '' ,
+			'token' => $json ,
 			'inputName' => $matriz['nickname'],
 			'inputEmail' => $matriz['email']
 		);
@@ -77,6 +77,54 @@ class controller_login
 		//print_r($json);	
 	}
 
+	function recover_mail(){
+
+		//print_r("recoever mail");
+
+		parse_str($_POST['data'],$array);
+		//$data = array($array,$_POST['manual']);
+
+		$json = array();
+		$json = loadModel(MODEL_LOGIN, "login_model", "mail_recover_model",$array['recmail']);
+	
+		//print_r($json);
+		//$token = generate_Token_secure(20);
+
+		if ($json === false){
+			echo ("ERROR");
+		}else{
+			//echo ("TRUE");
+				//sendmail
+		$arrArgument = array(
+
+			'type' => 'changepass',
+			'token' => $json,
+			'inputEmail' => $array['recmail']
+		);
+		//print_r($arrArgument);
+		//echo json_encode($arrArgument);
+		try {
+			echo  enviar_email($arrArgument);
+			//print_r($arrArgument);
+		} catch (Exception $e) {
+			echo "<div class='alert alert-error'>Server error. Try later...</div>";
+		}
+		}
+		
+	
+
+	}
+
+	function change_pass (){
+		 print_r("gola");
+		// die();
+		require(VIEW_PATH_INC . "top_page_login.php");
+		require(VIEW_PATH_INC . "menu.html");
+		loadView('modules/login/view/', 'recover_pass.html');
+		require(VIEW_PATH_INC . "footer.html");
+	}
 
 
+//2a47aae2d10a1798475c
+//2a47aae2d10a1798475c
 }
