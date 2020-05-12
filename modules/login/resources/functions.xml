@@ -32,6 +32,10 @@
         <uri></uri>
     </function>
 
+  <function>
+        <name>change_password</name>
+        <uri></uri>
+    </function>
     
 
 

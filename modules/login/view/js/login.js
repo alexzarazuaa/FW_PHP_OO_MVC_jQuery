@@ -232,7 +232,7 @@ var ipu = new Promise(function (resolve) { //obtener  ip for user no logged
 function login() {
 	console.log("ENTRA FUNC LOGIN");
 	if (validate_login() != 0) {
-		var userinfo = $('#recoverpass').serialize();
+		var userinfo = $('#formlogin').serialize();
 		console.log(userinfo);
 		reg('module/login/controller/controller_login.php?op=login', userinfo)
 			.then(function (data) {
@@ -261,17 +261,16 @@ function login() {
 												redirect_cart();
 											} else {
 												console.log(data);
-												alert(" no on");
-												// alert("Sesion iniciada correctamente");
+												toastr.succes("EL CARRITO ESTA VACIO ", "CARRITO.");
 												// localStorage.setItem('user',data.user_email);
-												redirect_home();
+												//redirect_home();
 											}
 
 										})
 								})
 						})
 				} else {
-					alert("Hay un problema en el inicio se sesión, email o contraseña no válidos")
+					toastr.error("FALLO EN EL INICIO DE SESION", "ERROR.");
 				}
 
 			})
@@ -336,27 +335,42 @@ function recover_pass() {
 	if (validate_recover_passwd() != 0) {
 		var userinfo = $('#recoverpass').serialize();
 		console.log(userinfo)
-	}
+		var token = get_token(window.location.href);
+		console.log(token);
+		var info_data = { module: 'login', function: 'change_password', data: userinfo , token : token}
+		reg('?', info_data)
+			.then(function (data) {
+				console.log("entra recover pass");
+				toastr.success("Password correctly changed.");
+							//redirect home
+							window.setTimeout(function () {
+								redirect_home();
+							}, 1000)
+						
+			})
+
+	 }
 
 }
 
-function mail_recover(){
+
+function mail_recover() {
 	console.log("entra mail recover");
 	if (send_mail_recover() != 0) {
-		
+
 		var userinfo = $('#mailrecover').serialize();
 		console.log(userinfo)
 		var info_data = { module: 'login', function: 'recover_mail', data: userinfo }
 		reg('?', info_data)
-		.then(function (data) {
-			console.log("entra1");
-			console.log(data);
-			if(data=="ERROR"){
-				toastr.error("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
-			}else{
-				toastr.success("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
-			}
-		})
+			.then(function (data) {
+				console.log("entra1");
+				console.log(data);
+				if (data == "ERROR") {
+					toastr.error("THIS USER NAME IS ALREADY IN USE", "Email was not sent.");
+				} else {
+					toastr.success("THE EMAIL HAS BEEN SENT", "Email was  sent.");
+				}
+			})
 
 	}
 }
@@ -377,18 +391,22 @@ function btn_login_reg() {
 
 	})
 
-	//recover pass
+	//recover send mail
 	$(document).on("click", '#recoverbtn', function () {
 		console.log("entra CLICK REC0VER");
 		mail_recover();
 
 	})
+
+	// //recover pass
+	// $(document).on("click", '#recoverbtnpass', function () {
+	// 	console.log("entra CLICK REC0VER the password");
+	// 	recover_pass();
+
+	// })
+
+
 }
-
-
-
-
-
 
 
 function key_log_reg() {
@@ -412,8 +430,17 @@ function key_log_reg() {
 	$('#recmail').on("keydown", function (e) {
 		console.log("clickpass")
 		if (e.which == 13) {
-			console.log("entra CLICK REC0VER");
+			console.log("entra CLICK REC0VER mail");
 			mail_recover();
+		}
+	});
+
+	//KEYLOG_RECOVER PASS
+	$('#reppassword').on("keydown", function (e) {
+		console.log("clickpass")
+		if (e.which == 13) {
+			console.log("entra CLICK recover password");
+			recover_pass();
 		}
 	});
 
@@ -427,7 +454,7 @@ function key_log_reg() {
 
 $(document).ready(function () {
 
-	//console.log("valideate login");
+	console.log("valideate login");
 
 	key_log_reg();
 	btn_login_reg();

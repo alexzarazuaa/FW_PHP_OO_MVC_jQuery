@@ -17,7 +17,7 @@ function enviar_email($arr)
      
         case 'changepass':
             $subject = 'Tu Nuevo Password en EN MASTERSPORT<br>';
-            $ruta = '<a href="' . amigable("?module=login&function=change_pass&param=" . $arr['token'], true) . '">aqu&iacute;</a>';
+            $ruta = '<a href="' . amigable("?module=login&function=login&param=" . $arr['token'], true) . '">aqu&iacute;</a>';
             $body = 'Para recordar tu password pulsa ' . $ruta;
             break;
 

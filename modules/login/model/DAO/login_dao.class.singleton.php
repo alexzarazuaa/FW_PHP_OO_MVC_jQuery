@@ -62,8 +62,20 @@ class login_dao
         $token = generate_Token_secure(20);
         $sql = "UPDATE user set token='$token' WHERE user_email='$data'";
         $stmt = $db->ejecutar($sql);
+        return $token;
      
     }
+
+
+    public function update_password($db,$data)
+    {
+        $password  =  password_hash($data[0], PASSWORD_BCRYPT);
+        $sql = "UPDATE user set password='$password' WHERE token='$data[1]'";
+        $stmt = $db->ejecutar($sql);
+      
+     
+    }
+
 
 
 

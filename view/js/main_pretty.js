@@ -15,3 +15,8 @@ function amigable(url) {
     }
     return "http://localhost/SPORT_V1.6" + link;
 }
+
+function get_token(url){
+    $url_split=url.split("/");
+    return $url_split[6];
+}

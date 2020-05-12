@@ -70,10 +70,7 @@ class login_bll
 
 
 				$check_mail = $this->dao->user_email($this->db);
-				//print_r($data);
-				//print_r(array_slice($check_mail,0));
-				//print_r(array_slice($check_mail,0));
-				//user_email
+				//print_r($check_mail);
 
 				$res = false;
 				$rlt = false;
@@ -132,5 +129,12 @@ class login_bll
 	
 
 	}//end_func
+
+
+	public function update_password_bll($data){
+		//$token = $this->dao->updatetoken_mail($this->db,$data);
+		return $this->dao->update_password($this->db, $data);
+		//return $token;
+	}
 
 }

@@ -43,6 +43,10 @@ class login_model {
         return $this->bll->mail_recover_bll($data);
     }
 
+    public function update_password_model($data){
+        return $this->bll->update_password_bll($data);
+    }
+
   
 
 
