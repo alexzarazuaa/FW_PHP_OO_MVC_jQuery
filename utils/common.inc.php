@@ -48,3 +48,31 @@
             //die();
         }
     }
+
+
+
+    // function generate_token_JWT($id){
+    //     $header = '{"typ":"JWT", "alg":"HS256"}';
+    //     $secret = 'maytheforcebewithyou';
+    
+    //     /////////////////////////// yomogan ////////////////////////////////////////
+    //     //iat: Tiempo que inició el token
+    //     //exp: Tiempo que expirará el token (+1 hora)
+    //     //name: info user
+    //     $payload = '{
+    //         "iat":time(), 
+    //         "exp":time() + (60*60),
+    //         "name":"yomogan"
+    //     }';
+    
+    //     $JWT = new JWT;
+    //     $token = $JWT->encode($header, $payload, $secret);
+      
+    // }
+
+
+    // function decode_token($token){
+    //     $json = $JWT->decode($token, $secret);
+    //     echo 'JWT encode yomogan: '.$token."\n\n"; echo '<br>';
+    //     echo 'JWT decode yomogan: '.$json."\n\n"; echo '<br>'; echo '<br>';
+    // }

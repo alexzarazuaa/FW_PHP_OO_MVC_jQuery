@@ -36,6 +36,15 @@ class login_bll
 		//return $data;
 
 	}
+	
+	public  function exist_type_user_bll()
+	{
+
+		return $this->dao->type_user($this->db);
+		//return $data;
+
+	}
+
 	public  function check_id_bll($data)
 	{
 
@@ -136,5 +145,37 @@ class login_bll
 		return $this->dao->update_password($this->db, $data);
 		//return $token;
 	}
+
+
+	public function mail_check_bll($data){
+
+
+		$check_mail = $this->dao->check_user_email($this->db);
+		//echo json_encode($check_mail[0]['type']);
+		//print_r(array_slice($check_mail,0));
+		//print_r(array_slice($check_mail,0));
+		//user_email
+
+		$res = false;
+	
+
+		// y comprobamos que exista uno que sea igual
+		for ($i = 0; $i < count($check_mail); $i++) {
+
+			if ($res == false) {
+				//si encuentra un mail igual
+				if (($check_mail[$i]['user_email']) == ($data)) {
+					$res = true;
+					return true;
+					//return true;
+				} else {
+					$res = false;
+					return false;
+				}
+			}
+		} //end_for
+	
+
+	}//end_func
 
 }

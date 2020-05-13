@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="<?php echo TOASTR_PATH ?>build/toastr.css">
   <!-- TOASTR -->
   <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>animation_login.js"></script>
+  <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>init.js"></script>
 
    
     <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>

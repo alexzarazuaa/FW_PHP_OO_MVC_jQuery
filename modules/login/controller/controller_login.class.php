@@ -132,5 +132,34 @@ class controller_login
 		//}
 
 	}
+
+
+	function login_user(){
+
+		parse_str($_POST['data'], $matriz);
+		//echo json_encode($matriz);
+//		echo json_encode($_POST['data']);
+		//$data = array($matriz['newpassword'],$_POST['token']);
+		
+
+		$json = array();
+		$json = loadModel(MODEL_LOGIN, "login_model", "check_usermail_model",$matriz['email']);
+		echo json_encode($json);
+
+	}
+
+	function type_user(){
+
+
+		//echo json_encode($matriz);
+		//echo json_encode($_POST['data']);
+		//$data = array($matriz['newpassword'],$_POST['token']);
+		
+
+		$json = array();
+		$json = loadModel(MODEL_LOGIN, "login_model", "exist_type_user_model");
+		echo json_encode($json);
+
+	}
 }
 

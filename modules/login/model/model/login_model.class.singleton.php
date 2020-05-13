@@ -47,6 +47,16 @@ class login_model {
         return $this->bll->update_password_bll($data);
     }
 
+    public function check_usermail_model($data){
+        return $this->bll->mail_check_bll($data);
+    }
+
+    
+    public function exist_type_user_model(){
+        return $this->bll->exist_type_user_bll();
+    }
+
+
   
 
 

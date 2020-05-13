@@ -26,17 +26,27 @@
         <uri></uri>
     </function>
 
-    
+
     <function>
         <name>change_pass</name>
         <uri></uri>
     </function>
 
-  <function>
+    <function>
         <name>change_password</name>
         <uri></uri>
     </function>
-    
+
+    <function>
+        <name>login_user</name>
+        <uri></uri>
+    </function>
+
+    <function>
+        <name>type_user</name>
+        <uri></uri>
+    </function>
+
 
 
 

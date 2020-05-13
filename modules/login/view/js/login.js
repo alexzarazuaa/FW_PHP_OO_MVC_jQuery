@@ -234,41 +234,50 @@ function login() {
 	if (validate_login() != 0) {
 		var userinfo = $('#formlogin').serialize();
 		console.log(userinfo);
-		reg('module/login/controller/controller_login.php?op=login', userinfo)
+		var info_data = { module: 'login', function: 'login_user', data: userinfo }
+		reg('?', info_data)
 			.then(function (data) {
 				console.log(data);
-				if (data == '"existe"') {
-					ipu
-						.then(function (ipu) {
-							var change = userinfo.split("&");
-							console.log(change)
-							var change2 = change[0].split("=");
-							console.log(change2)
+				if (data == "true") {
+					console.log(data);
+					paint_type_menu();
+					// ipu
+					// 	.then(function (ipu) {
+					// 		var change = userinfo.split("&");
+					// 		console.log(change)
+					// 		var change2 = change[0].split("=");
+					// 		console.log(change2)
 
-							var email = change2[1].replace("%40", "@");
-							var info = { email: email, ip: ipu };
+					// 		var email = change2[1].replace("%40", "@");
+					// 		var info = { email: email, ip: ipu };
 
-							console.log(ipu)
-							reg('module/login/controller/controller_login.php?op=change_us', info)
-								.then(function (info) {
-									console.log(info);
-									alert("change");
-									reg('module/login/controller/controller_login.php?op=log_user')
-										.then(function (data) {
-											if (data == "on") {
-												console.log(data);
-												alert("on");
-												redirect_cart();
-											} else {
-												console.log(data);
-												toastr.succes("EL CARRITO ESTA VACIO ", "CARRITO.");
-												// localStorage.setItem('user',data.user_email);
-												//redirect_home();
-											}
+					// 		console.log(ipu)
+					// 		reg('module/login/controller/controller_login.php?op=change_us', info)
+					// 			.then(function (info) {
+					// 				console.log(info);
+					// 				alert("change");
+					// 				reg('module/login/controller/controller_login.php?op=log_user')
+					// 					.then(function (data) {
+					// 						if (data == "on") {
+					// 							console.log(data);
+					// 							alert("on");
+					// 							redirect_cart();
+					// 						} else {
+					// 							console.log(data);
+					// 							toastr.succes("EL CARRITO ESTA VACIO ", "CARRITO.");
+					// 							// localStorage.setItem('user',data.user_email);
+					// 							//redirect_home();
+					// 						}
 
-										})
-								})
-						})
+					// 					})
+					// 			})
+					// 	})
+					toastr.success("LOGEADO CORRECTAMENTE.");
+					alert("comprueba");
+					//redirect home
+					window.setTimeout(function () {
+						redirect_home();
+					}, 1000)
 				} else {
 					toastr.error("FALLO EN EL INICIO DE SESION", "ERROR.");
 				}

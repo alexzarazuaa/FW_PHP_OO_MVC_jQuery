@@ -1,5 +1,6 @@
 <?php
  require_once("paths.php");
+ require_once "model/JWT.php";
 
 spl_autoload_register(null, false);
 spl_autoload_extensions('.php,.inc.php,.class.php,.class.singleton.php');

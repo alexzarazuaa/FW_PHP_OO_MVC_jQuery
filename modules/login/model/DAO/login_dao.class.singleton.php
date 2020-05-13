@@ -76,10 +76,20 @@ class login_dao
      
     }
 
+  
+    public function check_user_email($db)
+    {
+        $sql = "SELECT * FROM user WHERE userid=nickname and activate=1 ";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
 
 
-
-
+    public function type_user($db) {
+        $sql = "SELECT type FROM user WHERE userid=nickname and activate=1 ";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
 
 
  
