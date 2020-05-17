@@ -174,7 +174,13 @@ class controller_login
 
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "exist_type_user_model");
-		echo json_encode($json);
+		if ($json == 'null'){
+			echo json_encode($json);
+		}else
+		{
+			echo ("es favorito");
+		}
+	
 
 	}
 

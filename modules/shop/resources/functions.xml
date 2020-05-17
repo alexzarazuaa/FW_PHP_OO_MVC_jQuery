@@ -31,37 +31,48 @@
         <uri></uri>
     </function>
 
-    
+
     <function>
         <name>select_btnsearch</name>
         <uri></uri>
     </function>
 
-        
+
     <function>
         <name>gmaps</name>
         <uri></uri>
     </function>
 
-     <function>
+    <function>
         <name>geomaps</name>
         <uri></uri>
     </function>
 
-      <function>
+    <function>
         <name>geomaps_desc</name>
         <uri></uri>
     </function>
 
-      <function>
+    <function>
         <name>count_pages</name>
         <uri></uri>
     </function>
 
-        <function>
+    <function>
         <name>likes</name>
         <uri></uri>
     </function>
+
+    <function>
+        <name>unlike</name>
+        <uri></uri>
+    </function>
+
+       <function>
+        <name>paint_likes</name>
+        <uri></uri>
+    </function>
+
 
 
 

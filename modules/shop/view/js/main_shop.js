@@ -910,47 +910,54 @@ var fav = function (url, data) { //funcion favorite general
 
 
 
-// function inlike() {
-//   $(document).on('click', '.like', function () {
-//     console.log('like');
+function inlike() {
+  $(document).on('click', '.like', function () {
+    console.log('like');
 
-//     var idprod = $(this).attr('id');
-//     console.log(idprod)
-//     var token = localStorage.getItem("id_token");
-//     //console.log(token)
-//     if (token) {
-//       //console.log(token)
-//           //console.log('If de info');
-//           $('.' + idprod + '').toggleClass('btn-danger');
-//           fav('module/shop/controller/controller_shop.php?op=like', idprod)
-//             .then(function (data) {
-//               console.log(data)
-//               if (data == "its favorite") {
-//                 //console.log('centra ind');
-//                 fav('module/shop/controller/controller_shop.php?op=unlike', idprod)
-//                   .then(function (data) {
-//                     console.log(data)
-//                   })
+    var idprod = $(this).attr('id');
+    console.log(idprod)
+    var token = localStorage.getItem("id_token");
+    //console.log(token)
+    if (token) {
+      //console.log(token)
+          $('.' + idprod + '').toggleClass('btn-danger');
+          //fav('module/shop/controller/controller_shop.php?op=like', idprod)
+          var info_data = { module: 'shop', function: 'likes', idprod: idprod  }
+		      fav('?', info_data)
+            .then(function (data) {
+              console.log(data)
+              if (data != "null") {
+                //console.log('centra ind');
+                var info_data = { module: 'shop', function: 'unlike', idprod: idprod  }
+                fav('?', info_data)
+                  .then(function (data) {
+                    console.log(data)
+                  })
 
-//               }
+              }
 
-//             })
+            })
 
-//         } else {
-//           redirect_login();
-//         }
-//       })
+        } else {
+          toastr.error("TIENES QUE ESTAR LOGUEADO", "ERROR.");
+					window.setTimeout(function () {
+						redirect_login();
+					}, 1000)
+				
+        }
+      })
+    
 
-//   })
 
-// }
+}
 
 
 
 
 function paint_likes() {
 
-  fav('module/shop/controller/controller_shop.php?op=paint')
+  var info_data = { module: 'shop', function: 'paint_likes' }
+  fav('?', info_data)
     .then(function (info) {
       //  console.log(info);
       var data = JSON.parse(info);
@@ -996,7 +1003,7 @@ $(document).ready(function () {
   all_lists_products();
   pagination();
   detail_book();
-  // inlike();
+   inlike();
 
 
   // prod_cart();

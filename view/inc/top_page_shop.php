@@ -53,7 +53,7 @@
   <script type="text/javascript" src="<?php echo  JQUERY_PATH ?>jquery.bootpag.min.js"></script>
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
-  <script src="<?php echo JS_VIEW_CART ?>cart.js"></script>
+ 
 
  <!-- IPCART-->
  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>

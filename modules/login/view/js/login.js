@@ -242,7 +242,7 @@ function login() {
 				console.log(info)
 				var data = JSON.parse(info)
 				console.log(data);
-				localStorage.remove('id_token',data['token_jwt']);
+				//localStorage.remove('id_token',data['token_jwt']);
 				localStorage.setItem('id_token',data['token_jwt']);
 				var correct = data['response']
 				if (data['response'] == correct ) {
