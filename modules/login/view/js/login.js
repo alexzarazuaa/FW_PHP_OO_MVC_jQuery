@@ -231,18 +231,18 @@ var ipu = new Promise(function (resolve) { //obtener  ip for user no logged
 
 function login() {
 	console.log("ENTRA FUNC LOGIN");
-	localStorage.remove('id_token',data['token_jwt']);
+	
 	if (validate_login() != 0) {
 		var userinfo = $('#formlogin').serialize();
 		console.log(userinfo);
 		var info_data = { module: 'login', function: 'login_user', data: userinfo }
 		reg('?', info_data)
 			.then(function (info) {
-				//localStorage.remove('id_token',data['token_jwt']);
+				console.log("entra")
 				console.log(info)
 				var data = JSON.parse(info)
 				console.log(data);
-				//alert("va be")
+				localStorage.remove('id_token',data['token_jwt']);
 				localStorage.setItem('id_token',data['token_jwt']);
 				var correct = data['response']
 				if (data['response'] == correct ) {

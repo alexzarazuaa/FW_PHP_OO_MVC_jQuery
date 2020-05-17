@@ -156,7 +156,7 @@ class controller_login
 								'token_jwt' => $jwt_token
 							);
 							$_SESSION['nickname'] = $json[0]['nickname'];
-							print_r($_SESSION['nickname']);
+							//print_r($_SESSION['nickname']);
 							echo json_encode($response);
 						}else{
 							echo "contraseña incorrecta";

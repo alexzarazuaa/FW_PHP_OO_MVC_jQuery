@@ -1,12 +1,12 @@
 // function config() {
 //     // Initialize Firebase
 //     var config = {
-//         apiKey: "AIzaSyAJNDQ7a-CzG0g1BYM5eL5tewUeY1TKBX8",
+//         apiKey: "GHUB_API",
 //         authDomain: "fw-php-mastersport.firebaseapp.com",
 //         databaseURL: "https://fw-php-mastersport.firebaseapp.com",
 //         projectId: "fw-php-mastersport",
 //         storageBucket: "",
-//         messagingSenderId: "720501739990"
+//         messagingSenderId: "messageSender"
 //       };
 //     firebase.initializeApp(config);
 // }
