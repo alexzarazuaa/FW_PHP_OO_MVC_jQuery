@@ -66,6 +66,18 @@ class shop_bll
 		return $this->dao->select_count_pages($this->db);
 	}
 
+
+	public function insert_likes_bll($nickname, $idprod){
+		return $this->dao->like($this->db,$nickname, $idprod);
+	}
+
+	public function unlike_bll($nickname, $idprod){
+		return $this->dao->unlike($this->db,$nickname, $idprod);
+	}
+
+	public function paint_likes_bll($nickname){
+		return $this->dao->paint_likes($this->db,$nickname);
+	}
 	
 
 }

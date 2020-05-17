@@ -18,7 +18,8 @@ class login_dao
     }
 
 
-    public function insert_user($db, $data){ //insert a register manual user
+    public function insert_user($db, $data)
+    { //insert a register manual user
         $email   = $data['email'];
         $nickname = $data['nickname'];
         $password  =  password_hash($data['password'], PASSWORD_BCRYPT);
@@ -27,23 +28,47 @@ class login_dao
         $token = generate_Token_secure(20);
         $sql = "INSERT INTO user (userid,user_email,nickname,password,avatar,token) 
             VALUES('$nickname','$email','$nickname','$password',' $avatar','$token')";
-          $db->ejecutar($sql);
+        $db->ejecutar($sql);
 
         return $token;
 
         // return $data;
 
-    }//end_insert
+    } //end_insert
 
-    function exist_user($db,$user_email,$nickname){
+    public function insert_social_user($db, $data)
+    {
+        $userid = $data['uid'];
+        $user_email = $data['email'];
+        $email_username = explode("@", $user_email);
+        $nickname = $email_username[0];
+        $Updatetoken = generate_Token_secure(20);
+        $avatar = $data['photoURL'];
+        $sql = "INSERT INTO user (userid,user_email,nickname,avatar,token) 
+        VALUES('$userid','$user_email','$nickname',' $avatar','$Updatetoken')";
+        $db->ejecutar($sql);
+
+        return $Updatetoken;
+    }
+
+    public function check_registerSocial($db,$data){
+        $uid=$data['uid'];
+        $sql="SELECT * FROM user where userid='$uid'";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+
+    public function exist_user($db, $user_email, $nickname)
+    {
 
         $sql = "SELECT * FROM user WHERE nickname='$nickname' AND user_email='$user_email'  ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
 
-    function select_id ($db){
-        
+    public function select_id($db)
+    {
+
         $sql = "SELECT userid FROM user  WHERE userid=nickname ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
@@ -56,27 +81,24 @@ class login_dao
         return $db->listar($stmt);
     }
 
-    public function updatetoken_mail($db,$data)
+    public function updatetoken_mail($db, $data)
     {
 
         $token = generate_Token_secure(20);
         $sql = "UPDATE user set token='$token' WHERE user_email='$data'";
         $stmt = $db->ejecutar($sql);
         return $token;
-     
     }
 
 
-    public function update_password($db,$data)
+    public function update_password($db, $data)
     {
         $password  =  password_hash($data[0], PASSWORD_BCRYPT);
         $sql = "UPDATE user set password='$password' WHERE token='$data[1]'";
         $stmt = $db->ejecutar($sql);
-      
-     
     }
 
-  
+
     public function check_user_email($db)
     {
         $sql = "SELECT * FROM user WHERE userid=nickname and activate=1 ";
@@ -85,12 +107,10 @@ class login_dao
     }
 
 
-    public function type_user($db) {
+    public function type_user($db)
+    {
         $sql = "SELECT type FROM user WHERE userid=nickname and activate=1 ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
-
-
- 
 }

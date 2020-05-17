@@ -57,6 +57,15 @@ class login_model {
     }
 
 
+    public function check_socialuser_model($data){
+        return $this->bll->social_checklogin_bll($data);
+    }
+
+    public function insert_social_model($data){
+        return $this->bll->insert_social_bll($data);
+    }
+
+
   
 
 

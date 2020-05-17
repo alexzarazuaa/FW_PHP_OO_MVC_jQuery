@@ -85,13 +85,23 @@ define('MODEL_HOME', SITE_ROOT . 'modules/home/model/model/');
 define('JS_VIEW_HOME', SITE_PATH . 'modules/home/view/js/');
 
 
-
 //MODEL SHOP
 define('MODEL_PATH_SHOP', SITE_ROOT . 'modules/shop/model/');
 define('DAO_SHOP', SITE_ROOT . 'modules/shop/model/DAO/');
 define('BLL_SHOP', SITE_ROOT . 'modules/shop/model/BLL/');
 define('MODEL_SHOP', SITE_ROOT . 'modules/shop/model/model/');
 define('JS_VIEW_SHOP', SITE_PATH . 'modules/shop/view/js/');
+
+
+//MODEL CART
+define('MODEL_PATH_CART', SITE_ROOT . 'modules/cart/model/');
+define('DAO_CART', SITE_ROOT . 'modules/cart/model/DAO/');
+define('BLL_CART', SITE_ROOT . 'modules/cart/model/BLL/');
+define('MODEL_CART', SITE_ROOT . 'modules/cart/model/model/');
+define('JS_VIEW_CART', SITE_PATH . 'modules/cart/view/js/');
+
+
+
 
 //MODEL LOGIN
 define('MODEL_PATH_LOGIN', SITE_ROOT . 'modules/login/model/');

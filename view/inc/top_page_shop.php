@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>MASTERSPORT</title>
 
-  <link href="view/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -53,11 +53,7 @@
   <script type="text/javascript" src="<?php echo  JQUERY_PATH ?>jquery.bootpag.min.js"></script>
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
-
-  <!--añadir despues una vez probado el shop correctly-->
-  <!-- 
-  <script src="module/cart/model/cart.js"></script>
-</script> -->
+  <script src="<?php echo JS_VIEW_CART ?>cart.js"></script>
 
  <!-- IPCART-->
  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>

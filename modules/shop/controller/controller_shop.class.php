@@ -88,6 +88,21 @@ class controller_shop
 		echo json_encode($json);
 	}
 
+	function likes(){
+
+		$json = array();
+		$json = loadModel(MODEL_SHOP, "shop_model", "insert_like_model" ,$_POST['nickname'],$_POST['idprod']);
+		echo json_encode($json);
+	}
+
+	function unlike(){
+
+	}
+
+
+	function paint_likes() {
+
+	}
 
 
 }

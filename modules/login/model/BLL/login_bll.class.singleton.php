@@ -151,7 +151,7 @@ class login_bll
 
 
 		$check_mail = $this->dao->check_user_email($this->db);
-		//echo json_encode($check_mail[0]['type']);
+		//echo json_encode($check_mail[0]['token']);
 		//print_r(array_slice($check_mail,0));
 		//print_r(array_slice($check_mail,0));
 		//user_email
@@ -166,7 +166,7 @@ class login_bll
 				//si encuentra un mail igual
 				if (($check_mail[$i]['user_email']) == ($data)) {
 					$res = true;
-					return true;
+					return  $this->dao->check_user_email($this->db);
 					//return true;
 				} else {
 					$res = false;
@@ -177,5 +177,17 @@ class login_bll
 	
 
 	}//end_func
+
+	public function social_checklogin_bll($data){
+		//$token = $this->dao->updatetoken_mail($this->db,$data);
+		return $this->dao->check_registerSocial($this->db, $data);
+		//return $token;
+	}
+
+	public function insert_social_bll($data){
+		//$token = $this->dao->updatetoken_mail($this->db,$data);
+		return $this->dao->insert_social_user($this->db, $data);
+		//return $token;
+	}
 
 }

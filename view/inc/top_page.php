@@ -33,14 +33,14 @@
   <!-- //LINKS PLANTILLA -->
 
   <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
-
+  
   <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
   <script src="<?php echo ACTIVITY_PATH ?>activity.js"></script>
 
-
+  <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>init.js"></script>
   
 
   <!--  

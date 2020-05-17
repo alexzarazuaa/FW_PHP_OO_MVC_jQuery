@@ -99,25 +99,25 @@ class shop_dao
 
     // /////// LIKES
 
-    // public function like($db, $nickname, $idprod)
-    // { //INSERT INTO FOR LIKES
-    //     $sql = "INSERT INTO likes (user_ID,product_code) values ('$nickname','$idprod')";
-    //     $stmt = $db->ejecutar($sql);
-    // }
+    public function like($db, $nickname, $idprod)
+    { //INSERT INTO FOR LIKES
+        $sql = "INSERT INTO likes (user_ID,product_code) values ('$nickname','$idprod')";
+        $stmt = $db->ejecutar($sql);
+    }
 
-    // public function unlike($db, $nickname, $idprod)
-    // {//FUNCTION FOR DELETE THE LIKE FOR UNLIE IN PRODUCT
-    //     $sql = " DELETE from likes where user_ID = '$nickname' and product_code = '$idprod' ";
-    //     $stmt = $db->ejecutar($sql);
-    // }
+    public function unlike($db, $nickname, $idprod)
+    {//FUNCTION FOR DELETE THE LIKE FOR UNLIE IN PRODUCT
+        $sql = " DELETE from likes where user_ID = '$nickname' and product_code = '$idprod' ";
+        $stmt = $db->ejecutar($sql);
+    }
 
 
-    // public function paint_likes($db, $nickname)
-    // { //SELECT PARA MOSTRAR LOS LIKES
-    //     $sql = " SELECT *  from likes where user_ID = '$nickname'  ";
-    //     $stmt = $db->ejecutar($sql);
-    //     return $db->listar($stmt);
-    // }
+    public function paint_likes($db, $nickname)
+    { //SELECT PARA MOSTRAR LOS LIKES
+        $sql = " SELECT *  from likes where user_ID = '$nickname'  ";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
     
 
     /// FUNCTION FOR MODULE CART

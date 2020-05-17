@@ -231,16 +231,22 @@ var ipu = new Promise(function (resolve) { //obtener  ip for user no logged
 
 function login() {
 	console.log("ENTRA FUNC LOGIN");
+	localStorage.remove('id_token',data['token_jwt']);
 	if (validate_login() != 0) {
 		var userinfo = $('#formlogin').serialize();
 		console.log(userinfo);
 		var info_data = { module: 'login', function: 'login_user', data: userinfo }
 		reg('?', info_data)
-			.then(function (data) {
+			.then(function (info) {
+				//localStorage.remove('id_token',data['token_jwt']);
+				console.log(info)
+				var data = JSON.parse(info)
 				console.log(data);
-				if (data == "true") {
-					console.log(data);
-					paint_type_menu();
+				//alert("va be")
+				localStorage.setItem('id_token',data['token_jwt']);
+				var correct = data['response']
+				if (data['response'] == correct ) {
+					console.log("todo ok")
 					// ipu
 					// 	.then(function (ipu) {
 					// 		var change = userinfo.split("&");
@@ -273,13 +279,16 @@ function login() {
 					// 			})
 					// 	})
 					toastr.success("LOGEADO CORRECTAMENTE.");
-					alert("comprueba");
+					//alert("comprueba");
 					//redirect home
 					window.setTimeout(function () {
 						redirect_home();
 					}, 1000)
 				} else {
 					toastr.error("FALLO EN EL INICIO DE SESION", "ERROR.");
+					window.setTimeout(function () {
+						redirect_login();
+					}, 1000)
 				}
 
 			})
@@ -407,12 +416,7 @@ function btn_login_reg() {
 
 	})
 
-	// //recover pass
-	// $(document).on("click", '#recoverbtnpass', function () {
-	// 	console.log("entra CLICK REC0VER the password");
-	// 	recover_pass();
 
-	// })
 
 
 }
@@ -468,7 +472,6 @@ $(document).ready(function () {
 	key_log_reg();
 	btn_login_reg();
 
-	//apend_recover_pasword();
 	apend_mail_recover();
 
 

@@ -808,12 +808,11 @@ function pagination() {
 
 
 //REDIRECT LOGIN ESPERAR A LA MIGRACION DE LOGIN
-function redirect_login() {
-	url = amigable('?module=login');
-	$(window).attr('location', url)
+// function redirect_login() {
+//   var url = "index.php?page=controller_login&op=view_register"
+//   $(window).attr('location', url);
 
-}
-
+// }
 
 
 
@@ -916,17 +915,18 @@ function inlike() {
 
     var idprod = $(this).attr('id');
     console.log(idprod)
-    var token = localStorage.getItem("id_token");
-    //console.log(token)
-    if (token) {
-      //console.log(token)
-          //console.log('If de info');
+
+    fav('module/shop/controller/controller_shop.php?op=check_logged')
+      .then(function (info) {
+        console.log(info)
+        if (info != "notlogged") {
+          console.log('If de info');
           $('.' + idprod + '').toggleClass('btn-danger');
           fav('module/shop/controller/controller_shop.php?op=like', idprod)
             .then(function (data) {
               console.log(data)
               if (data == "its favorite") {
-                //console.log('centra ind');
+                console.log('centra ind');
                 fav('module/shop/controller/controller_shop.php?op=unlike', idprod)
                   .then(function (data) {
                     console.log(data)
@@ -964,6 +964,20 @@ function paint_likes() {
 
 }
 
+// function prueba_products(data = 0) {
+
+//   console.log("ENTRA  get data");
+
+//   //alert("AVISO HA ENTRADO ");
+//   //console.log(data);
+
+//   var info_data = { module: 'shop', function: 'data_products', data: data }
+//   shop(amigable("?"), info_data)
+//     .then(function (data) {
+//       var info = JSON.parse(data)
+//       console.log(info)
+//     })
+// }
 
 var shop = function (url, data) { //function-promise GENERAL 
 

@@ -51,28 +51,26 @@
 
 
 
-    // function generate_token_JWT($id){
-    //     $header = '{"typ":"JWT", "alg":"HS256"}';
-    //     $secret = 'maytheforcebewithyou';
+    function generate_token_JWT($iduser){
+        $header = '{"typ":"JWT", "alg":"HS256"}';
+        $secret = generate_Token_secure(20);
     
-    //     /////////////////////////// yomogan ////////////////////////////////////////
-    //     //iat: Tiempo que inició el token
-    //     //exp: Tiempo que expirará el token (+1 hora)
-    //     //name: info user
-    //     $payload = '{
-    //         "iat":time(), 
-    //         "exp":time() + (60*60),
-    //         "name":"yomogan"
-    //     }';
+        $arrayPayload =array(
+            'iat' => time(),
+            'exp'=> time() + (15 * 60),
+            'name'=> $iduser
+           );
+           $payload = json_encode($arrayPayload);
     
-    //     $JWT = new JWT;
-    //     $token = $JWT->encode($header, $payload, $secret);
+        $JWT = new JWT;
+        return $JWT->encode($header, $payload, $secret);
       
-    // }
+    }
 
 
-    // function decode_token($token){
-    //     $json = $JWT->decode($token, $secret);
-    //     echo 'JWT encode yomogan: '.$token."\n\n"; echo '<br>';
-    //     echo 'JWT decode yomogan: '.$json."\n\n"; echo '<br>'; echo '<br>';
-    // }
+    function decode_token($token){
+        $secret = generate_Token_secure(20);
+        $JWT = new JWT;
+        $json = $JWT->decode($token, $secret);
+        return $json;
+    }

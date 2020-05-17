@@ -31,8 +31,8 @@
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
   <!-- //Fonts -->
   <!-- //LINKS PLANTILLA -->
-   <!-- //LINKS PLANTILLA -->
-   <link rel="stylesheet" href="<?php echo JS_PATH ?>jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+  <!-- //LINKS PLANTILLA -->
+  <link rel="stylesheet" href="<?php echo JS_PATH ?>jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxcore.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxbuttons.js"></script>
@@ -41,26 +41,41 @@
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxdatatable.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxcheckbox.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxlistbox.js"></script>
-   <!-- <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqxscrollview.js"></script>  -->
+  <!-- <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqxscrollview.js"></script>  -->
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
   <script type="text/javascript" src="<?php echo JS_PATH ?>jqwidgets/scripts/demos.js"></script>
   <!-- //jQWidgets -->
 
+
+  <!-- FIREBASE-->
+  
+  <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script> -->
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+
+  <!-- FIREBASE-->
+
+
   <script type="text/javascript" src="<?php echo LANG_PATH ?>translate.js"></script>
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <script src="<?php echo ACTIVITY_PATH ?>activiti.js"></script>
+  <script src="<?php echo JS_PATH ?>api_keys.js"></script>
   <script type="text/javascript" src="<?php echo  JS_PATH ?>main_pretty.js"></script>
   <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>login.js"></script>
-    <!-- TOASTR -->
-    <script type="text/javascript" src="<?php echo TOASTR_PATH ?>build/toastr.min.js"></script>
+  <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>social_firebase.js"></script>
+  <!-- TOASTR -->
+  <script type="text/javascript" src="<?php echo TOASTR_PATH ?>build/toastr.min.js"></script>
   <link rel="stylesheet" href="<?php echo TOASTR_PATH ?>build/toastr.css">
   <!-- TOASTR -->
   <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>animation_login.js"></script>
   <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>init.js"></script>
 
-   
-    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 
   <link rel="icon" type="image/png" sizes="192x192" href="view/img/fav.png">
