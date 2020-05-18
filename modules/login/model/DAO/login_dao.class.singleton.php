@@ -44,8 +44,8 @@ class login_dao
         $nickname = $email_username[0];
         $Updatetoken = generate_Token_secure(20);
         $avatar = $data['photoURL'];
-        $sql = "INSERT INTO user (userid,user_email,nickname,avatar,token) 
-        VALUES('$userid','$user_email','$nickname',' $avatar','$Updatetoken')";
+        $sql = "INSERT INTO user (userid,user_email,nickname,avatar,activate,token) 
+        VALUES('$userid','$user_email','$nickname',' $avatar','1','$Updatetoken')";
         $db->ejecutar($sql);
 
         return $Updatetoken;
@@ -110,6 +110,13 @@ class login_dao
     public function type_user($db)
     {
         $sql = "SELECT type FROM user WHERE userid=nickname and activate=1 ";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+
+    public function user_session($db,$nickname,$user_email){
+        
+        $sql = "SELECT user_email,nickname,avatar FROM user WHERE nickname='$nickname' AND user_email='$user_email'  ";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

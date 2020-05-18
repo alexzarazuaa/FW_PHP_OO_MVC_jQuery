@@ -66,6 +66,10 @@ class login_model {
     }
 
 
+    public function user_session_model($nickname,$user_email){
+        return $this->bll->user_session_bll($nickname,$user_email);
+    }
+
   
 
 

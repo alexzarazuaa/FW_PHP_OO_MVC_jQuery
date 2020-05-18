@@ -179,15 +179,19 @@ class login_bll
 	}//end_func
 
 	public function social_checklogin_bll($data){
-		//$token = $this->dao->updatetoken_mail($this->db,$data);
+
 		return $this->dao->check_registerSocial($this->db, $data);
-		//return $token;
+
 	}
 
 	public function insert_social_bll($data){
-		//$token = $this->dao->updatetoken_mail($this->db,$data);
+		
 		return $this->dao->insert_social_user($this->db, $data);
-		//return $token;
+		
+	}
+
+	public function user_session_bll($nickname,$user_email){
+		return $this->dao->user_session($this->db,$nickname,$user_email);
 	}
 
 }

@@ -150,18 +150,16 @@ function redirect_login() {
 
 
 function logout() {
-	$.ajax({
-		type: 'GET',
-		url: 'module/login/controller/controller_login.php?op=logout',
-	})
-		.done(function (data) {
-			// console.log('asdf');
 
-			console.log(data);
-			if (data == '"done"') {
-				redirect_home();
-			}
-		})
+
+	$('#.btn').on("click", function () {
+		console.log("entra CLICK LOGOUT");
+		  logout_firebase();
+		  localStorage.removeItem('id_token');
+
+	})
+
+
 
 }
 
@@ -309,10 +307,6 @@ function apend_mail_recover() {
 		$("#formlogin").empty()
 		$("#register-form").empty()
 
-		// '<div class="form-group">' +
-		// '<input type="email" name="recemail" id="recemail" tabindex="1" class="form-control" placeholder="EmailAddress" value="">' +
-		// '<span id="err_emailrec"></span>' +
-		// '</div>' +
 
 		$("#recover_mail").append(
 
@@ -402,6 +396,7 @@ function btn_login_reg() {
 
 	})
 
+
 	//register
 	$('#register-submit').on("click", function () {
 		//console.log("entra CLICK LOGIN");
@@ -473,7 +468,7 @@ $(document).ready(function () {
 	btn_login_reg();
 
 	apend_mail_recover();
-
+	logout();
 
 });//ENDREADY
 

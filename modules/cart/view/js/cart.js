@@ -1,1024 +1,658 @@
-
-function ajaxForSearch(url, data) {
-  //var url = durl;
-  console.log(url);
-  $.ajax({
-    type: "POST",
-    data: data,
-    url: url,
-  })
-    .done(function (data) {
-
-      console.log("lala");
-      var data = JSON.parse(data);
-      console.log(data)
-      $.each(data, function (index, data) {
-        //console.log(data);
-        var ElementDiv = document.createElement('div');
-        ElementDiv.innerHTML = "<br><div id='cont_img'><img src='" + data.imagen + "' class='details' id='" + data.idprod + "' data-toggle='modal' data-target='#exampleModal'></div><div id='list_header'><span id='li_brand'>  " + data.nombre + "</span></div>" +
-          "<div id='list_footer'><span id='" + data.idprod + "pr'>" + data.precio + "€ " + "</span><div id='cont_comprar'></select><button class='baddcart' id='" + data.idprod + "'>Add to cart</button><button class='btn btn-default btn-lg like  " + data.idprod + " ' id='" + data.idprod + "' id=''>❤</button>";
-        document.getElementById("list_products").appendChild(ElementDiv);
-      });
-
-      paint_likes();
-    });
-}//endajaxforearch
-
-function apiajax(url) {
-  var url = url;
-  console.log(url);
-  //var limit = 2;
-  $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: url,
-  })
-    .done(function (data) {
-
-      console.log(data);
-      var DatosJson = JSON.parse(JSON.stringify(data));
-      console.log(DatosJson.items.length);
-      //console.log(data['items'][i]['volumeInfo']['infoLink']);
-      //DatosJson.items.length = limit;
-      $('#pagination').empty();
-
-      for (i = 0; i < DatosJson.items.length; i++) {
-
-        var ElementDiv = document.createElement('div');
-        ElementDiv.innerHTML =
-          "<br><div id='cont_img'><img src='" + data['items'][i]['volumeInfo']['imageLinks']['thumbnail'] + "' class='cart' cat='" + data['items'][i]['volumeInfo']['categories'] + "'  idb= '" + data['items'][i]['id'] + "' data-toggle='modal' data-target='#exampleModal'></div><div id='list_header'><hr><span id='li_brand'>  " + DatosJson.items[i].volumeInfo.title + "</br>" + "</span></div></hr>";
-        document.getElementById("featured").appendChild(ElementDiv);
-      }
-
-
-
-
-    });
-}
-
-function detail_book() {
-  /// redirect to google book if you want know more info about the
-
-  $(document).on("click", '.cart', function () {
-    console.log("click");
-    var id = this.getAttribute('idb');
-    console.log(id);
-    url = "https://books.google.es/books?id=" + id + "&hl=&source=gbs_api"
-    //  console.log(url);
-
-    $(window).attr('location', url)
-  })
-
-}
-
-
-function details_gmaps() {
-  ////
-  if (document.getElementById("mapdetails") != null) {
-    console.log("ENTRA MAP 2");
-    var script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=" + KEY_API + "&callback=initMap";
-
-    script.async;
-    script.defer;
-    document.getElementsByTagName('script')[0].parentNode.appendChild(script);
-    console.log(script);
-  }
-
-
-}
-//funcion mostrar mapa grande 
-function details_gmaps2() {
-  ////
-  if (document.getElementById("mapa") != null) {
-    $("#pagination").empty()
-    console.log("ENTRA MAP 2");
-    var script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=" + KEY_API + "&callback=initMap2";
-    script.async;
-    script.defer;
-    document.getElementsByTagName('script')[0].parentNode.appendChild(script);
-    console.log(script);
-  }
-
-
-}
-
-// funcion productos in gmaps
-function initMap() {
-
-  // var
-  var markers = [];
-
-  //console.log(jewelry_stores)
-  var map = new google.maps.Map(document.getElementById('mapdetails'), {
-    zoom: 4,
-    center: new google.maps.LatLng(40.891859, -3.695447),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-
-  var infowindow = new google.maps.InfoWindow();
-  var info_data = { module: 'shop', function: 'gmaps' }
-  shop(amigable("?"), info_data)
-    .then(function (data) {
-      console.log(data);
-      info = JSON.parse(data)
-      console.log(info)
-
-      for (row in info) {
-        console.log(info);
-
-        var newMarker = new google.maps.Marker({
-          position: new google.maps.LatLng(
-            info[row].latitud,
-            info[row].longitud),
-          map: map,
-          title:
-            info[row].Tienda
-        });
-
-        google.maps.event.addListener(newMarker, 'click', (function (newMarker, row) {
-          return function () {
-            infowindow.setContent(
-              info[row].dscp);
-            infowindow.open(map, newMarker);
-          }
-        })(newMarker, row));
-
-        markers.push(newMarker);
-      }
-    });
-}
-
-
-
-//funcion mostrar mapa grande 
-function initMap2() {
-
-  // var
-  var markers = [];
-
-  //console.log(jewelry_stores)
-  var map = new google.maps.Map(document.getElementById('mapa'), {
-    zoom: 6,
-    center: new google.maps.LatLng(40.891859, -3.695447),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-
-  var infowindow = new google.maps.InfoWindow();
-  var info_data = { module: 'shop', function: 'geomaps' }
-  shop(amigable("?"), info_data)
-    .then(function (data) {
-      console.log(data);
-      info = JSON.parse(data)
-      console.log(info)
-
-      for (row in info) {
-        console.log(info);
-
-        var newMarker = new google.maps.Marker({
-          position: new google.maps.LatLng(
-            info[row].latitud,
-            info[row].longitud),
-          map: map,
-          title:
-            info[row].Tienda
-        });
-
-        google.maps.event.addListener(newMarker, 'click', (function (newMarker, row) {
-
-          return function () {
-            var latitud = info[row].latitud
-            var longitud = info[row].longitud
-            console.log(latitud);
-            console.log(longitud);
-            var info_data = { module: 'shop', function: 'geomaps_desc', latitud : latitud, longitud:longitud }
-            shop(amigable("?"), info_data)
-              .then(function (data) {
-                console.log(data);
-                info = JSON.parse(data)
-                console.log(info)
-                var name = "";
-                for (row in info) {
-                  name = name + info[row].nombre
-                }
-                infowindow.setContent(
-                  name);
-                infowindow.open(map, newMarker);
-              });
-          }
-        })(newMarker, row));
-
-        markers.push(newMarker);
-      }
-    });
-}
-
-// click del gmaps
-function clickgmaps() {
-  $(document).on("click", '#mapdetails', function () {
-    //console.log("click");
-
-    $("#products").empty();
-    $("#emptyfilters").empty()
-    $("#search").empty()
-    $("#mapdetails").empty()
-    $("#textarea").empty()
-    $("#npg").empty();
-    $('#textarea2').append(
-      ' <h4 class="mb-2"><span class="fa fa-map-marker" aria-hidden="true" >VISTA EN MAPA</span></h4>'
-    )
-
-    details_gmaps2();
-
-  });
-}
-
-/// filtros 
-function filtros() {
-
-
-
-  var filters = "";
-  var click_an = 0;
-  var click_su = 0;
-  var click_ca = 0;
-  var click_ch = 0;
-  var click_p1 = 0;
-  var click_p2 = 0;
-  var click_p3 = 0;
-  var click_p4 = 0;
-  var click_fav = 0;
-
-  $('#camisetas').click(function () {
-    console.log("click_an= " + click_an)
-
-
-    if ((click_an % 2) == 0) {
-      console.log("click_an para filtrar")
-      click_an = click_an + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where categoria = 'CAMISETAS'" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " OR categoria = 'CAMISETAS'";
-        console.log(CAMISETAS);
-      }
-
-    } else {
-      console.log("click_an para desfiltrar")
-      click_an = click_an + 1
-      CAMISETAS = '';
-      filters = filters.replace("categoria = 'CAMISETAS' OR ", "");
-      filters = filters.replace(" OR categoria = 'CAMISETAS'", "");
-      filters = filters.replace("where categoria = 'CAMISETAS'", "");
-
-
-    }
-    allfilters(filters);
-    console.log("click_an= " + click_an);
-  });
-  // sudaderas
-  $('#sudaderas').click(function () {
-    console.log("click_an= " + click_su)
-
-    if ((click_su % 2) == 0) {
-      console.log("click_su para filtrar")
-      click_su = click_su + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where categoria = 'SUDADERAS'" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " OR categoria = 'SUDADERAS'";
-        console.log(SUDADERAS);
-      }
-    } else {
-      console.log("click_su para desfiltrar")
-      click_su = click_su + 1
-      SUDADERAS = '';
-      filters = filters.replace("categoria = 'SUDADERAS' OR ", "");
-      filters = filters.replace(" OR categoria = 'SUDADERAS'", "");
-      filters = filters.replace("where categoria = 'SUDADERAS'", "");
-    }
-    allfilters(filters);
-    console.log("click_an= " + click_an);
-  });
-  //calzado
-  $('#calzado').click(function () {
-    console.log("click_ca= " + click_ca)
-
-    if ((click_ca % 2) == 0) {
-      console.log("click_ca para filtrar")
-      click_ca = click_ca + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where categoria = 'CALZADO'" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " OR categoria = 'CALZADO'";
-        console.log(CALZADO);
-      }
-    } else {
-      console.log("click_ca para desfiltrar")
-      click_ca = click_ca + 1
-      CALZADO = '';
-      filters = filters.replace("categoria = 'CALZADO' OR ", "");
-      filters = filters.replace(" OR categoria = 'CALZADO'", "");
-      filters = filters.replace("where categoria = 'CALZADO'", "");
-    }
-    allfilters(filters);
-    console.log("click_an= " + click_an);
-  });
-  //chandals
-  $('#chandal').click(function () {
-    console.log("click_ch= " + click_ch)
-
-    if ((click_ch % 2) == 0) {
-      console.log("click_ch para filtrar")
-      click_ch = click_ch + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where categoria = 'CHANDALS'" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " OR categoria = 'CHANDALS'";
-        console.log(CHANDALS);
-      }
-    } else {
-      console.log("click_ch para desfiltrar")
-      click_ch = click_ch + 1
-      CHANDALS = '';
-      filters = filters.replace("categoria = 'CHANDALS' OR ", "");
-      filters = filters.replace(" OR categoria = 'CHANDALS'", "");
-      filters = filters.replace("where categoria = 'CHANDALS'", "");
-    }
-    allfilters(filters);
-    console.log("click_ch= " + click_ch);
-  });
-
-  //precios
-  $('#050').click(function () {
-    console.log("click_p1= " + click_p1)
-
-    if ((click_p1 % 2) == 0) {
-      console.log("click_p1 para filtrar")
-      click_p1 = click_p1 + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where precio between 0 and 50" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " and precio between 0 and 50";
-        console.log(CHANDALS);
-      }
-    } else {
-      console.log("click_p1 para desfiltrar")
-      click_p1 = click_p1 + 1
-      precio = '';
-      filters = filters.replace("precio between 0 and 50 and ", "");
-      filters = filters.replace(" and precio between 0 and 50", "");
-      filters = filters.replace("where precio between 0 and 50", "");
-
-    }
-    allfilters(filters);
-    console.log("click_p1= " + click_p1);
-  });
-  //
-  $('#508').click(function () {
-    console.log("click_p2= " + click_p2)
-
-    if ((click_p2 % 2) == 0) {
-      console.log("click_p2 para filtrar")
-      click_p2 = click_p2 + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where precio between 50 and 80" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " and precio between 50 and 80";
-        console.log(CHANDALS);
-      }
-    } else {
-      console.log("click_p2 para desfiltrar")
-      click_p2 = click_p2 + 1
-      precio = '';
-      filters = filters.replace("precio between 50 and 80 and ", "");
-      filters = filters.replace(" and precio between 50 and 80", "");
-      filters = filters.replace("where precio between 50 and 80", "");
-
-    }
-    allfilters(filters);
-    console.log("click_p2= " + click_p2);
-  });
-  //
-  $('#8012').click(function () {
-    console.log("click_p3= " + click_p3)
-
-    if ((click_p3 % 2) == 0) {
-      console.log("click_p3 para filtrar")
-      click_p3 = click_p3 + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where precio between 80 and 120" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " and precio between 80 and 120";
-        console.log(CHANDALS);
-      }
-    } else {
-      console.log("click_p3 para desfiltrar")
-      click_p3 = click_p3 + 1
-      precio = '';
-      filters = filters.replace("precio between 80 and 120 and ", "");
-      filters = filters.replace(" and precio between 80 and 120", "");
-      filters = filters.replace("where precio between 80 and 120", "");
-
-    }
-    allfilters(filters);
-    console.log("click_p3= " + click_p3);
-  });
-  //
-  $('#12020').click(function () {
-    console.log("click_p4= " + click_p4)
-
-    if ((click_p4 % 2) == 0) {
-      console.log("click_p4 para filtrar")
-      click_p4 = click_p4 + 1
-      if (filters === "") {
-        console.log("cadena vacia")
-        filters = "where precio between 120 and 200" + filters;
-      } else {
-        console.log("cadena escrita")
-        filters = filters + " and precio between 120 and 200";
-        console.log(CHANDALS);
-      }
-    } else {
-      console.log("click_p4 para desfiltrar")
-      click_p4 = click_p4 + 1
-      precio = '';
-      filters = filters.replace("precio between 120 and 200 and ", "");
-      filters = filters.replace(" and precio between 120 and 200", "");
-      filters = filters.replace("where precio between 120 and 200", "");
-
-    }
-    allfilters(filters);
-    console.log("click_p4= " + click_p4);
-  });
-  //click filter favorite
-  $('#like').click(function () {
-    console.log("click_fav= " + click_fav)
-
-    //le decimos a la promesa general que obtenga el nombre del usuario logueado
-    fav('module/shop/controller/controller_shop.php?op=check_fav')
-      .then(function (info) {
-        console.log(info)
-
-        //si hay algun usuario conectado entra
-        if (info !== "") {
-          console.log('entra if')
-          console.log(info)
-
-          ///si es la primera vez o alguna  vez par ya que el contador empieza en 0 fitrara
-          if ((click_fav % 2) == 0) {
-            console.log("click_fav para filtrar")
-            click_fav = click_fav + 1
-
-            ///comprobara si la cadena esta vacia o llena
-            if (filters === "") {
-              //console.log("cadena vacia")
-              filters = "Where idprod in (SELECT product_code from likes where user_ID='" + info + "')";
-              console.log(filters)
-            } else {
-              console.log("cadena escrita")
-              filters = filters + " AND idprod in (SELECT product_code from likes where user_ID='" + info + "')";
-
-            }
-
-
-            ///entrara si esta clickando para desfiltrar y borrara la cadena
-          } else {
-            console.log("like para desfiltrar")
-            like = like + 1
-            filters = filters.replace(" AND idprod in (SELECT product_code from likes where user_ID='" + info + "')", "");
-            filters = filters.replace("WHERE idprod in (SELECT product_code from likes where user_ID='" + info + "')", "");
-
-
-          }
-          allfilters(filters)
-          console.log("click_fav= " + click_fav)
-
-          //si no esta logueado lo mandara a loguearse
-        } else {
-          redirect_login();
-        }
-      })
-
-  })
-
-
-}// end_function_filtros
-
-function allfilters(filters) {
-  //click de todos 
-  console.log("filter");
-  $('#list_products').empty();
-  console.log(filters);
-  var info_data = { module: 'shop', function: 'select_filter', data: filters }
-  ajaxForSearch(amigable("?"), info_data)
-
-  //end_click_checked
-}
-
-function loadata() {
-
-  console.log("entra datos");
-  //search
-
-  // cojo name del list and datalists
-  //search
-  var talla = localStorage.getItem('talla', talla); // save data
-  console.log(talla);
-  var marca = localStorage.getItem('marca', marca); // save data
-  console.log(marca);
-  var auto = localStorage.getItem('autocomplete', auto); // save data
-  console.log(auto);
-
-
-}
-function detuggestions() {
-
-  limit = 9
-
-  $.ajax({
-    type: 'GET',
-    dataType: "json",
-    url: "https://www.googleapis.com/books/v1/volumes?q=This%20is%20Not%20Fashion:%20Streetwear%20Past,%20Present%20and%20Future",
-  })
-
-    .done(function (data) {
-      var DatosJson = JSON.parse(JSON.stringify(data));
-      console.log(DatosJson.items.length);
-      //console.log(data['items'][i]['volumeInfo']['infoLink']);
-      //console.log(DatosJson.items.imageLinks);
-      DatosJson.items.length = limit;
-
-      for (i = 6; i < DatosJson.items.length; i++) {
-
-        var ElementDiv = document.createElement('div');
-        ElementDiv.innerHTML =
-          "<br><div id='cont_img'><img src='" + data['items'][i]['volumeInfo']['imageLinks']['thumbnail'] + "' class='cart' cat='" + data['items'][i]['volumeInfo']['categories'] + "' data-toggle='modal' data-target='#exampleModal'></div><div id='list_header'><hr><span id='li_brand'>  " + DatosJson.items[i].volumeInfo.title + "</br>" + "</span></div></hr>";
-        document.getElementById("featured").appendChild(ElementDiv);
-      }
-
-    });
-
-  $(document).on("click", '.cart', function () {
-    //console.log("click");
-    //alert("click cart");
-    var categ = this.getAttribute('cat');
-    localStorage.setItem('bookCategorie', categ);
-
-    var url = 'index.php?page=controller_shop&op=view'
-    $(window).attr('location', url)
-
-  });
-
-
-
-}
-
-function details_products() {
-
-  $(document).on('click', '.details', function () {
-    console.log("click");
-
-
-
-    var id = this.getAttribute('id');
-    console.log(id)
-
-    //click count
-    console.log(id);
-    //DUDA SI HACER PROMISE
-    //PROMISE FOR COUNT EN CADA PRODUCT
-    var info_data = { module: 'shop', function: 'count_views', data: id }
-    shop(amigable("?"), info_data)
-      .then(function (data) {
-        //console.log(data)
-      })
-    // $.ajax({
-    //   type: 'POST',
-    //   dataType: "json",
-    //   url: "module/shop/controller/controller_shop.php?op=countvi&idprod=" + id,
-    // })
-    //PROMISE for details
-    var info_data = { module: 'shop', function: 'data_one_product', data: id }
-    shop(amigable("?"), info_data)
-      .then(function (data) {
-        console.log(data);
-        info = JSON.parse(data)
-        console.log(info[0].imagen)
-        console.log("done");
-
-
-        $("#list_products").empty();
-        $("#featured").empty();
-        $("#mapdetails").empty();
-        $("#emptyfilters").empty();
-        $("#search").empty()
-        $("#textarea").empty()
-        $("#pagination").empty()
-        $("#npg").empty()
-
-        console.log(info[0].idprod);
-        $("#list_prod").append(
-          '<div class="row">' +
-          '<div class="desc1-left col-md-6"> <img src="' + info[0].imagen + '" class="img-fluid" alt=""> </div>' +
-          '<div class="desc1-right col-md-6 pl-lg-4"> <h3>' + info[0].nombre + '</h3> <h5>' + info[0].precio + '€' + ' <span>99</span> <a href="#">click for offer</a></h5>' +
-          "<div class='available mt-3'><button class='btn btn-default btn-lg like  " + info[0].idprod + "' ' id='" + info[0].idprod + "' id=''>❤</button>" +
-          "</span><div id='cont_comprar'><select  id='" + info[0].idprod + "'></select><button class='baddcart' id='" + info[0].idprod + "'>Add to cart</button></div></div>" +
-          ' <br><div class="share-desc"><div class="share"><h4>Share Product :</h4>' +
-          ' <ul class="w3layouts_social_list list-unstyled"><li><a href="#" class="w3pvt_facebook"> <span class="fa fa-facebook-f"></span></a></a></li>' +
-          ' <li class="mx-2"><a href="#" class="w3pvt_twitter"><span class="fa fa-twitter"></span></a></li>' +
-          ' <li><a href="#" class="w3pvt_dribble"><span class="fa fa-dribbble"></span></a></li>' +
-          ' <li class="ml-2"><a href="#" class="w3pvt_google"><span class="fa fa-google-plus"></span></a></li></ul></div>' +
-          '<div class="clearfix"></div></div></div></div>' +
-          '<div class="row sub-para-w3layouts mt-5"><h3 class="shop-sing"><strong>MARCA :</strong> ' + info[0].marca + ' <BR> <strong>PRODUCTO  :</strong> ' + info[0].nombre + ' <BR><strong> DESCRIPCIÓN :</strong></h3>' +
-          '<p>' + info[0].descripcion + '</p>'
-
-
-        );
-
-
-        detuggestions();
-
-
-
-        paint_likes();
-
-
-      });
-
-  });//endajaxaDETAILS
-}
-
-function all_lists_products() {
-
-  if (document.getElementById('list_products')) {
-
-    var car = localStorage.getItem('all');
-    console.log(car); // carousel
-    var cat = localStorage.getItem('categoria');
-    console.log(cat); // categorias
-    console.log(cat + "CAMISETA"); // categorias
-    console.log("CAMISETA" + cat); // categorias
-    var categ = localStorage.getItem('bookCategorie') // save data
-    //console.log(categ.replace(/ /g, ""));
-
-
-    //search
-    var talla = localStorage.getItem('talla', talla); // save data
-    console.log(talla);
-    var marca = localStorage.getItem('marca', marca); // save data
-    console.log(marca);
-    var auto = localStorage.getItem('autocomplete', auto); // save data
-    console.log(auto);
-    //search
-    limit = 0;
-    if (cat) {
-      console.log("home categoria");
-      console.log(cat);
-      //hacer funcion categoria
-      var info_data = { module: 'shop', function: 'prods_categoria', data: cat }
-      ajaxForSearch(amigable("?"), info_data)
-
-    } else if (auto) {
-
-      console.log("entra en auto , existe el nombre")
-      var insidesearch = 'where nombre= "' + auto + '"';
-
-      //console.log(insidesearch);
-      var info_data = { module: 'shop', function: 'select_btnsearch', data: insidesearch }
-      ajaxForSearch(amigable("?"), info_data)
-
-      //ajaxForSearch("module/shop/controller/controller_shop.php?op=search&btnsearch=" + insidesearch);//
-    } else if ((marca) && (talla) && (marca != 0) && (talla != 0)) {
-
-      console.log("entra en marca y talla existe la marca y la talla o son distintos de 0")
-      var insides = 'where talla= "' + talla + '" and  marca="' + marca + '" ';
-
-      //console.log(insidesearch);
-      var info_data = { module: 'shop', function: 'select_btnsearch', data: insides }
-      ajaxForSearch(amigable("?"), info_data)
-
-    } else if ((marca) && (marca != 0)) {
-      console.log("entra en marca o es distintos de 0")
-      var insides = 'where marca= "' + marca + '"';
-      console.log("inside=" + insides);
-
-      //console.log(insidesearch);
-      var info_data = { module: 'shop', function: 'select_btnsearch', data: insides }
-      ajaxForSearch(amigable("?"), info_data)
-
-    } else if ((talla) && (talla != 0)) {
-      console.log("entra en talla o es distintos de 0")
-      var insides = 'where talla= "' + talla + '"';
-      console.log("inside=" + insides);
-
-      //console.log(insidesearch);
-      var info_data = { module: 'shop', function: 'select_btnsearch', data: insides }
-      ajaxForSearch(amigable("?"), info_data)
-
-    } else if (categ) {
-      //console.log(categ);
-      console.log("entra en categ book , existe el book")
-      apiajax("https://www.googleapis.com/books/v1/volumes?q=This%20is%20Not%20Fashion:%20Streetwear%20Past,%20Present%20and%20Future&categories=" + categ);
-      //console.log(apiajax);
-    } else {
-      //ajaxForSearch("module/shop/controller/controller_shop.php?op=productos&limit=" + limit);
-      //var info_data = { data: limit }
-      var info_data = { module: 'shop', function: 'data_products', data: limit }
-      ajaxForSearch(amigable("?"), info_data)
-      //ajaxForSearch(amigable("?module=shop&function=data_products",limit));
-    }
-
-  } // end_if
-
-
-  // consolse para saber en estas lineas estan los remove
-  console.log("remove item localstoratge");
-
-
-  var car = localStorage.removeItem('all');
-  //
-  var cat = localStorage.removeItem('categoria');
-
-  //search
-  var talla = localStorage.removeItem('talla', talla); // save data
-  console.log(talla);
-  var marca = localStorage.removeItem('marca', marca); // save data
-  console.log(marca);
-  var auto = localStorage.removeItem('autocomplete', auto); // save data
-  console.log(auto);
-  var categ = localStorage.removeItem('bookCategorie') // save data
-
-
-
-}
-
-function pagination() {
-  var info_data = { module: 'shop', function: 'count_pages' }
-  shop(amigable("?"), info_data)
-    .then(function (data) {
-      console.log(data);
-      var info = JSON.parse(data);
-      console.log(info);
-      var numprods = info[0].allpages;
-      console.log(numprods)
-      page = numprods / 3;
-      console.log(page);
-      $('#pagination').bootpag({
-        total: page,
-        page: 1,
-        maxVisible: 3
-      }).on("page", function (event, num) {
-        console.log(num);
-        limit = 3 * (num - 1);
-        var info_data = { module: 'shop', function: 'data_products', data: limit }
-        shop(amigable("?"), info_data)
-          .then(function (data) {
-
-            console.log(data);
-            var info = JSON.parse(data);
-            console.log(info);
-
-            $('#list_products').empty();
-            $("#npg").html("Page " + num);
-
-            console.log(limit);
-            var info_data = { module: 'shop', function: 'data_products', data: limit }
-            ajaxForSearch(amigable("?"), info_data)
-
-          });
-      });//end on
-    });//enddone
-}
-
-
-//REDIRECT LOGIN ESPERAR A LA MIGRACION DE LOGIN
-// function redirect_login() {
-//   var url = "index.php?page=controller_login&op=view_register"
-//   $(window).attr('location', url);
-
-// }
-
-
-
-//ESPERARSE A LA MIGRACION DEL CART
-
-// function prod_cart() {
-//   var prod = [];
-
-//   $(document).on('click', '.baddcart', function () {
-//     console.log("btnaddcart")
-
-//     var id = this.getAttribute('id');
-//     console.log(id)
-
-//     fav('module/shop/controller/controller_shop.php?op=check_logged')
-//       .then(function (info) {
-//         console.log(info)
-//         if (info == '"logged"') {
-//           console.log("entra if")
-
-//           //console.log(data.ip);
-//           fav('module/shop/controller/controller_shop.php?op=check_fav')
-//             .then(function (nickname) {
-//               console.log(nickname)
-
-//               var infouser = { id_prod: id, id: nickname };
-//               console.log(infouser);
-
-//               fav('module/shop/controller/controller_shop.php?op=add_prod_cart', infouser)
-//                 .then(function (data) {
-
-//                   console.log(data)
-
-//                 })
-//             })
-
-
-
-//         } else {
-
-//           $.getJSON('https://api.ipify.org?format=json', function (data) {
-//             console.log(data.ip);
-
-//             var infouser = { id_prod: id, id: data.ip };
-//             console.log(infouser);
-
-//             fav('module/shop/controller/controller_shop.php?op=add_prod_cart', infouser)
-//               .then(function (data) {
-
-//                 console.log(data)
-
-
-//               })
-
-//           });
-
-
-//         }
-
-//         prod.push(id);
-//         console.log(prod)
-
-
-//         localStorage.setItem('prod', JSON.stringify(prod));
-//         var gd = localStorage.getItem('prod');
-//         console.log(JSON.parse(gd));
-//         var save = localStorage.getItem('prod');
-//         var storatge = { prod: save }
-//         fav('module/shop/controller/controller_shop.php?op=prod_array', storatge)
-//           .then(function (data) {
-//             var data = JSON.parse(data);
-//             console.log(data)
-//           })
-
-//       })
-//   })
-// }
-
-var fav = function (url, data) { //funcion favorite general
-
-  console.log(data)
-
-  return new Promise(function (resolve) {
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: data
-    })
-      .done(function (data) {
-        resolve(data);
-      })
-  })
-};
-
-
-
-function inlike() {
-  $(document).on('click', '.like', function () {
-    console.log('like');
-
-    var idprod = $(this).attr('id');
-    console.log(idprod)
-
-    fav('module/shop/controller/controller_shop.php?op=check_logged')
-      .then(function (info) {
-        console.log(info)
-        if (info != "notlogged") {
-          console.log('If de info');
-          $('.' + idprod + '').toggleClass('btn-danger');
-          fav('module/shop/controller/controller_shop.php?op=like', idprod)
-            .then(function (data) {
-              console.log(data)
-              if (data == "its favorite") {
-                console.log('centra ind');
-                fav('module/shop/controller/controller_shop.php?op=unlike', idprod)
-                  .then(function (data) {
-                    console.log(data)
-                  })
-
-              }
-
-            })
-
-        } else {
-          redirect_login();
-        }
-      })
-
-  })
-
-}
-
-
-
-
-function paint_likes() {
-
-  fav('module/shop/controller/controller_shop.php?op=paint')
-    .then(function (info) {
-      //  console.log(info);
-      var data = JSON.parse(info);
-      console.log(data)
-      for (row in data) {
-        $('.' + data[row].product_code + '').toggleClass('btn-danger');
-      }
-
-    })
-
-
-}
-
-// function prueba_products(data = 0) {
-
-//   console.log("ENTRA  get data");
-
-//   //alert("AVISO HA ENTRADO ");
-//   //console.log(data);
-
-//   var info_data = { module: 'shop', function: 'data_products', data: data }
-//   shop(amigable("?"), info_data)
-//     .then(function (data) {
-//       var info = JSON.parse(data)
-//       console.log(info)
-//     })
-// }
-
-var shop = function (url, data) { //function-promise GENERAL 
-
-  console.log(data)
-
-  return new Promise(function (resolve) {
-    //console.log(url)
-    //console.log(data)
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: data
-    })
-      .done(function (data) {
-        resolve(data);
-      })
-  })
-};
-
-
 $(document).ready(function () {
 
-  details_gmaps();
-  details_products();
-  loadata();
+  //console.log("carrito js");
 
-  apiajax();
-  filtros();
-  clickgmaps();
-  all_lists_products();
-  pagination();
-  detail_book();
-  // inlike();
-
-
-  // prod_cart();
-
-  //prueba_products();
-
+  show_cart();
+  delete_prod_cart();
+  delete_all_cart();
+  calc_stock();
+  checkout();
 
 
 }); // end ready function
 
 
+
+var cart = function (url, data) { //funcion cart general
+
+  console.log(data)
+
+  return new Promise(function (resolve) {
+      $.ajax({
+          type: "POST",
+          url: url,
+          data: data
+      })
+          .done(function (data) {
+              resolve(data);
+          })
+  })
+};
+
+
+//FUNTIONS OF DELETE FROM CART AND DELETE ALL CART
+
+function delete_prod_cart() {
+
+  $(document).on('click', '.delete_prod', function () {
+      console.log("btndeletprod_cart")
+      //console.log(prod)
+      //cart('module/cart/controller/controller_cart.php?op=delete_prod_cart', prod)
+
+      var idprod = $(this).attr('id');
+      console.log(idprod)
+
+      fav('module/cart/controller/controller_cart.php?op=check_cart')
+          .then(function (data) {
+              ip
+                  .then(function (ip) {
+                      // console.log(data);
+                      if (data !== 'notlogged') { // SI ESTA LOGGEADO
+
+                          console.log(data)
+                          var user = data
+                          console.log("nickname " + user);
+
+                          // var info = {id: a713};
+                          //{}
+
+                      } else {
+
+                          console.log(ip)
+                          var user = ip;
+
+                      }
+                      var info_user = { idprod: idprod, id: user }
+
+                      fav('module/cart/controller/controller_cart.php?op=delete_prod_cart', info_user)
+                          .then(function (data) {
+                              console.log(data)
+                              $('#' + idprod + 'd').remove();
+                              show_prices();
+                          })
+                  })
+
+          })
+
+
+  })
+
+}
+function delete_all_cart() {
+  $(document).on('click', '.delete_all', function () {
+      console.log("btndeletprod_cart")
+      //console.log(prod)
+      //cart('module/cart/controller/controller_cart.php?op=delete_prod_cart', prod)
+
+      fav('module/cart/controller/controller_cart.php?op=check_cart')
+          .then(function (data) {
+              ip
+                  .then(function (ip) {
+                      // console.log(data);
+                      if (data !== 'notlogged') { // SI ESTA LOGGEADO
+
+                          console.log(data)
+                          var user = data
+                          console.log("nickname " + user);
+
+                          // var info = {id: a713};
+                          //{}
+
+                      } else {
+                          console.log(ip)
+                          var user = ip;
+
+                      }
+
+                      info_user = { id: user }
+
+                      fav('module/cart/controller/controller_cart.php?op=delete_all_cart', info_user)
+                          .then(function (data) {
+                              console.log(data)
+                              $('#prods').empty();
+                              show_cart();
+                          })
+                  })
+          })
+
+  })
+
+}
+
+var ip = new Promise(function (resolve) { //obtener  ip for user no logged
+
+  $.getJSON('https://api.ipify.org?format=json', function (data) {
+      //console.log(data.ip);
+      console.log(data.ip);
+      resolve(data.ip);
+  })
+})
+
+
+function show_cart() {
+
+
+  fav('module/cart/controller/controller_cart.php?op=check_cart')
+      .then(function (data) {
+          ip
+              .then(function (ip) {
+                  // console.log(data);
+                  if (data !== 'notlogged') { // SI ESTA LOGGEADO
+
+                      console.log("data  " + data);
+                      var idlog = data;
+                      console.log(idlog);
+
+                  } else {// SI NO LO ESTA
+                      console.log(ip)
+                      var idlog = ip;
+
+                  }
+
+                  var info = { id: idlog };
+
+                  console.log(info)
+                  fav('module/cart/controller/controller_cart.php?op=inf_prods', info)
+
+                      .then(function (data) {
+                          //console.log(data)
+                          var json = JSON.parse(data);
+                          console.log(json)//llegan los productos de ese usuario
+                          var subtotal = 0;
+                          var GastosGestion = 0;
+                          //var totali = 0
+                          if (json.length == 0) {
+                              //console.log(json.length)
+                              //$("#prods").empty()
+                              $("#prods").append(
+                                  '<h1>NO HAS AÑADIDO NINGÚN PRODUCTO</h1>'
+                              );
+                          } else {
+                              for (row in json) {
+                                  if (json[row].stock > 0) {
+                                      var precio = parseInt(json[row].precio);
+                                      subtotal = subtotal + precio;
+                                      //totali = totali + subtotal;
+                                      //console.log(totali)
+                                      $("#prods").append(
+                                          '<tr id="' + json[row].idprod + 'd">' +
+                                          '<td><img src="' + json[row].imagen + '"  height="50" width="50"/> </td>' +
+                                          '<td>' + json[row].nombre + '</td>' +
+                                          '<td>' + json[row].stock + '</td>' +
+                                          '<td align="center">' +
+                                          '<input class="stock" idprod="' + json[row].idprod + '" name="stock" id="' + json[row].idprod + '" type="number"  value="1" step="1" min="1" max="' + json[row].stock + '" />' +
+                                          '</td>' +
+                                          '<td class="text-right" id="' + json[row].idprod + 'p">' + json[row].precio + ' €</td>' +
+                                          '<td class="text-right"><button class="btn btn-sm btn-danger delete_prod "  id="' + json[row].idprod + '"><i class="fa fa-trash"></i>' +
+                                          '</button> </td>'
+
+
+                                      );
+                                      //subtotal = subtotal + precio
+                                  } else {
+                                      $("#prods").append(
+                                          '<tr>' +
+                                          '<td><img src="' + json[row].imagen + '"  height="50" width="50"/> </td>' +
+                                          '<td>' + json[row].nombre + '</td>' +
+                                          '<td>' + "  NOT AVALIABLE  " + '</td>' +
+                                          '<td align="center">' +
+                                          '<p><p/>' +
+                                          '</td>' +
+                                          '<td class="text-right" id="' + json[row].idprod + 'p"><p><p/></td>' +
+                                          '<td class="text-right"><button class="btn btn-sm btn-danger " id="' + json[row].idprod + '"><i class="fa fa-trash"></i>' +
+                                          '</button> </td>'
+
+                                      );
+                                  }//end_else  stock
+                              }//end_for
+                              // AQUI USAMOS LA FUNCION parseFloat(Math.round() / ).toFixed(2);
+                              // PARA QUE NOS SAQUE SIEMPRE LOS NUMERO CON SOLO DOS DECIMALES EJEMPLO 4.25;
+
+
+                              //siempre con dos numeros decimales
+                              var subt = parseFloat(Math.round(subtotal * 100) / 100).toFixed(2);
+                              console.log(subt)
+
+                              //APLICAMOS UN 3% POR LOS GATOS DE GESTION
+                              GastosGestion = (subtotal * 0.03)
+                              console.log(GastosGestion)
+
+                              //siempre con dos numeros decimales
+                              var gd = parseFloat(Math.round(GastosGestion * 100) / 100).toFixed(2);
+                              console.log(gd)
+
+                              totali = (subtotal + GastosGestion )
+                              console.log(totali)
+
+                              //siempre con dos numeros decimales
+                              var total = parseFloat(Math.round(totali * 100) / 100).toFixed(2);
+                              console.log(total)
+
+
+                              $("#prods").append(
+                                  '<tr>' +
+                                  '<td></td>' +
+                                  '<td></td>' +
+                                  '<td></td>' +
+                                  '<td></td>' +
+                                  '<td>Sub-Total</td>' +
+                                  '<td class="text-right" id="subtotal">' + subtotal + ' €</td>' +
+                                  '</tr>' +
+                                  '<tr>' +
+                                  ' <td></td>' +
+                                  ' <td></td>' +
+                                  ' <td></td>' +
+                                  ' <td></td>' +
+                                  '<td>Gastos De Gestion</td>' +
+                                  '<td class="text-right" id="gd">' + gd + ' €</td>' +
+                                  '</tr>' +
+                                  '<tr id="prices_tot">' +
+                                  '<td class="text-right"><button class="btn btn-sm btn-danger delete_all"><i class="fa fa-trash"></i>' +
+                                  '</button>Delete all </td>' +
+                                  ' <td></td>' +
+                                  ' <td></td>' +
+                                  ' <td></td>' +
+                                  ' <td><strong>Total</strong></td>' +
+                                  ' <td class="text-right" id="total">' + total + ' €</td>' +
+                                  ' </tr>'
+                              );
+                          }
+
+                          var info = { id: idlog };
+                          fav('module/cart/controller/controller_cart.php?op=checks', info)
+                              .then(function (data) {
+                                  //console.log(JSON.parse(data));
+                                  console.log(total)
+                                  var check = JSON.parse(data);
+                                  console.log(check)
+                                  if (check.length == 1) {
+                                      console.log(check[0])
+                                      $('#prices_tot').remove();
+                                      $("#prods").append(
+                                          '<tr>' +
+                                          '<td>' +
+                                          '<button value="del_check" id="check" type="button" class="close" aria-label="Close">' +
+                                          '<span aria-hidden="true">&times;</span>' +
+                                          '</button>' +
+                                          '</td>' +
+                                          ' <td>Cupon:</td>' +
+                                          ' <td><button value="' + check[0] + '"  id="check">' + check[0] + '</button></td>' +
+                                          ' <td></td>' +
+                                          '<td>Descuento</td>' +
+                                          '<td id="desc" class="text-right">- 0.00 €</td>' +
+                                          ' </tr>' +
+                                          '<tr id="prices_tot">' +
+                                          '<td class="text-right"><button class="btn btn-sm btn-danger delete_all"><i class="fa fa-trash"></i>' +
+                                          '</button>Delete all </td>' +
+                                          ' <td></td>' +
+                                          ' <td></td>' +
+                                          ' <td></td>' +
+                                          ' <td><strong>Total</strong></td>' +
+                                          ' <td class="text-right" id="total">' + total + ' €</td>' +
+                                          ' </tr>'
+                                      );
+                                  }
+
+                                  action_quecke();
+                              })
+
+                      })//end_then
+
+
+              })
+      })
+
+
+}
+
+
+// FUNCTION DE LA DATA QUE ARRIBA PER $_SESSION
+function prova_date() {
+  var save = localStorage.getItem('prod');
+  cart('module/cart/controller/controller_cart.php?op=dates', save)
+      .then(function (info) {
+          console.log("entra dates")
+          var data = JSON.parse(info);
+          console.log(data)
+          //  if(info == 'ok') {
+
+          //}
+
+      })
+  localStorage.removeItem('prod');
+}
+
+function action_quecke() {
+  var click_cheke = 0
+
+  // si  eliges cheke
+  $(document).on('click', '#check', function () {
+      console.log("checke");
+      // click =click +1
+      var checke = $(this).val();
+
+
+      console.log(checke)
+
+      var tota_row = document.getElementById("checkout").rows.length
+
+      var total = document.getElementById("checkout").rows[tota_row - 1].cells[5].innerHTML
+      console.log(total)
+
+      if (checke != 'del_check') {
+          if (click_cheke == 0) {
+
+              localStorage.setItem('Cheque', checke);
+
+              var total = parseInt(total)
+
+
+              // se te añadira un descuento del 20 por ciento
+
+              // ya que de momento todos son generados por la generacion de puntos y todos estos seran de un 10%
+              //cuando existan mas cupones añadiremos una columna de porcentaje y lo cogeremos de ahi
+              var descuento = total * 0.1
+              console.log(descuento)
+              var descuento = parseFloat(Math.round(descuento * 100) / 100).toFixed(2);
+              console.log(descuento)
+
+              document.getElementById('desc').innerHTML = '- ' + descuento + ' €';
+
+              var tot = total * 0.9
+
+              // }
+
+              var tot = parseFloat(Math.round(tot * 100) / 100).toFixed(2);
+              document.getElementById('total').innerHTML = tot + ' €';
+          }
+          click_cheke = click_cheke + 1
+      } else {
+          console.log("entra else");
+          localStorage.removeItem('Cheque', checke);
+
+          document.getElementById('desc').innerHTML = '- 0.00 €';
+
+          show_prices()
+          click_cheke = 0
+      }
+  });
+
+}
+
+function show_prices() {
+  console.log("entra");
+  var subtotal = 0
+
+  //evitando las cabeceras / titulo
+  //Evitando las filas del subtotal,total,etc ya que esas no muestran productos
+  // var algo = ((document.getElementById("checkout").rows.length) - 4);
+  // console.log(algo)
+  for (i = 1; i <= ((document.getElementById("checkout").rows.length) - 5 || (document.getElementById("checkout").rows.length) - 4 ); i++) {
+      console.log("enyra for")
+
+      //para cada celda observas si esta disponible el producto o no
+      var stock = document.getElementById("checkout").rows[i].cells[2].innerHTML
+      // alert(stock);
+      //cambiar HACER REQUEST
+      //si lo esta:
+      if (stock != "  NOT AVALIABLE  ") {
+          console.log("YES are STOCK");
+
+          // precio total en el momento
+          var preu = document.getElementById("checkout").rows[i].cells[4].innerHTML
+          console.log(preu)
+
+          ///le quitas el '€' y lo conviertes en un int
+          var preu = parseInt(preu)
+          console.log(preu)
+
+          //Hacer que  el subtotal sea cada  uno de los productos del cart  mas el siguiente
+          subtotal = subtotal + preu
+          console.log(subtotal)
+      }
+
+  }
+
+  //lo hacemos para que siempre salgan dos decimales
+  var sub = parseFloat(Math.round(subtotal * 100) / 100).toFixed(2);
+  console.log(sub)
+
+  //y lo añadimos a la celda del subtotal
+  document.getElementById('subtotal').innerHTML = sub + ' €';
+
+
+  //el encarcgado de los envios se lleva un 0.1% del precio de  cada unidad comprada
+  //es decir un 0.1% del total
+  gd = (subtotal * 0.01)
+  console.log(gd)
+
+  //ahora hacemos que salga siempre con dos numeros decimales
+  var ship = parseFloat(Math.round(gd * 100) / 100).toFixed(2);
+  console.log(ship)
+
+  //y lo añadimos a la celda de shipping
+  document.getElementById('gd').innerHTML = ship + ' €';
+
+  ///el total sera los gastos de envios menos el subtotal
+  total = subtotal + gd
+  console.log(total)
+
+  if ($("#check").length) {
+
+      // console.log(descuento)
+      // var descuento = parseFloat(Math.round(descuento * 100) / 100).toFixed(2);
+      // console.log(descuento)
+
+      var discount = document.getElementById('desc').innerHTML
+      console.log(discount)
+      discount = discount.replace("-", "");
+      console.log(discount);
+      var discount = parseInt(discount)
+      console.log(discount)
+
+      if (discount == 0) {
+          var tot = total
+
+      } else {
+          var desc = total * 0.2
+          var disct = parseFloat(Math.round(desc * 100) / 100).toFixed(2);
+          console.log(disct)
+          document.getElementById('desc').innerHTML = '- ' + disct + ' €'
+
+          var tot = total - desc
+      }
+
+
+
+  } else {
+      var tot = total
+
+  }
+
+  //ahora hacemos que salga siempre con dos numeros decimales
+  var intotal = parseFloat(Math.round(tot * 100) / 100).toFixed(2);
+  console.log(intotal)
+
+  //y lo añadimos a la celda de intotall
+  document.getElementById('total').innerHTML = intotal + ' €';
+
+
+  //MYY
+  // //ahora hacemos que salga siempre con dos numeros decimales
+  // var tot = parseFloat(Math.round(total * 100) / 100).toFixed(2);
+  // console.log(tot)
+
+  // //y lo añadimos a la celda de total
+  // document.getElementById('total').innerHTML = tot + ' €';
+
+
+}
+
+function calc_stock() {
+
+  /// si cambias las unidades que quieres:
+  $(document).on('change', '.stock', function () {
+
+      //cogemos el id del que has clicado
+      var idprod = $(this).attr('idprod');
+      console.log(idprod)
+
+      //y ves las unidades del que has clicado
+      var unity = document.getElementById(idprod).value
+      console.log(unity)
+      //console.log(idprod)
+      ///ves el precio que tiene
+      fav('module/cart/controller/controller_cart.php?op=inf_price', idprod)
+          .then(function (data) {
+              //console.log(idprod)
+
+              var price = JSON.parse(data);
+              console.log(price.precio)
+              // console.log(data)
+
+
+              ///le quitas el '€' y lo conviertes en un int
+              var unity_price = parseInt(price.precio)
+              console.log(unity_price)
+
+              ///calculas las unidades que tienes por el precio unitario 
+              var total_price = unity * unity_price
+              console.log(total_price)
+
+              var total_price = document.getElementById(idprod + 'p').innerHTML = total_price + ' €';;
+              //alert(total_price)
+              show_prices();
+
+          })
+  })
+
+}
+
+
+function checkout() {
+  $(document).on('click', '#shop', function () {
+      console.log("click check")
+      fav('module/cart/controller/controller_cart.php?op=check_cart')
+          .then(function (data) {
+              // console.log(data);
+              if (data !== 'notlogged') { // SI ESTA LOGGEADO
+
+                  console.log(data)
+                  var user = data
+                  console.log("nickname " + user);
+
+                  var codigs = [];
+
+                  for (i = 1; i <= ((document.getElementById("checkout").rows.length) - 4); i++) {
+                      console.log("enyra for")
+
+                      //para cada celda observas si esta disponible el producto o no
+                      var stock = document.getElementById("checkout").rows[i].cells[2].innerHTML
+                      console.log(stock);
+                      // alert(stock);
+                      //cambiar HACER REQUEST
+                      //si lo esta:
+                      if (stock != "  NOT AVALIABLE  ") {
+                          console.log("YES are STOCK");
+                          var nameprod = document.getElementById("checkout").rows[i].cells[1].innerHTML
+                          //console.log(nameprod);
+                          info = { nick: nameprod }
+                          console.log(info)
+                          fav('module/cart/controller/controller_cart.php?op=name_product', info)
+                              .then(function (data) {
+                                  var cod = JSON.parse(data);
+                                  console.log(cod)
+
+                                  var unity = document.getElementById(cod.idprod).value;
+                                  console.log(unity)
+
+
+                                  var uni_prec = (cod.precio);
+
+                                  var totali_precio = document.getElementById("checkout").rows.length
+                                  var price_total = document.getElementById("checkout").rows[totali_precio - 1].cells[5].innerHTML
+
+                                  console.log(price_total);
+                                  price_total = price_total.replace(" €", "");
+                                  console.log(price_total);
+
+
+
+                                  var chequereg = localStorage.getItem('Cheque');
+                                  console.log(chequereg)
+
+                                  //array para cada prod:
+                                  var prods = []
+
+                                  //su codigo de referencia
+                                  prods.push(cod.idprod)
+                                  //y sus unidades
+                                  prods.push(unity)
+                                  prods.push(uni_prec)
+                                  prods.push(user)
+                                  prods.push(price_total)
+                                  prods.push(chequereg)
+                                  console.log(prods)
+
+                                  codigs.push(prods)
+                                  console.log(codigs)
+
+
+                                  // save it
+                                  localStorage.setItem('addcart', JSON.stringify(codigs));
+                                  var save = localStorage.getItem('addcart');
+                                  console.log(save)
+                                  localStorage.removeItem('Cheque');
+
+                                  var storage = { addcart: save };
+
+
+                                  ///save it in $session
+                                  cart('module/cart/controller/controller_cart.php?op=save_cart', storage)
+                                      .then(function (data) {
+                                          console.log(data)
+                                          alert("hola")
+                                          redirect_home();
+
+
+                                      })
+
+
+                              })
+                      }
+                  }
+              } else {
+                  //REDIRECT LOGIN
+
+                  var log = { log: "on" }
+                  cart('module/cart/controller/controller_cart.php?op=savelog', log)
+                      .then(function (data) {
+                          console.log(data)
+                          alert("hola");
+
+                          redirect_login();
+
+
+                      })
+
+
+
+              }
+
+          })
+  })
+}
+
+
+
+function redirect_home() {
+	url = amigable('?module=home');
+	$(window).attr('location', url)
+
+}
+
+
+function redirect_login() {
+	url = amigable('?module=login');
+	$(window).attr('location', url)
+}

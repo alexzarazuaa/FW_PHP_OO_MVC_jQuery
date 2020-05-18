@@ -1,4 +1,3 @@
-<!-- <div id="print_menu"></div> -->
 <!-- mian-content -->
 <div class="main-banner inner" id="home">
   <!-- header -->
@@ -20,8 +19,14 @@
           <li><a href="<?php amigable('?module=shop'); ?>" data-tr="Tienda"></a></li>
 
           <!-- conocenos -->
+
           <li>
-           
+          
+              <li id="print_menu"></li>
+        
+          </li>
+
+          <!-- conocenos -->
           <li>
             <!-- First Tier Drop Down -->
             <label for="drop-2" class="toggle">IDIOMA<span class="fa fa-angle-down" aria-hidden="true"></span> </label>
@@ -44,15 +49,18 @@
             <a type="button" class="btn btn-success" href="<?php amigable('?module=cart'); ?>" data-tr="CARRITO"></a>
           </li>
           <!-- /CARRITO -->
+          <!-- <li><a type="button" class="btn btn-danger" id="logout" data-tr="Log Out"></a></li> -->
+          <li>
+            <div id="print_menu"></div>
+          </li>
 
-          <div id="menu" class="nav navbar-nav navbar-right">
-            <div id="nick" class="nickuses"></div>
-            <div id="container"></div>
+          <!-- REGISTER / LOGIN -->
+          <li>
+            <a id="login_register"  type="button" class="btn btn-danger" href="<?php amigable('?module=login'); ?>" data-tr="Login"></a>
+          </li>
+          <li><a id="print_menu_client"></a></li>
+          <li><a id="logout_btn"></a></li>
 
-            <!-- REGISTER / LOGIN -->
-            <li>
-              <a type="button" class="btn btn-danger" href="<?php amigable('?module=login'); ?>" data-tr="Login"></a>
-            </li>
 
 
         </ul>

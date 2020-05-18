@@ -156,6 +156,7 @@ class controller_login
 								'token_jwt' => $jwt_token
 							);
 							$_SESSION['nickname'] = $json[0]['nickname'];
+							$_SESSION['time'] = time();
 							//print_r($_SESSION['nickname']);
 							echo json_encode($response);
 						}else{
@@ -174,33 +175,51 @@ class controller_login
 
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "exist_type_user_model");
-		if ($json == 'null'){
-			echo json_encode($json);
-		}else
-		{
-			echo ("es favorito");
-		}
-	
+		echo json_encode($json);
 
 	}
 
 
-
 	function social_login(){
 
-		parse_str($_POST['data'], $matriz);
+		$matriz=$_POST['data'];
 
 		$json=loadModel(MODEL_LOGIN, "login_model", "check_socialuser_model",$matriz);
 		if ($json == null){//NO ESTA REGISTRADO AUN
-			print_r("json null entra");
+			//print_r("json null entra");
 			$json=loadModel(MODEL_LOGIN, "login_model", "insert_social_model",$matriz);
 			 echo json_encode("registered");
 		}
 		$token_jwt=generate_token_JWT($matriz['uid']);
 		echo $token_jwt;
-		// echo json_encode($insert);
-		// echo json_encode($result);
 	}
+
+
+
+	function activity (){
+		if (!isset($_SESSION["time"])) {
+            echo "active";
+        } else {
+            if ((time() - $_SESSION["time"]) >= 50000) {
+                echo "inactive";
+                //exit();
+            } else {
+                echo "active";
+                //exit();
+            }
+        }
+		
+
+	}//end_function
+
+
+	function session (){
+		// parse_str($_POST['data'], $matriz);
+		// echo json_encode($matriz);
+		//$json = array();
+		$json = loadModel(MODEL_LOGIN, "login_model", "user_session_model");
+		echo json_encode($json);
+	}//END_SESSION
 
 	}
 

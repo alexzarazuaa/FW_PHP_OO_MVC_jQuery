@@ -53,6 +53,15 @@
         <uri></uri>
     </function>
 
+     <function>
+        <name>activity</name>
+        <uri></uri>
+    </function>
+
+       <function>
+        <name>session</name>
+        <uri></uri>
+    </function>
 
 
 

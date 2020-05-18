@@ -1004,11 +1004,8 @@ $(document).ready(function () {
   pagination();
   detail_book();
    inlike();
-
-
   // prod_cart();
 
-  //prueba_products();
 
 
 

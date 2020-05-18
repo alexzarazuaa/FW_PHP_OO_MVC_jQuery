@@ -39,13 +39,9 @@
   <script src="<?php echo JS_VIEW_SEARCH ?>fsearch.js"></script>
   <script src="<?php echo JS_PATH ?>api_keys.js"></script>
   <script src="<?php echo ACTIVITY_PATH ?>activity.js"></script>
-
   <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>init.js"></script>
-  
+  <script type="text/javascript" src="<?php echo JS_VIEW_LOGIN ?>login.js"></script>
 
-  <!--  
-  <script src="module/sport/model/validate_sport.js"></script>
-  <script src="module/shop/model/main_shop.js"></script> -->
 
 
 
